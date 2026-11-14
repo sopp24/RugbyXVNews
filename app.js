@@ -220,7 +220,7 @@ async function loadSportsData(){
   const response=await fetch(DATA_URL,{cache:'no-store'});
   if(!response.ok)throw new Error('Données sportives indisponibles');
   const data=await response.json();
-  if(data&&typeof data==='object')SPORTS={...SPORTS,...data};
+  if(data&&typeof data==='object')SPORTS={...SPORTS,...data,competitions:Array.isArray(data.competitions)?data.competitions:[],clubs:Array.isArray(data.clubs)?data.clubs:[],players:Array.isArray(data.players)?data.players:[],videos:Array.isArray(data.videos)?data.videos:[],podcasts:Array.isArray(data.podcasts)?data.podcasts:[]};
  }catch(e){console.info('RugbyXVNews : fichier sports-data.json non chargé. Les modules de scores restent en attente de source.',e.message)}
 }
 
@@ -244,15 +244,23 @@ async function loadEditorialData(){
  }catch(e){console.info('RugbyXVNews : contenu éditorial distant non chargé, utilisation des données de démonstration.',e.message)}
 }
 function updateMeta(){
- const description=view==='article'&&articleById(articleId)?articleById(articleId).excerpt:view==='competition'?compInfo(compId).description:view==='live'?'Scores, résultats, calendriers et classements des compétitions de rugby.':'RugbyXVNews : actualités, analyses et informations du rugby français et international.';
+ const currentArticle=view==='article'?articleById(articleId):null;
+ const description=currentArticle?currentArticle.excerpt:view==='competition'?compInfo(compId).description:view==='live'?'Scores, résultats, calendriers et classements des compétitions de rugby.':'RugbyXVNews : actualités, analyses et informations du rugby français et international.';
  const d=$('meta[name="description"]');if(d)d.content=description;
  const og=$('meta[property="og:title"]');if(og)og.content=document.title;
  const ogd=$('meta[property="og:description"]');if(ogd)ogd.content=description;
+ const ogType=$('meta[property="og:type"]');if(ogType)ogType.content=currentArticle?'article':'website';
+ const ogUrl=$('meta[property="og:url"]');if(ogUrl)ogUrl.content=location.href;
  const canonical=$('link[rel="canonical"]');if(canonical)canonical.href=location.href;
- const robots=$('meta[name="robots"]');if(robots)robots.content=PREVIEW_MODE?'noindex,nofollow':'index,follow';
+ let ogImage=$('meta[property="og:image"]');
+ if(currentArticle&&safeHttpUrl(currentArticle.image)){
+  if(!ogImage){ogImage=document.createElement('meta');ogImage.setAttribute('property','og:image');document.head.appendChild(ogImage)}
+  ogImage.content=safeHttpUrl(currentArticle.image);
+ }else if(ogImage){ogImage.remove()}
+ const robots=$('meta[name="robots"]');if(robots)robots.content=(PREVIEW_MODE||(currentArticle&&currentArticle.demo))?'noindex,nofollow':'index,follow';
  const schema=$('#article-schema');if(schema)schema.remove();
  const a=view==='article'?articleById(articleId):null;
- if(a&&!PREVIEW_MODE){
+ if(a&&!PREVIEW_MODE&&!a.demo){
   const script=document.createElement('script');script.type='application/ld+json';script.id='article-schema';
   const articleSchema={'@context':'https://schema.org','@type':'NewsArticle','headline':a.title,'description':a.excerpt,'articleSection':a.category,'author':{'@type':'Organization','name':a.author},'publisher':{'@type':'Organization','name':'RugbyXVNews'},'mainEntityOfPage':location.href};
   if(a.datePublished)articleSchema.datePublished=a.datePublished;
