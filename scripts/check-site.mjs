@@ -21,7 +21,7 @@ assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v14'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v15'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -53,7 +53,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v14/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v15/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
@@ -78,6 +78,13 @@ assert.match(sw,/endsWith\('\.json'\)/,'Sports JSON should use network-first cac
 assert.ok(Array.isArray(sports.competitions),'Sports competitions must be an array');
 assert.ok(Array.isArray(articles.articles),'Articles must be an array');
 assert.ok(Array.isArray(gallery.items),'Gallery items must be an array');
+assert.match(app,/data-gallery-prev/,'Gallery viewer must expose a previous-item arrow');
+assert.match(app,/data-gallery-next/,'Gallery viewer must expose a next-item arrow');
+assert.match(app,/function navigateGallery\(direction\)/,'Gallery viewer must support previous/next navigation');
+assert.match(app,/e\.key==='ArrowLeft'\|\|e\.key==='ArrowRight'/,'Gallery viewer must support keyboard arrow navigation');
+assert.match(app,/galleryNavigationIndices\(\)/,'Gallery navigation must follow the currently visible filtered items');
+assert.match(css,/\.gallery-dialog-arrow\{[^}]*width:48px;height:48px/s,'Gallery navigation arrows must have large touch targets');
+assert.ok(locales.ui['Fichier précédent']&&locales.ui['Fichier suivant'],'Gallery arrow labels need English translations');
 assert.ok(locales.ui&&Object.keys(locales.ui).length>100,'English UI translation catalogue missing');
 assert.ok(locales.articleTranslations&&Object.keys(locales.articleTranslations).length>=articles.articles.length,'English article translations are incomplete');
 assert.ok(locales.competitionTranslations&&Object.keys(locales.competitionTranslations).length===4,'English competition translations missing');
