@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Rugby XV News</title>
   <rect width="64" height="64" fill="#5533EC"/>
-  <path d="M0 42C16 27 31 23 45 29c8 3 14 8 19 13v22H0Z" fill="#111111"/>
-  <text x="32" y="44" fill="#FFFFFF" font-family="Montserrat,Arial,Helvetica,sans-serif" font-size="37" font-style="italic" font-weight="900" letter-spacing="-5" text-anchor="middle">XV</text>
-  <path d="M13 53h38" stroke="#8A70FF" stroke-width="2"/>
+  <path d="M0 42C17 31 43 31 64 42V64H0Z" fill="#111111"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M9 16L29 46M29 16L9 46"/>
+    <path d="M35 16L46 46L57 16"/>
+  </g>
+  <path d="M13 55H51" stroke="#8A70FF" stroke-width="2"/>
 </svg>
