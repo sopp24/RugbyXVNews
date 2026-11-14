@@ -18,10 +18,10 @@ const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.webmanifest')
 
 assert.match(html,/id="main"/,'Main landmark missing');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
-assert.match(html,/rel="icon" href="\\.\\/icon\\.svg\\?v=2"/,'Versioned SVG favicon must be linked');
-assert.match(manifest.icons[0].src,/icon\\.svg\\?v=2/,'PWA manifest must use the branded favicon');
-assert.match(sw,/rugbyxvnews-v6/,'Service worker cache must be bumped after favicon updates');
-assert.match(sw,/icon\\.svg\\?v=2/,'Versioned favicon must be included in the offline cache');
+assert.ok(html.includes('rel="icon" href="./icon.svg?v=2"'),'Versioned SVG favicon must be linked');
+assert.ok(manifest.icons[0].src.includes('icon.svg?v=2'),'PWA manifest must use the branded favicon');
+assert.ok(sw.includes('rugbyxvnews-v6'),'Service worker cache must be bumped after favicon updates');
+assert.ok(sw.includes('icon.svg?v=2'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
 assert.match(html,/data-theme-toggle/,'Theme switch missing');
