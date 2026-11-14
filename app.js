@@ -230,7 +230,7 @@ function renderSaved(){
  main.innerHTML=pageIntro('Mes favoris','Retrouve les articles que tu as enregistrés sur cet appareil.')+'<section class="page-shell"><div class="wrap">'+(items.length?'<div class="card-grid">'+items.map(card).join('')+'</div>':emptyState('Aucun article enregistré','Utilise l’étoile sur un article pour le retrouver ici.','<a class="btn dark" href="?view=news">Explorer les actualités ↗</a>'))+'<p class="standings-note">Tes favoris sont enregistrés localement dans ce navigateur. Ils ne sont pas synchronisés entre tes appareils.</p></div></section>';
 }
 function searchArticles(value){
- const terms=escText(value).split(/\\s+/).filter(Boolean);
+ const terms=escText(value).split(/\s+/).filter(Boolean);
  if(!terms.length)return [];
  return ARTICLES.filter(article=>{
   const translated=LOCALES.articleTranslations&&LOCALES.articleTranslations[article.id]||{};
