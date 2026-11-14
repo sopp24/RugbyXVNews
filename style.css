@@ -805,3 +805,17 @@ body[data-theme=light] .score-num .is-loser{color:var(--rxn-violet-deep)}
 @media(max-width:820px){
  .hero-media img{object-position:center}
 }
+
+/* Additional light-theme contrast for supporting text and compact controls. */
+body[data-theme=light] .section-head p,
+body[data-theme=light] .sectionhead p,
+body[data-theme=light] .tab,
+body[data-theme=light] .search-hint,
+body[data-theme=light] .image-caption,
+body[data-theme=light] .gallery-item small{color:var(--muted)}
+body[data-theme=light] .score-card-head,
+body[data-theme=light] .score-card-head{border-color:var(--line)}
+body[data-theme=light] kbd{background:#EFEDF5;border-color:#D7D3E0;color:var(--rxn-white)}
+body[data-theme=light] .toc{color:var(--rxn-white)}
+body[data-theme=light] .toc a{color:var(--muted)}
+body[data-theme=light] .toc a:hover{color:var(--rxn-violet)}
