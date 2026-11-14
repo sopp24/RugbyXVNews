@@ -1,0 +1,16 @@
+{
+  "_about": "Schéma de données éditoriales pour RugbyXVNews. Les tableaux sont volontairement vides : ne pas publier de scores, classements ou effectifs sans source vérifiée.",
+  "provider": null,
+  "sourceUrl": null,
+  "updatedAt": null,
+  "competitions": [
+    {"id":"top14","name":"Top 14","season":null,"updatedAt":null,"sourceName":null,"sourceUrl":null,"matches":[],"standings":[]},
+    {"id":"pro-d2","name":"Pro D2","season":null,"updatedAt":null,"sourceName":null,"sourceUrl":null,"matches":[],"standings":[]},
+    {"id":"nationale","name":"Nationale","season":null,"updatedAt":null,"sourceName":null,"sourceUrl":null,"matches":[],"standings":[]},
+    {"id":"international","name":"International","season":null,"updatedAt":null,"sourceName":null,"sourceUrl":null,"matches":[],"standings":[]}
+  ],
+  "clubs": [],
+  "players": [],
+  "videos": [],
+  "podcasts": []
+}
