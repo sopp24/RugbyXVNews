@@ -30,6 +30,7 @@ assert.ok(!html.includes('<li class="nav-podcast">'),'Podcasts CTA must not be h
 assert.match(app,/function initNavigation\(\)/,'Navigation must have a dedicated early initializer');
 assert.match(app,/initThemeToggle\(\);\s*initNavigation\(\);\s*await Promise\.all/,'Navigation and theme controls must work before asynchronous content loads');
 assert.match(css,/\.nav-podcast-cta\{[^}]*display:inline-flex/s,'Podcasts CTA must remain visible beside navigation tools');
+assert.match(css,/\.theme-control \[data-theme-label\]\{display:inline/,'Theme action label must remain visible on mobile');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation tools must not shrink or disappear');
 assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/stroke="#FFFFFF"/,'Favicon monogram must use high-contrast brand white');
 assert.match(html,/name="viewport"/,'Viewport meta missing');
