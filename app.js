@@ -352,6 +352,26 @@ function updatePreferenceControls(){
   themeButton.setAttribute('aria-pressed',String(dark));
  }
 }
+function initNavigation(){
+ const menu=$('.menu'),nav=$('#navlinks');
+ if(!menu||!nav)return;
+ const setOpen=open=>{
+  nav.classList.toggle('open',open);
+  menu.setAttribute('aria-expanded',String(open));
+  menu.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+  menu.title=open?'Fermer le menu':'Ouvrir le menu';
+  document.body.classList.toggle('menuopen',open);
+ };
+ menu.addEventListener('click',()=>setOpen(menu.getAttribute('aria-expanded')!=='true'));
+ nav.addEventListener('click',e=>{if(e.target.closest('a'))setOpen(false)});
+ document.addEventListener('click',e=>{
+  if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target))setOpen(false);
+ });
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+ window.addEventListener('resize',()=>{
+  if(window.innerWidth>1150&&menu.getAttribute('aria-expanded')==='true')setOpen(false);
+ },{passive:true});
+}
 function initThemeToggle(){
  const themeButton=$('[data-theme-toggle]');
  if(!themeButton)return;
@@ -517,16 +537,11 @@ function initEvents(){
  const directoryFilter=$('#directory-filter');if(directoryFilter)directoryFilter.addEventListener('input',applyDirectoryFilter);
  const searchForm=$('#page-search');if(searchForm)searchForm.addEventListener('submit',e=>{e.preventDefault();const q=$('#page-search-input').value.trim();location.href='?view=search&q='+encodeURIComponent(q)});
  const globalSearch=$('#global-search');if(globalSearch)globalSearch.addEventListener('submit',e=>{e.preventDefault();const q=$('#global-search-input').value.trim();if(q)location.href='?view=search&q='+encodeURIComponent(q)});
- const menu=$('.menu'),nav=$('#navlinks');
- const closeMenu=()=>{if(!nav||!menu)return;nav.classList.remove('open');menu.setAttribute('aria-expanded','false');document.body.classList.remove('menuopen')};
- if(menu&&nav)menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);document.body.classList.toggle('menuopen',open)});
- if(nav)nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu()});
- document.addEventListener('click',e=>{if(nav&&nav.classList.contains('open')&&!nav.contains(e.target)&&!(menu&&menu.contains(e.target)))closeMenu()});
  const dialog=$('#search-dialog');
  $$('[data-open-search]').forEach(b=>b.addEventListener('click',()=>{if(dialog&&typeof dialog.showModal==='function'){dialog.showModal();setTimeout(()=>$('#global-search-input').focus(),20)}else location.href='?view=search'}));
  document.addEventListener('keydown',e=>{
   if((e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();if(dialog&&dialog.showModal)dialog.showModal();setTimeout(()=>$('#global-search-input').focus(),20)}
-  if(e.key==='Escape'){closeMenu();if(dialog&&dialog.open)dialog.close()}
+  if(e.key==='Escape'&&dialog&&dialog.open)dialog.close()
  });
  const toTop=$('.totop');
  if(toTop){window.addEventListener('scroll',()=>toTop.classList.toggle('visible',window.scrollY>450),{passive:true});toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}))}
@@ -577,6 +592,7 @@ async function boot(){
  try{const savedTheme=localStorage.getItem('rxn-theme');if(savedTheme==='light'||savedTheme==='dark')initialTheme=savedTheme}catch(e){}
  applyTheme(initialTheme,false);
  initThemeToggle();
+ initNavigation();
  await Promise.all([loadSportsData(),loadEditorialData(),loadLocaleData()]);
  render();
  initEvents();
