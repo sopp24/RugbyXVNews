@@ -29,6 +29,7 @@ assert.match(html,/class="mastactions">[\s\S]*?data-open-search[\s\S]*?<\/div>\s
 assert.match(css,/\.tagline\{[^}]*text-align:left/s,'Masthead tagline must be left-aligned');
 assert.match(html,/id="global-search-suggestions"[^>]*aria-live="polite"/,'Global search must expose live suggestions accessibly');
 assert.match(app,/function searchArticles\(value\)/,'A shared article-search function must power suggestions and results');
+assert.ok(app.includes('split(/\\s+/)'),'Article search must split multi-word queries into individual keywords');
 assert.match(app,/translated\.title[\s\S]*translatedSections/,'Article search must include English and full article content');
 assert.match(app,/globalSearchInput\.addEventListener\('input',renderGlobalSearchSuggestions\)/,'Global search must update results while typing');
 assert.match(app,/globalSearch\.addEventListener\('submit'/,'Global search must support form submission');
