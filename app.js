@@ -56,7 +56,7 @@ const sectionHead=(title,desc='',href='',label='Voir tout')=>'<div class="sectio
 const crumb=(items)=>'<div class="crumb"><a href="?view=home">Accueil</a>'+items.map(x=>'<span> / </span>'+(x.href?'<a href="'+x.href+'">'+esc(x.label)+'</a>':esc(x.label))).join('')+'</div>';
 const emptyState=(title,desc,extra='')=>'<div class="empty-state"><strong>'+esc(title)+'</strong><p>'+esc(desc)+'</p>'+extra+'</div>';
 const visual=(tone='ink',label='RugbyXVNews',cls='news-visual',src='',alt='')=>{const image=safeHttpUrl(src),priority=cls==='article-cover'||cls==='hero-media';return '<span class="'+cls+' '+esc(tone)+(image?' has-image':'')+'" role="img" aria-label="'+esc(alt||label||'Illustration éditoriale de rugby')+'">'+(image?'<img src="'+esc(image)+'" alt="" loading="'+(priority?'eager':'lazy')+'" '+(priority?'fetchpriority="high"':'')+' decoding="async" width="1200" height="675">':'')+'<span class="visual-label">'+esc(label)+'</span></span>'};
-const headline=(value)=>{const title=String(value||'').trim();if(!title)return '';const colon=title.indexOf(':');let split=colon>0&&colon<42?colon:(title.indexOf(' ')>0?title.indexOf(' ',title.indexOf(' ')+1):-1);if(split<1)return esc(title);const first=title.slice(0,split).trim();const rest=title.slice(split).replace(/^\s*:\s*|^\s+/,'');return '<mark>'+esc(first)+'</mark>'+(rest?' '+esc(rest):'')};
+const headline=(value)=>{let title=String(value||'').trim();if(currentLang==='en')title=translateValue(title,buildTranslationMap());if(!title)return '';const colon=title.indexOf(':');let split=colon>0&&colon<42?colon:(title.indexOf(' ')>0?title.indexOf(' ',title.indexOf(' ')+1):-1);if(split<1)return esc(title);const first=title.slice(0,split).trim();const rest=title.slice(split).replace(/^\s*:\s*|^\s+/,'');return '<mark>'+esc(first)+'</mark>'+(rest?' '+esc(rest):'')};
 const scoreMarkup=(homeScore,awayScore)=>{const valid=homeScore!==null&&homeScore!==undefined&&awayScore!==null&&awayScore!==undefined&&Number.isFinite(Number(homeScore))&&Number.isFinite(Number(awayScore));if(!valid)return 'VS';const h=Number(homeScore),a=Number(awayScore),homeClass=h>a?'is-winner':h<a?'is-loser':'is-draw',awayClass=a>h?'is-winner':a<h?'is-loser':'is-draw';return '<span class="score-value '+homeClass+'">'+esc(homeScore)+'</span><span class="score-value '+awayClass+'">'+esc(awayScore)+'</span>'};
 const articleTags=a=>'<div class="meta-row">'+pill(a.type,'gold')+pill(a.category,'')+'</div>';
 const saveButton=a=>'<button class="save-button" type="button" data-save="'+esc(a.id)+'" aria-label="Sauvegarder : '+esc(a.title)+'" aria-pressed="'+String(allSaved().includes(a.id))+'" title="Sauvegarder cet article">'+(allSaved().includes(a.id)?'★':'☆')+'</button>';
@@ -252,7 +252,7 @@ function renderLegal(){
 }
 function renderPrivacy(){
  document.title='Confidentialité — RugbyXVNews';
- main.innerHTML=pageIntro('Confidentialité','Politique à adapter aux outils réellement activés sur le site.')+'<section class="page-shell"><div class="wrap bodycopy"><div class="editorialnote"><b>Modèle de travail :</b> cette page doit être mise à jour selon les outils, cookies et traitements effectivement déployés.</div><h2>Données collectées</h2><p>Dans cette version, le site ne propose pas de compte utilisateur, de commentaire, de formulaire de collecte ni d’inscription à une newsletter. Les liens de contact ouvrent le logiciel de messagerie du visiteur.</p><h2>Services tiers</h2><p>La version actuelle charge les polices depuis Google Fonts et propose des liens vers des plateformes sociales externes. Leurs propres politiques s’appliquent lorsque le visiteur utilise ces services.</p><h2>Cookies et mesure d’audience</h2><p>Aucun outil de mesure d’audience ni gestionnaire publicitaire n’est intégré à cette maquette. Si un service de ce type est ajouté, documenter les traceurs utilisés et mettre en place le dispositif de consentement adapté avant son activation.</p><h2>Vos droits et contact</h2><p>Les coordonnées du responsable du traitement et les modalités d’exercice des droits doivent être précisées par l’éditeur avant publication. Contact : <a href="mailto:contact@rugbyxvnew.com">contact@rugbyxvnew.com</a>.</p></div></section>';
+ main.innerHTML=pageIntro('Confidentialité','Politique à adapter aux outils réellement activés sur le site.')+'<section class="page-shell"><div class="wrap bodycopy"><div class="editorialnote"><b>Modèle de travail :</b> cette page doit être mise à jour selon les outils, cookies et traitements effectivement déployés.</div><h2>Données collectées</h2><p>Dans cette version, le site ne propose pas de compte utilisateur, de commentaire, de formulaire de collecte ni d’inscription à une newsletter. Les liens de contact ouvrent le logiciel de messagerie du visiteur.</p><h2>Services tiers</h2><p>La version actuelle héberge ses polices directement sur le site et propose des liens vers des plateformes sociales externes. Les politiques de confidentialité de ces plateformes s’appliquent lorsque le visiteur utilise leurs services.</p><h2>Cookies et mesure d’audience</h2><p>Aucun outil de mesure d’audience ni gestionnaire publicitaire n’est intégré à cette maquette. Si un service de ce type est ajouté, documenter les traceurs utilisés et mettre en place le dispositif de consentement adapté avant son activation.</p><h2>Vos droits et contact</h2><p>Les coordonnées du responsable du traitement et les modalités d’exercice des droits doivent être précisées par l’éditeur avant publication. Contact : <a href="mailto:contact@rugbyxvnew.com">contact@rugbyxvnew.com</a>.</p></div></section>';
 }
 async function loadSportsData(){
  try{
@@ -339,7 +339,9 @@ function updatePreferenceControls(){
   if(current)current.textContent=currentLang.toUpperCase();
   if(next)next.textContent=(currentLang==='fr'?'en':'fr').toUpperCase();
   langButton.classList.toggle('is-en',currentLang==='en');
-  langButton.setAttribute('aria-label',currentLang==='fr'?'Switch language to English':'Passer en français');
+  const langAction=currentLang==='fr'?'Switch to English':'Passer en français';
+  langButton.setAttribute('aria-label',langAction);
+  langButton.title=langAction;
   langButton.setAttribute('aria-pressed',String(currentLang==='en'));
  }
  const themeButton=$('[data-theme-toggle]');
@@ -384,8 +386,10 @@ function initThemeToggle(){
 function applyTheme(theme,persist=true){
  const safe=theme==='dark'?'dark':'light';
  document.body.dataset.theme=safe;
+ document.documentElement.dataset.theme=safe;
+ document.documentElement.style.colorScheme=safe;
  const themeMeta=$('meta[name="theme-color"]');
- if(themeMeta)themeMeta.content=safe==='dark'?'#111111':'#FFFFFF';
+ if(themeMeta)themeMeta.content=safe==='dark'?'#111111':'#F6F5FA';
  const schemeMeta=$('meta[name="color-scheme"]');
  if(schemeMeta)schemeMeta.content=safe;
  if(persist){try{localStorage.setItem('rxn-theme',safe)}catch(e){}}
@@ -403,8 +407,8 @@ function applySiteLanguage(){
    if(!node.nodeValue||!node.nodeValue.trim())continue;
    node.nodeValue=translateValue(node.nodeValue,map);
   }
-  $$('input,button,a,[aria-label],[title]').forEach(el=>{
-   ['placeholder','title','aria-label'].forEach(attr=>{
+  $('input,button,a,[aria-label],[title],[alt]').forEach(el=>{
+   ['placeholder','title','aria-label','aria-description','alt'].forEach(attr=>{
     if(el.hasAttribute(attr))el.setAttribute(attr,translateValue(el.getAttribute(attr),map));
    });
   });
@@ -477,10 +481,11 @@ function render(){
  $('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===(view==='match'?'live':view)));
  if(PREVIEW_MODE)$('#preview-notice').classList.remove('hidden');
  updateSavedCount();
+ applySiteLanguage();
 }
 function notify(message){
  const el=$('#toast');if(!el)return;
- el.textContent=message;el.classList.add('show');
+ el.textContent=currentLang==='en'?translateValue(message,buildTranslationMap()):message;el.classList.add('show');
  clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.classList.remove('show'),2400);
 }
 function toggleSaved(id){
@@ -513,12 +518,14 @@ function applyNewsFilters(){
  const filtered=ARTICLES.filter(a=>(!q||escText([a.title,a.excerpt,a.category,a.type,a.tags.join(' ')].join(' ')).includes(q))&&(!c||a.category===c)&&(!t||a.type===t));
  results.innerHTML=filtered.length?filtered.map(card).join(''):emptyState('Aucun article','Modifie les filtres ou essaie une autre recherche.');
  const count=$('#news-count');if(count)count.textContent=filtered.length+' article(s) affiché(s).';
+ applySiteLanguage();
 }
 function applyDirectoryFilter(){
  const input=$('#directory-filter'),results=$('#directory-results');if(!input||!results)return;
  const isClubs=(params.get('kind')||'clubs')==='clubs',items=isClubs?SPORTS.clubs:SPORTS.players,q=escText(input.value);
  const filtered=(items||[]).filter(x=>escText([x.name,x.competition,x.position,x.description].join(' ')).includes(q));
  results.innerHTML=filtered.length?filtered.map(x=>'<article class="directory-card"><span class="kicker">'+esc(isClubs?x.competition||'Club':x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p>'+(x.url?'<a class="text-link" href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">Consulter ↗</a>':'')+'</article>').join(''):emptyState('Aucun résultat','Aucune fiche ne correspond à ta recherche.');
+ applySiteLanguage();
 }
 function initEvents(){
  document.addEventListener('click',e=>{
@@ -576,6 +583,7 @@ function openGallery(index){
  }
  $('.gallery-dialog-visual strong',dlg).textContent=item.title;
  $('p',dlg).textContent=item.caption+(item.credit?' · Crédit : '+item.credit:'');
+ applySiteLanguage();
  if(dlg.showModal)dlg.showModal();
 }
 async function refreshSportsData(button){
