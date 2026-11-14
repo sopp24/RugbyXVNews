@@ -36,7 +36,7 @@ Les liens d'articles sont construits à partir de id. Garder un identifiant uniq
 **Aucun fournisseur de scores n'est connecté dans cette version.** Les données sont donc vides par défaut et le site ne fabrique pas de scores, classements, effectifs ou horaires. Les états de match en direct deviennent « direct non actualisé » si le dernier rafraîchissement date de plus de dix minutes. Pour un vrai direct automatique, il faut un fournisseur de données avec licence, un service de synchronisation et une fréquence de mise à jour définie.
 
 ## Configuration de prévisualisation et référencement
-Dans **app.js**, passer **PREVIEW_MODE** à false uniquement lorsque les exemples ont été remplacés et les données contrôlées. Ce mode retire l'avertissement de démonstration, autorise l'indexation et active le balisage NewsArticle des pages article. Tant que le mode est actif, la page utilise noindex,nofollow pour éviter d'indexer le contenu fictif.
+Dans **app.js**, passer **PREVIEW_MODE** à false uniquement lorsque les exemples ont été remplacés et les données contrôlées. Ce mode retire l'avertissement de démonstration, autorise l'indexation et active le balisage NewsArticle des pages article. Tant que le mode est actif, la page utilise noindex,nofollow pour éviter d'indexer le contenu fictif. Avant l'ouverture publique, modifier aussi la balise robots statique de index.html de noindex,nofollow vers index,follow.
 
 Le sitemap utilise actuellement l'URL GitHub Pages par défaut **https://sopp24.github.io/RugbyXVNews/**. Si un domaine personnalisé est ajouté, mettre à jour les URLs dans **sitemap.xml**, **robots.txt** et le schéma site-schema de **index.html**.
 
