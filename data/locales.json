@@ -1,0 +1,460 @@
+{
+  "ui": {
+    "Le rugby, sans détour. Depuis le bord du terrain.": "Rugby, without the noise. Straight from the touchline.",
+    "Centre de match": "Match centre",
+    "Live & résultats": "Live & scores",
+    "Podcasts": "Podcasts",
+    "Accueil": "Home",
+    "Actus & transferts": "News & transfers",
+    "Clubs & joueurs": "Clubs & players",
+    "Vidéos & galerie": "Videos & gallery",
+    "Le fil rugby": "The rugby feed",
+    "À LA UNE": "IN FOCUS",
+    "Le média rugby · À la une": "The rugby media · Featured",
+    "Le média rugby · Toute l’année": "The rugby media · All year round",
+    "Le rugby.": "Rugby.",
+    "Sans détour.": "Straight up.",
+    "Explorer l’actualité": "Explore the news",
+    "Lire le dossier": "Read the feature",
+    "Les dernières actualités": "Latest news",
+    "Toutes les actus": "All news",
+    "Toutes les actualités": "All news",
+    "Le fil éditorial RugbyXVNews": "The RugbyXVNews editorial feed",
+    "Dernières actualités": "Latest stories",
+    "Toutes les compétitions": "All competitions",
+    "Un accès direct aux rubriques majeures": "Quick access to the major competitions",
+    "Résultats & classements": "Scores & standings",
+    "Par compétition": "By competition",
+    "Explorer les autres compétitions": "Explore other competitions",
+    "Les compétitions à suivre": "Competitions to follow",
+    "Les compétitions majeures": "Major competitions",
+    "Compétition": "Competition",
+    "Explorer la rubrique": "Explore section",
+    "Les dernières infos": "Latest news",
+    "Toute la rubrique": "All stories",
+    "Actualités": "News",
+    "Calendrier": "Fixtures",
+    "Classement": "Standings",
+    "Tous les articles": "All articles",
+    "À suivre": "Coming up",
+    "Les articles arrivent": "Stories coming soon",
+    "Les publications de cette compétition seront regroupées dans cette rubrique.": "Coverage of this competition will appear here.",
+    "Classement en attente": "Standings coming soon",
+    "Le tableau sera publié dès que les données officielles de la compétition seront disponibles.": "The table will appear once verified competition data is available.",
+    "Calendrier non connecté": "Fixtures not connected",
+    "Les journées et horaires seront ajoutés dès qu’un flux officiel ou une saisie éditoriale sera relié à la rubrique.": "Rounds and kick-off times will appear once an official feed or editorial input is connected.",
+    "Le direct arrive": "Live coverage is coming",
+    "Le centre de match est prêt. Les scores s’afficheront dès qu’une source sportive fiable et autorisée sera renseignée dans data/sports-data.json.": "The match centre is ready. Scores will appear once a trusted, authorised sports data source is connected.",
+    "Ouvrir le centre de match": "Open match centre",
+    "EN DIRECT": "LIVE",
+    "DIRECT NON ACTUALISÉ": "LIVE — NOT UPDATED",
+    "TERMINÉ": "FULL TIME",
+    "REPORTÉ": "POSTPONED",
+    "À VENIR": "UPCOMING",
+    "Horaire à confirmer": "Kick-off time to be confirmed",
+    "Équipe à confirmer": "Team to be confirmed",
+    "Mise à jour non renseignée": "Update time not provided",
+    "Mis à jour à l’instant": "Updated just now",
+    "Mis à jour il y a ": "Updated ",
+    " min": " min ago",
+    "Mis à jour le ": "Updated on ",
+    "Vérifier": "Check source",
+    "Source : ": "Source: ",
+    "Source des données": "Data source",
+    "Résultats": "Results",
+    "À venir": "Upcoming",
+    "Aucun direct disponible": "No live matches available",
+    "Aucun résultat publié": "No results published",
+    "Aucune rencontre programmée": "No fixtures scheduled",
+    "Aucun résultat": "No results",
+    "Le centre de match est opérationnel côté interface. Il affichera les informations lorsque le fichier de données sera alimenté par une source vérifiée.": "The match centre interface is ready. Information will appear when the data file is populated from a verified source.",
+    "Les scores seront affichés dès que la source sera connectée.": "Scores will appear once the data source is connected.",
+    "Rechercher": "Search",
+    "Que recherchez-vous ?": "What are you looking for?",
+    "Mots-clés": "Keywords",
+    "Recherche": "Search",
+    "Recherche dans les articles et rubriques.": "Search articles and sections.",
+    "Recherche dans les articles, les compétitions, les clubs, les joueurs et les rencontres.": "Search articles, competitions, clubs, players and matches.",
+    "Club, joueur, compétition, sujet…": "Club, player, competition, topic…",
+    "Rechercher un club…": "Search clubs…",
+    "Rechercher un joueur…": "Search players…",
+    "résultat(s) dans le média.": "result(s) across the site.",
+    "article(s) affiché(s).": "article(s) shown.",
+    "Essaie avec un autre mot-clé ou explore les rubriques.": "Try another keyword or browse the sections.",
+    "Modifie les filtres ou essaie une autre recherche.": "Change the filters or try another search.",
+    "Retrouve un article, une compétition ou un sujet.": "Find an article, competition or topic.",
+    "Mes favoris": "My saved stories",
+    "Mes articles sauvegardés": "Saved stories",
+    "Retrouve les articles que tu as enregistrés sur cet appareil.": "Find the stories you saved on this device.",
+    "Aucun article enregistré": "No saved stories yet",
+    "Utilise l’étoile sur un article pour le retrouver ici.": "Tap the star on an article to save it here.",
+    "Tes favoris sont enregistrés localement dans ce navigateur. Ils ne sont pas synchronisés entre tes appareils.": "Your saved stories are stored in this browser. They are not synced between devices.",
+    "Article ajouté aux favoris.": "Story saved.",
+    "Article retiré des favoris.": "Story removed from saved items.",
+    "Le navigateur ne permet pas de conserver les favoris.": "This browser does not allow saved stories.",
+    "Partager": "Share",
+    "Copier le lien": "Copy link",
+    "Lien copié dans le presse-papiers.": "Link copied to clipboard.",
+    "Copie indisponible : copie l’adresse depuis la barre du navigateur.": "Copy is unavailable. Copy the address from your browser bar.",
+    "Partage indisponible sur cet appareil.": "Sharing is unavailable on this device.",
+    "Imprimer": "Print",
+    "Confort de lecture": "Reading comfort",
+    "Ajuste la taille du texte selon ton écran.": "Adjust text size to suit your screen.",
+    "Dans cet article": "In this story",
+    "Sommaire": "Contents",
+    "À lire aussi": "More to read",
+    "D’autres sujets pour prolonger la lecture": "More stories to explore",
+    "Signaler une correction": "Report a correction",
+    "Retour à la compétition": "Back to competition",
+    "Tous les résultats": "All results",
+    "Fiche du match": "Match details",
+    "Fiche du match indisponible": "Match details unavailable",
+    "Les informations de cette rencontre ne sont pas encore disponibles.": "Details for this fixture are not available yet.",
+    "Les fiches détaillées seront ouvertes dès qu’une rencontre issue d’une source validée sera ajoutée.": "Detailed match pages will be available once a fixture from a verified source is added.",
+    "Statistiques": "Statistics",
+    "Données du match": "Match data",
+    "Statistiques à venir": "Statistics coming soon",
+    "Les statistiques détaillées apparaîtront si le fournisseur de données les propose.": "Detailed statistics will appear if the data provider supplies them.",
+    "Fil du match": "Match timeline",
+    "Temps forts et événements": "Key moments and events",
+    "Fil du match non disponible": "Match timeline unavailable",
+    "Le fil chronologique sera affiché lorsqu’un flux détaillé sera connecté.": "The match timeline will appear when a detailed feed is connected.",
+    "Compositions": "Line-ups",
+    "Feuilles de match": "Team sheets",
+    "Compositions non publiées": "Line-ups not published",
+    "Les feuilles de match seront ajoutées après confirmation officielle des compositions.": "Team sheets will be added once the line-ups are officially confirmed.",
+    "Rubrique : ": "Section: ",
+    "Les dernières infos et analyses": "Latest news and analysis",
+    "Clubs": "Clubs",
+    "Joueurs": "Players",
+    "Annuaire des clubs à connecter": "Club directory to be connected",
+    "Fiches joueurs à connecter": "Player profiles to be connected",
+    "Ajoute les fiches validées dans data/sports-data.json. Aucun effectif ou profil fictif n’est affiché.": "Add verified profiles to data/sports-data.json. No fictional squads or player profiles are displayed.",
+    "Aucune fiche ne correspond à ta recherche.": "No profiles match your search.",
+    "Fiche à compléter avec des informations vérifiées.": "Profile to be completed with verified information.",
+    "Consulter": "View",
+    "Vidéos & temps forts": "Videos & highlights",
+    "Les séquences vidéo, interviews et analyses proposées par la rédaction.": "Video clips, interviews and analysis from the editorial team.",
+    "Vidéos à venir": "Videos coming soon",
+    "Les vidéos seront ajoutées lorsque les contenus et leurs droits de diffusion seront confirmés.": "Videos will be added once the content and its usage rights are confirmed.",
+    "Regarder": "Watch",
+    "La galerie": "Gallery",
+    "Les images, les gestes et les émotions qui racontent le rugby.": "The images, skills and emotions that tell the story of rugby.",
+    "Tout voir": "View all",
+    "Photos": "Photos",
+    "Vidéos": "Videos",
+    "Photo": "Photo",
+    "Vidéo": "Video",
+    "En images": "In pictures",
+    "En images & en séquences": "In pictures & clips",
+    "Les photos, vidéos et podcasts rugby.": "Rugby photos, videos and podcasts.",
+    "Vignettes de démonstration. À remplacer par des médias originaux ou dûment licenciés, avec crédits et légendes.": "Demo thumbnails. Replace with original or properly licensed media, including credits and captions.",
+    "Podcasts à venir": "Podcasts coming soon",
+    "Les épisodes seront publiés lorsque les fichiers audio et les informations de diffusion seront prêts.": "Episodes will be published once the audio files and release information are ready.",
+    "Écouter": "Listen",
+    "Médiathèque": "Media library",
+    "Tous les formats RugbyXVNews : images, séquences vidéo et podcasts.": "All RugbyXVNews formats: photos, video clips and podcasts.",
+    "Galerie photo": "Photo gallery",
+    "Images et instants du rugby.": "Rugby images and moments.",
+    "Les séquences et entretiens vidéo.": "Video clips and interviews.",
+    "Les émissions et formats audio.": "Shows and audio formats.",
+    "Contact": "Contact",
+    "Parlons rugby": "Let's talk rugby",
+    "Une information à signaler, une question, une proposition de collaboration ou une demande média.": "A news tip, a question, a collaboration proposal or a media enquiry.",
+    "La rédaction": "The newsroom",
+    "Une information ?": "A news tip?",
+    "Pour transmettre une information, proposer un sujet ou contacter l’équipe éditoriale.": "To share a tip, suggest a story or contact the editorial team.",
+    "Réseaux sociaux": "Social media",
+    "Retrouve les contenus, les coulisses et les temps forts sur nos réseaux.": "Follow our stories, behind-the-scenes content and highlights.",
+    "Les formats RugbyXVNews": "RugbyXVNews formats",
+    "Comprendre le jeu. Ressentir le rugby.": "Understand the game. Feel the rugby.",
+    "Des formats pour prendre du recul, revivre les temps forts et raconter le rugby autrement.": "Formats to explore the game, revisit the highlights and tell rugby stories differently.",
+    "Analyses": "Analysis",
+    "Les clés tactiques et les histoires derrière le match.": "The tactical details and stories behind the match.",
+    "Les séquences à revoir et les formats à découvrir.": "Clips to revisit and new formats to discover.",
+    "La médiathèque": "The media library",
+    "Les gestes, les émotions et les coulisses.": "Skills, emotions and behind-the-scenes moments.",
+    "Toute la médiathèque": "Explore the media library",
+    "Voir la galerie": "View gallery",
+    "À retrouver": "More from us",
+    "Les dossiers du moment": "Featured reads",
+    "Le rugby continue ici": "Rugby continues here",
+    "Retrouve les coulisses et les temps forts sur nos réseaux.": "Follow the behind-the-scenes stories and highlights on our social channels.",
+    "Suivre RugbyXVNews": "Follow RugbyXVNews",
+    "Les infos et les coulisses du rugby sur nos réseaux.": "Rugby news and behind-the-scenes content on our social channels.",
+    "Au cœur des compétitions": "Inside the competitions",
+    "Toute l’année": "All year round",
+    "Le média rugby": "The rugby media",
+    "À écouter": "Listen",
+    "Les contenus de la rédaction": "Stories from the newsroom",
+    "À regarder": "Watch",
+    "Les vidéos et les temps forts": "Videos and highlights",
+    "Ne manque rien de l’actualité rugby": "Never miss a rugby story",
+    "Retrouve les dernières publications et les formats de la rédaction. La newsletter sera activée lors du branchement d’un service d’inscription.": "Keep up with the latest stories and newsroom formats. The newsletter will be activated once a subscription service is connected.",
+    "Contacter la rédaction": "Contact the newsroom",
+    "Une info, une idée, un regard rugby ?": "A tip, an idea, a rugby perspective?",
+    "La rédaction est à l'écoute des passionnés, des clubs et de celles et ceux qui font vivre le rugby.": "The newsroom is open to fans, clubs and everyone who makes rugby happen.",
+    "Écrire à la rédaction": "Write to the newsroom",
+    "Explore": "Explore",
+    "Explorer": "Explore",
+    "RugbyXVNews · Prévisualisation": "RugbyXVNews · Preview",
+    "RugbyXVNews · Média rugby": "RugbyXVNews · Rugby media",
+    "Aucun article": "No stories",
+    "Bientôt dans cette rubrique": "Coming soon to this section",
+    "Les prochains articles seront publiés ici.": "New stories will be published here.",
+    "Actualisation…": "Refreshing…",
+    "Données rechargées. Vérifie la date de dernière mise à jour et la source.": "Data reloaded. Check the last update time and source.",
+    "Aucun fournisseur de scores n’est connecté dans cette version.": "No score provider is connected in this version.",
+    "Le site est en prévisualisation.": "The site is in preview mode.",
+    "Saison et données officielles à renseigner": "Season and official data to be added",
+    "Saison : ": "Season: ",
+    "Décryptage": "Breakdown",
+    "Exemple éditorial": "Sample copy",
+    "France": "France",
+    "International": "International",
+    "Analyse": "Analysis",
+    "Focus": "Spotlight",
+    "Dossier": "Feature",
+    "Grand format": "Long read",
+    "Pédagogie": "Explainer",
+    "Actualités & transferts": "News & transfers",
+    "Actus / Transferts": "News / Transfers",
+    "Le rugby français et international : actualités, compétitions, analyses, transferts et histoires de terrain.": "French and international rugby: news, competitions, analysis, transfers and stories from the game.",
+    "Tous droits réservés.": "All rights reserved.",
+    "Mentions légales": "Legal notice",
+    "Confidentialité": "Privacy",
+    "Conçu avec passion pour le rugby.": "Made with a passion for rugby.",
+    "Pressez / pour rechercher": "Press / to search",
+    "Activer le thème sombre": "Switch to dark mode",
+    "Activer le thème clair": "Switch to light mode",
+    "Mode sombre": "Dark mode",
+    "Mode clair": "Light mode",
+    "Passer en anglais": "Switch to English",
+    "Passer en français": "Switch to French",
+    "Retour à l’accueil": "Back to home",
+    "RugbyXVNews. Tous droits réservés.": "RugbyXVNews. All rights reserved."
+  },
+  "articleTranslations": {
+    "top14-lecture-du-jeu": {
+      "title": "Top 14: the details that turn a big game",
+      "category": "Top 14",
+      "type": "Analysis",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "Set piece, discipline, territory and managing difficult spells: a closer look at the factors that shape a game.",
+      "lead": "A match is never defined by its score alone. Preparation, set-piece quality and the ability to make the right decisions at decisive moments tell a deeper story.",
+      "sections": [
+        [
+          "The contest starts up front",
+          "The scrum, line-out and maul set the tone. A team that secures its set piece can build its game and put its opponent under pressure."
+        ],
+        [
+          "Discipline sets the tone",
+          "Conceded penalties can pull a team away from its game plan. Managing the contact area and reorganising quickly are key indicators to watch."
+        ],
+        [
+          "Knowing when to play",
+          "Matches are also won through game management: attack after a turnover, keep possession when the situation demands it and kick for territory at the right time."
+        ]
+      ],
+      "tags": [
+        "Top 14",
+        "Analysis",
+        "Tactics"
+      ]
+    },
+    "pro-d2-identites-jeu": {
+      "title": "Pro D2: the playing identities that make the difference",
+      "category": "Pro D2",
+      "type": "Breakdown",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "A demanding league where consistency, squad depth and character carry real weight.",
+      "lead": "Pro D2 is a competition built on intensity and depth. To establish themselves, teams need a clear identity and the ability to sustain their level week after week.",
+      "sections": [
+        [
+          "Finding an identity",
+          "Every club looks for a balance between set piece, pace and territory. The link between the playing project and the available player profiles is decisive."
+        ],
+        [
+          "Squad depth",
+          "The season is long and fixtures come thick and fast. Rotation must preserve intensity without disrupting collective habits."
+        ]
+      ],
+      "tags": [
+        "Pro D2",
+        "Breakdown"
+      ]
+    },
+    "nationale-projets-clubs": {
+      "title": "Nationale: a pivotal league for ambitious clubs",
+      "category": "Nationale",
+      "type": "Spotlight",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "Between structure, player development and sporting ambition, the division has a distinctive role.",
+      "lead": "Nationale offers an important step for clubs looking to strengthen their project and move up a level.",
+      "sections": [
+        [
+          "A demanding environment",
+          "The level requires strong structures, tailored preparation and careful player development."
+        ],
+        [
+          "Building the collective",
+          "Squad continuity and the development of young players can become valuable performance drivers."
+        ]
+      ],
+      "tags": [
+        "Nationale",
+        "Clubs"
+      ]
+    },
+    "international-styles-jeu": {
+      "title": "International rugby: when playing styles collide",
+      "category": "International",
+      "type": "Analysis",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "Playing cultures, intensity and tactical adaptation: international fixtures are a fascinating laboratory.",
+      "lead": "International fixtures bring different rugby cultures into focus. Their collision reveals the tactical and human richness of the game.",
+      "sections": [
+        [
+          "Strong identities",
+          "Every national side draws on its history, development pathways and the profiles within its squad."
+        ],
+        [
+          "Adapting to the occasion",
+          "The level of opposition demands tactical adjustments without losing the collective principles that define a team."
+        ]
+      ],
+      "tags": [
+        "International",
+        "National teams"
+      ]
+    },
+    "transferts-construire-effectif": {
+      "title": "Transfers: how a squad is built over a season",
+      "category": "News & transfers",
+      "type": "Feature",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "Recruitment, complementary skill sets and academy pathways: the market is about more than a list of announcements.",
+      "lead": "A successful signing answers a specific need. It is part of a sporting strategy, a calendar and the balance of a changing squad.",
+      "sections": [
+        [
+          "Identifying the needs",
+          "Coaches assess positions, player availability and profiles that could strengthen the group."
+        ],
+        [
+          "Thinking about balance",
+          "Squad performance depends on combining talent, experience and the ability to support a shared project."
+        ]
+      ],
+      "tags": [
+        "Transfers",
+        "Feature"
+      ]
+    },
+    "formation-parcours-joueurs": {
+      "title": "Player development: the steps that shape a rugby career",
+      "category": "News & transfers",
+      "type": "Long read",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "From mini rugby to the top level, development is built over time and through the collective.",
+      "lead": "A player's journey is shaped by learning, encounters and choices. Progress rarely follows a straight line.",
+      "sections": [
+        [
+          "Learning the fundamentals",
+          "Individual technique, game awareness and the enjoyment of playing form the essential foundations."
+        ],
+        [
+          "Growing within a team",
+          "Support, physical development and the human environment matter as much as short-term results."
+        ]
+      ],
+      "tags": [
+        "Development",
+        "Players"
+      ]
+    },
+    "arbitrage-regles-comprendre": {
+      "title": "Refereeing: understanding the decisions at the heart of the game",
+      "category": "International",
+      "type": "Explainer",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "The laws of the game, communication and consistency all shape how a match is understood.",
+      "lead": "Refereeing is an integral part of rugby. Understanding the principles behind decisions also helps us read the game more clearly.",
+      "sections": [
+        [
+          "Safety comes first",
+          "Refereeing decisions aim, among other things, to protect players and preserve fairness."
+        ],
+        [
+          "A conversation within the game",
+          "Communication between referees, captains and players helps make decisions understood in the rhythm of a match."
+        ]
+      ],
+      "tags": [
+        "Refereeing",
+        "Laws of the game"
+      ]
+    },
+    "rugby-feminin-progression": {
+      "title": "Women's rugby: the drivers of continued growth",
+      "category": "International",
+      "type": "Spotlight",
+      "author": "The newsroom",
+      "published": "Sample copy",
+      "excerpt": "Visibility, development, structure and access to the game: the foundations of sustainable growth.",
+      "lead": "The growth of women's rugby depends on clear playing pathways, welcoming structures and coverage that celebrates the competitions.",
+      "sections": [
+        [
+          "Making pathways accessible",
+          "Clubs, schools and governing bodies play an important role in supporting players at every stage."
+        ],
+        [
+          "Building lasting visibility",
+          "Editorial coverage, celebrating players and regular competition windows all help broaden the audience."
+        ]
+      ],
+      "tags": [
+        "Women's rugby",
+        "Development"
+      ]
+    }
+  },
+  "galleryTranslations": {
+    "Au cœur de la ligne d’avantage": {
+      "title": "At the heart of the gain line",
+      "kind": "Photo",
+      "caption": "The collective battle, right in the thick of the action."
+    },
+    "La conquête aérienne": {
+      "title": "Winning the high ball",
+      "kind": "Photo",
+      "caption": "The line-out: a key part of the game plan."
+    },
+    "Un ballon à jouer": {
+      "title": "A ball to play",
+      "kind": "Video",
+      "caption": "A sample video sequence."
+    },
+    "Le regard du bord de terrain": {
+      "title": "A touchline perspective",
+      "kind": "Photo",
+      "caption": "The emotion lives beyond the pitch, too."
+    },
+    "Le geste technique": {
+      "title": "The technical skill",
+      "kind": "Video",
+      "caption": "A moment worth watching again."
+    },
+    "La communion avec le public": {
+      "title": "Together with the crowd",
+      "kind": "Photo",
+      "caption": "Rugby and its supporters."
+    }
+  }
+}
