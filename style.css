@@ -95,7 +95,9 @@ p{margin-bottom:1em}
 .nav .nav-podcast a{align-self:center;min-height:35px;margin-left:8px;padding:0 13px;background:var(--rxn-violet);border:0;color:#fff}
 .nav .nav-podcast a:hover{background:var(--rxn-violet-deep)}
 .live-dot{width:7px;height:7px;margin-right:7px;background:var(--rxn-violet-light);border-radius:50%}
-.nav-tools{display:flex;align-items:center;gap:7px;margin-left:auto}
+.nav-tools{display:flex;align-items:center;gap:7px;margin-left:auto;flex:0 0 auto}
+.nav ul{flex:1 1 auto}
+.nav-control{flex:0 0 auto;white-space:nowrap}
 .nav-control{min-height:36px;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 9px;border:1px solid #555;background:transparent;color:#fff;border-radius:0;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .nav-control:hover{border-color:var(--rxn-violet-light);color:var(--rxn-violet-light)}
 .lang-current{color:var(--rxn-violet-light)}
@@ -407,6 +409,16 @@ body[data-theme=light] .standings-note,body[data-theme=light] .results-count{col
 body[data-theme=light] .cta{color:#fff}
 body[data-theme=light] .mobile-dock{background:#111}
 body[data-theme=light] .topline{color:#fff}
+/* Navigation compacte avant tout chevauchement entre liens et préférences */
+@media(max-width:1150px){
+ .nav ul{position:absolute;top:100%;left:0;right:0;z-index:5;display:none;flex-direction:column;align-items:stretch;max-height:calc(100vh - 110px);overflow:auto;padding:9px 16px 15px;background:#111;border-top:1px solid #3c3c3c}
+ .nav ul.open{display:flex}
+ .nav li{display:block}
+ .nav li a{min-height:45px;padding:0 11px;border-bottom:1px solid #303030;font-size:12px}
+ .nav li a[aria-current=page]:after{display:none}
+ .nav .nav-podcast a{margin:8px 0;padding:0 12px;min-height:40px}
+ .menu{display:grid}
+}
 /* Responsive : lecture verticale, rang-club-points au mobile */
 @media(max-width:1050px){
  .nav li a{padding-inline:8px;font-size:9px}
