@@ -1,30 +1,44 @@
-# Données sportives
+# Données RugbyXVNews
 
-Ce fichier est lu par le front-end à l'adresse `./data/sports-data.json`. Les modules de résultats, calendriers, classements, clubs, joueurs, vidéos et podcasts sont déjà prêts à consommer ces tableaux.
+Le site lit trois fichiers JSON indépendants :
+- **articles.json** : contenu éditorial et fiches article.
+- **gallery.json** : albums et médias de la galerie.
+- **sports-data.json** : compétitions, résultats, classements, clubs, joueurs, vidéos et podcasts.
 
-## Règles éditoriales et de fiabilité
-- Ne publier que des données issues d'une source autorisée et vérifiable.
-- Toujours renseigner `sourceName` ou `sourceUrl` et `updatedAt` pour rendre la provenance et la fraîcheur visibles.
-- Pour un match en direct, `status` doit valoir `live` et `updatedAt` doit être actualisé. Le site masque l'état « en direct » lorsque cette donnée date de plus de dix minutes.
-- Utiliser les statuts `scheduled`, `live`, `finished` et `postponed`.
-- Les scores doivent être numériques. Ne pas remplir les champs avec une estimation.
-- Le dépôt ne contient pas de flux de données propriétaire ni de clé API.
+Les fichiers sont servis en lecture seule depuis GitHub Pages. La rédaction les met à jour en modifiant le dépôt. Pour une mise à jour automatique des scores, ajouter une fonction de synchronisation côté serveur ou une action planifiée GitHub Actions alimentée par un fournisseur sous licence. Ne jamais exposer une clé API privée dans les fichiers JavaScript ou JSON publics.
 
-## Exemple de rencontre
+## Format d'un article
+Champs requis : id, title, category, type, author, published, read, excerpt, lead et sections.
+Champs recommandés : tone, tags, image, imageAlt, imageCaption, datePublished, dateModified et demo.
+La propriété sections contient un tableau de paires : titre de section puis paragraphe. Les identifiants doivent être uniques et stables. Les dates réelles doivent être au format ISO 8601 avec fuseau horaire.
+
+## Format galerie
+Champs requis : title, kind (Photo ou Vidéo), caption. Champs recommandés : tone, image, credit et demo.
+Une URL d'image doit être HTTP(S) ou un chemin de fichier local au site. Les visuels doivent être libres de droits ou autorisés pour les usages prévus. Toujours renseigner un crédit lorsque requis.
+
+## Format sportif
+sports-data.json contient :
+- provider, sourceUrl et updatedAt au niveau racine.
+- competitions : tableau d'objets avec id, name, season, updatedAt, sourceName, sourceUrl, matches et standings.
+- clubs, players, videos et podcasts : tableaux de fiches.
+
+Un match peut utiliser les statuts scheduled, upcoming, live, finished ou postponed. Pour un match live, fournir un updatedAt récent. Le front-end n'affiche plus « EN DIRECT » au-delà de dix minutes depuis la dernière mise à jour connue. Les scores doivent être des nombres ; null signifie qu'aucun score n'est publié.
+
+## Exemple de match
 ```json
 {
-  "id": "identifiant-match",
+  "id": "game-001",
   "round": "Journée 1",
   "kickoff": "2026-09-05T18:00:00+02:00",
   "status": "scheduled",
-  "home": "Nom du club recevant",
-  "away": "Nom du club visiteur",
+  "home": "Club recevant",
+  "away": "Club visiteur",
   "homeScore": null,
   "awayScore": null,
-  "venue": "Stade",
+  "venue": "Nom du stade",
   "updatedAt": "2026-09-05T12:00:00+02:00",
-  "sourceName": "Nom de la source",
-  "sourceUrl": "https://exemple.org/match"
+  "sourceName": "Fournisseur de données",
+  "sourceUrl": "https://example.org/match"
 }
 ```
 
@@ -41,8 +55,4 @@ Ce fichier est lu par le front-end à l'adresse `./data/sports-data.json`. Les m
 }
 ```
 
-## Fiches clubs et joueurs
-Clubs : `name`, `competition`, `description`, `url`.
-Joueurs : `name`, `position`, `description`, `url`.
-
-Les données personnelles sensibles, informations médicales ou rumeurs non vérifiées ne doivent pas être intégrées à l'annuaire.
+Les données de personnes doivent rester limitées aux informations publiques et pertinentes pour le rugby. Ne pas ajouter de données personnelles sensibles, d'informations médicales ni de rumeurs non vérifiées.
