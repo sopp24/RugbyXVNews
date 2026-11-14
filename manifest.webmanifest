@@ -1,14 +1,14 @@
 {
   "id": "./",
-  "name": "RugbyXVNews — Le média rugby",
+  "name": "Rugby XV News — Le média rugby",
   "short_name": "RugbyXVNews",
   "description": "Actualités, résultats et analyses du rugby français et international.",
   "lang": "fr-FR",
   "start_url": "./?view=home",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f5f0e5",
-  "theme_color": "#383735",
+  "background_color": "#111111",
+  "theme_color": "#5533EC",
   "orientation": "any",
   "icons": [
     {
