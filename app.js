@@ -371,7 +371,7 @@ function applySiteLanguage(){
    if(!node.nodeValue||!node.nodeValue.trim())continue;
    node.nodeValue=translateValue(node.nodeValue,map);
   }
-  $('input,button,a,[aria-label],[title]').forEach(el=>{
+  $$('input,button,a,[aria-label],[title]').forEach(el=>{
    ['placeholder','title','aria-label'].forEach(attr=>{
     if(el.hasAttribute(attr))el.setAttribute(attr,translateValue(el.getAttribute(attr),map));
    });
