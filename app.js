@@ -494,6 +494,7 @@ function toggleSaved(id){
  $('[data-save]').filter(b=>b.dataset.save===id).forEach(b=>{b.setAttribute('aria-pressed',String(!exists));b.textContent=exists?'☆':'★'});
  updateSavedCount();notify(exists?'Article retiré des favoris.':'Article ajouté aux favoris.');
  if(view==='saved')renderSaved();
+ applySiteLanguage();
 }
 function updateSavedCount(){
  const count=allSaved().length;
