@@ -11,6 +11,13 @@ self.addEventListener('activate',event=>{
 self.addEventListener('fetch',event=>{
  const request=event.request;
  if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
+ if(new URL(request.url).pathname.endsWith('.json')) {
+  event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
+   if(response&&response.ok){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
+   return response;
+  }).catch(()=>caches.match(request)));
+  return;
+ }
  if(request.mode==='navigate'||request.headers.get('accept')?.includes('text/html')){
   event.respondWith(fetch(request).then(response=>{
    if(response&&response.ok){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
