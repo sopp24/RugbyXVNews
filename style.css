@@ -381,3 +381,25 @@ body[data-theme=dark] .tabs{border-color:#444}
 .article-sources li{margin:5px 0}
 .article-sources a,.article-meta-bar a{border-bottom:1px solid var(--gold);font-weight:700}
 body[data-theme=dark] .article-sources{background:#1d1d1d;color:#ddd}
+
+.score-detail-link{margin-top:9px}
+.score-detail-link a{font-size:9px}
+.match-feature{background:#111;color:#fff;padding:clamp(17px,3vw,30px);border-top:5px solid var(--gold);margin-bottom:28px}
+.match-feature-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.match-feature-teams{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:28px 0}
+.match-feature-teams small{display:block;color:#bbb;font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+.match-feature-teams strong{display:block;font:900 clamp(23px,4vw,44px)/.92 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin-top:7px;overflow-wrap:anywhere}
+.match-feature-teams>div:last-child{text-align:right}
+.match-feature-score{font:900 clamp(30px,5vw,56px)/1 "Barlow Condensed",Impact,sans-serif;white-space:nowrap;color:var(--gold)}
+.match-feature>p{font-size:10px;color:#ccc;margin:6px 0}
+.match-feature a{color:var(--gold);border-bottom:1px solid var(--gold)}
+.match-tabs{display:grid;grid-template-columns:1fr;gap:26px}
+.match-tabs>section{min-width:0}
+.lineup-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lineup-grid ol{padding-left:20px;font-size:11px;line-height:1.9}
+.match-events{list-style:none;padding:0;margin:0;border-left:2px solid var(--gold);margin-left:8px}
+.match-events li{display:grid;grid-template-columns:55px 1fr;gap:10px;padding:8px 0 8px 14px;font-size:11px;position:relative}
+.match-events li:before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;background:var(--gold);border-radius:50%}
+.match-events li b{color:var(--gold2)}
+body[data-theme=dark] .match-feature{background:#171717}
+@media(max-width:560px){.match-feature-teams{gap:7px;padding:22px 0}.match-feature-teams strong{font-size:22px}.match-feature-score{font-size:29px}.lineup-grid{grid-template-columns:1fr}}
