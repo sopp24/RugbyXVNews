@@ -358,8 +358,10 @@ function initNavigation(){
  const setOpen=open=>{
   nav.classList.toggle('open',open);
   menu.setAttribute('aria-expanded',String(open));
-  menu.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
-  menu.title=open?'Fermer le menu':'Ouvrir le menu';
+  const closeLabel=currentLang==='en'?'Close menu':'Fermer le menu';
+  const openLabel=currentLang==='en'?'Open menu':'Ouvrir le menu';
+  menu.setAttribute('aria-label',open?closeLabel:openLabel);
+  menu.title=open?closeLabel:openLabel;
   document.body.classList.toggle('menuopen',open);
  };
  menu.addEventListener('click',()=>setOpen(menu.getAttribute('aria-expanded')!=='true'));
