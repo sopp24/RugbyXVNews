@@ -19,7 +19,7 @@ Portail éditorial statique pour le rugby français et international. Le site es
 - **title**, **category**, **type**, **author**, **published**, **read**.
 - **excerpt** : chapô court ; **lead** : introduction.
 - **sections** : tableau de paires [titre, paragraphe].
-- **tone** : ambiance visuelle de secours (green, blue, red, gold, ink).
+- **tone** : identifiant d’ambiance pour les médias de secours. La couleur de marque reste le violet officiel ; les photos et couleurs de maillots ne sont pas recolorisées.
 - **image** : URL HTTP(S) ou chemin de fichier de l'image ; **imageAlt** : texte alternatif ; **imageCaption** : légende et crédit.
 - **tags** : mots-clés utiles à la recherche.
 - **datePublished** et **dateModified** : dates ISO 8601 lorsque l'article est réel.
@@ -70,9 +70,33 @@ Le workflow GitHub Actions **.github/workflows/site-check.yml** vérifie la synt
 - Les préférences de langue et de thème sont conservées localement dans le navigateur (clés localStorage rxn-lang et rxn-theme).
 - La commande FR / EN se trouve dans la barre de navigation persistante et recharge la page dans la langue choisie.
 - Les traductions d'interface sont dans **data/locales.json** (objet ui). Les traductions des articles sont dans articleTranslations et celles de la galerie dans galleryTranslations.
-- Le mode clair utilise une palette ivoire/anthracite/or ; le mode sombre applique un thème sombre complet. Le bouton de thème reste dans la barre de navigation persistante.
+- Le thème sombre officiel est appliqué par défaut. Le thème clair reste disponible comme alternative de lecture ; les deux préférences sont conservées localement.
 - Pour une nouvelle publication, renseigner ses champs anglais dans data/locales.json. Le moteur de traduction utilise les valeurs françaises comme clés de correspondance.
 
 
-## Direction artistique
-L'interface web reprend une esthétique éditoriale inspirée des visuels publics RugbyXVNews : papier ivoire, aplats anthracite, filets et cadres dorés, emblème en médaillon et typographie à empattements pour les grands titres. Sur mobile, la navigation devient une expérience de type application avec barre persistante, menu accessible, PWA installable et page hors ligne.
+## Direction artistique — charte Instagram Rugby XV News
+
+La charte officielle du compte @rugby_xv_news est la référence visuelle du site. L'identité repose sur un trio strict : violet électrique, noir et blanc. Les autres couleurs visibles dans les médias proviennent des photos, maillots et logos de compétitions ; elles ne deviennent pas des couleurs de marque.
+
+### Couleurs
+- Violet de marque : **#5533EC** (rubriques, bandeaux, accents et titres surlignés).
+- Noir : **#111111** (fond principal, arcs, navigation et grandes zones d'information).
+- Blanc : **#FFFFFF** (texte, chiffres et pastilles de rang).
+- Surface secondaire : **#1D1D1D** ; gris de barres de points : **#3C3C3C**.
+- Violet clair : **#8A70FF** pour les textes violets sur fond noir ; violet profond : **#4326C4** pour les états pressés.
+- Rouge cœur : **#E5405A**, réservé au motif cœur du podcast « Au cœur de la Nationale ».
+
+### Typographie et logo
+- Montserrat variable est auto-hébergée dans `assets/fonts/` (graisses variables, romain et italique). La licence SIL Open Font License est conservée dans `assets/fonts/OFL.txt`.
+- Titres en capitales et graisses 800–900 ; scores en italique 900 avec chiffres tabulaires ; corps lisible à partir de la graisse 400.
+- Les sujets de titres sont mis en évidence par un rectangle violet. Les accents des capitales sont conservés.
+- Le mot-symbole textuel et le monogramme XV présents dans le site et l'icône sont des approximations temporaires. Remplacer par le logo source exact dès que ses fichiers SVG officiels (versions blanche, noire et violette) sont fournis.
+
+### Formes, images et composants
+- Arcs noirs sur fonds violets, bandeaux de surlignage rectangulaires, onglets inclinés et pastilles de rang blanches à angles droits.
+- Pas d'ombre portée, pas de dégradé de marque, pas de carte arrondie. Seul le bas des photos reçoit un dégradé noir de lisibilité.
+- Photos principales en portrait 4:5, vignettes en 3:4, titre et score reconstruits en HTML réel, crédit visible. Les photos ne sont jamais recolorisées ; les écussons et logos tiers ne sont jamais déformés.
+- Les classements utilisent des rangs blancs, des barres de points gris et, sur mobile, une lecture compacte rang / club / points sans défilement horizontal.
+- La navigation reste noire avec un soulignement violet de 3 px pour la rubrique active et un accès Podcasts violet.
+
+La navigation mobile, la recherche, le mode de lecture clair optionnel, la langue FR/EN, les favoris et la PWA restent fonctionnels. Avant publication, confirmer le logo original et les licences de diffusion web des photographies, écussons et logos tiers.
