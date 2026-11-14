@@ -54,9 +54,9 @@ assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint mis
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
 assert.match(sw,/rugbyxvnews-v9/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
-assert.match(app,/updateSavedCount\(\);\\s*applySiteLanguage\(\);/,'Every route render must apply the selected language');
+assert.match(app,/updateSavedCount\(\);\s*applySiteLanguage\(\);/,'Every route render must apply the selected language');
 assert.match(app,/title=translateValue\(title,buildTranslationMap\(\)\)/,'Article headlines must be translated before markup splits them');
-assert.match(app,/el\\.textContent=currentLang==='en'\\?translateValue\(message,buildTranslationMap\(\)\):message/,'Transient notices must use the active language');
+assert.match(app,/el\.textContent=currentLang==='en'\?translateValue\(message,buildTranslationMap\(\)\):message/,'Transient notices must use the active language');
 assert.ok(locales.ui['La passion du jeu.']&&locales.ui["L'info, au cœur du terrain."],'Masthead strapline translations are required');
 assert.match(app,/localStorage\.setItem\('rxn-lang'/,'Language preference persistence missing');
 assert.match(app,/localStorage\.setItem\('rxn-theme'/,'Theme preference persistence missing');
