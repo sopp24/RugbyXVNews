@@ -403,3 +403,10 @@ body[data-theme=dark] .article-sources{background:#1d1d1d;color:#ddd}
 .match-events li b{color:var(--gold2)}
 body[data-theme=dark] .match-feature{background:#171717}
 @media(max-width:560px){.match-feature-teams{gap:7px;padding:22px 0}.match-feature-teams strong{font-size:22px}.match-feature-score{font-size:29px}.lineup-grid{grid-template-columns:1fr}}
+
+body{color-scheme:light}
+body[data-theme=dark]{color-scheme:dark}
+.save-button{min-width:44px;min-height:44px}
+.article-tools button{min-height:44px}
+.filter-button{min-height:44px}
+.score-detail-link a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0}
