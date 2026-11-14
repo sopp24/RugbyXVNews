@@ -393,29 +393,224 @@ p{margin-bottom:1em}
 .search-hint{margin:14px 0 0;color:#aaa;font-size:10px}
 kbd{padding:2px 6px;background:#333;border:1px solid #555;color:#fff}
 /* Thème clair réservé à une lecture alternative */
-body[data-theme=light]{color-scheme:light;background:#fff;color:#111}
-body[data-theme=light] .mast,body[data-theme=light] .nav,body[data-theme=light] .footer{background:#111;color:#fff}
-body[data-theme=light] .page-shell{color:#111}
-body[data-theme=light] .news-card,body[data-theme=light] .widget,body[data-theme=light] .widget-dark,body[data-theme=light] .directory-card,body[data-theme=light] .score-card,body[data-theme=light] .empty-state,body[data-theme=light] .match-feature{background:#fff;color:#111;border-color:#ddd}
-body[data-theme=light] .news-card-body p,body[data-theme=light] .widget p,body[data-theme=light] .directory-card p,body[data-theme=light] .score-status,body[data-theme=light] .excerpt,body[data-theme=light] .article-body,body[data-theme=light] .byline{color:#444}
-body[data-theme=light] .news-card-body h3 a,body[data-theme=light] .directory-card h3,body[data-theme=light] .score-team,body[data-theme=light] .match-feature-teams strong{color:#111}
-body[data-theme=light] .article-body blockquote,body[data-theme=light] .article-sources,body[data-theme=light] .editorialnote,body[data-theme=light] .article-aside .widget{background:#f3f3f3;color:#222}
-body[data-theme=light] .article-body h2{border-color:#ddd}
-body[data-theme=light] .article-meta-bar,body[data-theme=light] .article-header{border-color:#ddd}
-body[data-theme=light] .standings{background:#fff;color:#111}
-body[data-theme=light] .standings td{color:#111;border-color:#ddd}
-body[data-theme=light] .standings tr:nth-child(even) td{background:#f3f3f3}
-body[data-theme=light] .standings td:first-child{background:#fff;color:#111}
-body[data-theme=light] .feed-item{border-color:#ddd}
-body[data-theme=light] .feed-item p,body[data-theme=light] .feed-meta{color:#555}
-body[data-theme=light] .tab{color:#555}
-body[data-theme=light] .tab[aria-selected=true]{color:#111}
-body[data-theme=light] .filterbar input,body[data-theme=light] .filterbar select{background:#fff;color:#111;border-color:#bbb}
-body[data-theme=light] .article-body{color:#222}
-body[data-theme=light] .standings-note,body[data-theme=light] .results-count{color:#555}
-body[data-theme=light] .cta{color:#fff}
-body[data-theme=light] .mobile-dock{background:#111}
-body[data-theme=light] .topline{color:#fff}
+html[data-theme=light]{background:#F6F5FA;color-scheme:light}
+body[data-theme=light]{
+ color-scheme:light;
+ --rxn-black:#F6F5FA;
+ --rxn-surface:#FFFFFF;
+ --rxn-grey-bar:#E8E5F0;
+ --rxn-white:#181626;
+ --rxn-violet-light:#5B48C6;
+ --line:#D9D6E4;
+ --muted:#5D596B;
+ background:var(--rxn-black);
+ color:var(--rxn-white);
+}
+body[data-theme=light] .mast,
+body[data-theme=light] .nav,
+body[data-theme=light] .footer{
+ background:#FFFFFF;
+ color:var(--rxn-white);
+ border-color:var(--line);
+}
+body[data-theme=light] .page-shell,
+body[data-theme=light] .page-shell+.page-shell{color:var(--rxn-white);border-color:var(--line)}
+body[data-theme=light] .ticker,
+body[data-theme=light] .notice,
+body[data-theme=light] .searchform,
+body[data-theme=light] .score-card,
+body[data-theme=light] .empty-state,
+body[data-theme=light] .standings,
+body[data-theme=light] .article-body blockquote,
+body[data-theme=light] .article-sources,
+body[data-theme=light] .editorialnote,
+body[data-theme=light] .gallery-dialog,
+body[data-theme=light] .search-dialog{
+ background:#FFFFFF;
+ color:var(--rxn-white);
+ border-color:var(--line);
+}
+body[data-theme=light] .hero-grid,
+body[data-theme=light] .hero-side{background:var(--rxn-black)}
+body[data-theme=light] .hero-secondary,
+body[data-theme=light] .news-card,
+body[data-theme=light] .widget:not(.widget-dark),
+body[data-theme=light] .directory-card,
+body[data-theme=light] .match-feature,
+body[data-theme=light] .comp-card{
+ background:#FFFFFF;
+ color:var(--rxn-white);
+ border-color:var(--line);
+}
+body[data-theme=light] .mast,
+body[data-theme=light] .tagline,
+body[data-theme=light] .brand-caption,
+body[data-theme=light] .nav li a,
+body[data-theme=light] .nav-control,
+body[data-theme=light] .icon-button,
+body[data-theme=light] .menu,
+body[data-theme=light] .footer,
+body[data-theme=light] .footer a,
+body[data-theme=light] .footbottom,
+body[data-theme=light] .totop{
+ color:var(--rxn-white);
+}
+body[data-theme=light] .brand-caption,
+body[data-theme=light] .tagline,
+body[data-theme=light] .crumb:not(.pageintro .crumb),
+body[data-theme=light] .byline,
+body[data-theme=light] .feed-meta,
+body[data-theme=light] .news-card-body p,
+body[data-theme=light] .feed-item p,
+body[data-theme=light] .hero-secondary p,
+body[data-theme=light] .widget:not(.widget-dark) p,
+body[data-theme=light] .directory-card p,
+body[data-theme=light] .score-status,
+body[data-theme=light] .score-card-head>span:first-child,
+body[data-theme=light] .match-toolbar p,
+body[data-theme=light] .match-feature>p,
+body[data-theme=light] .match-feature-teams small,
+body[data-theme=light] .empty-state p,
+body[data-theme=light] .standings-note,
+body[data-theme=light] .results-count,
+body[data-theme=light] .data-freshness,
+body[data-theme=light] .article-deck,
+body[data-theme=light] .authorline,
+body[data-theme=light] .article-body,
+body[data-theme=light] .image-caption,
+body[data-theme=light] .gallery-item small,
+body[data-theme=light] .gallery-dialog p,
+body[data-theme=light] .bodycopy,
+body[data-theme=light] .footdesc,
+body[data-theme=light] .footer p,
+body[data-theme=light] .widget-line span{
+ color:var(--muted);
+}
+body[data-theme=light] .tagline strong,
+body[data-theme=light] .authorline b,
+body[data-theme=light] .news-card-body h3 a,
+body[data-theme=light] .directory-card h3,
+body[data-theme=light] .score-team,
+body[data-theme=light] .match-feature-teams strong,
+body[data-theme=light] .article-body h2,
+body[data-theme=light] .article-body h3,
+body[data-theme=light] .bodycopy h2,
+body[data-theme=light] .bodycopy h3,
+body[data-theme=light] .widget-line b,
+body[data-theme=light] .footer h3,
+body[data-theme=light] .footer .brand-caption{
+ color:var(--rxn-white);
+}
+body[data-theme=light] .nav{border-bottom-color:var(--line)}
+body[data-theme=light] .nav li a{color:#474456}
+body[data-theme=light] .nav li a:hover,
+body[data-theme=light] .nav li a[aria-current=page]{color:var(--rxn-violet)}
+body[data-theme=light] .nav-control,
+body[data-theme=light] .icon-button,
+body[data-theme=light] .menu,
+body[data-theme=light] .save-button,
+body[data-theme=light] .article-tools button,
+body[data-theme=light] .filter-button,
+body[data-theme=light] .quick a,
+body[data-theme=light] .social a{
+ background:transparent;
+ color:var(--rxn-white);
+ border-color:#C9C5D6;
+}
+body[data-theme=light] .nav-control:hover,
+body[data-theme=light] .icon-button:hover,
+body[data-theme=light] .menu:hover,
+body[data-theme=light] .save-button:hover,
+body[data-theme=light] .save-button[aria-pressed=true],
+body[data-theme=light] .article-tools button:hover,
+body[data-theme=light] .filter-button:hover,
+body[data-theme=light] .filter-button[aria-pressed=true],
+body[data-theme=light] .quick a:hover,
+body[data-theme=light] .social a:hover{
+ background:var(--rxn-violet);
+ color:#FFFFFF;
+ border-color:var(--rxn-violet);
+}
+body[data-theme=light] .lang-current{color:var(--rxn-violet)}
+body[data-theme=light] .lang-next,
+body[data-theme=light] .lang-divider{color:#716D7E}
+body[data-theme=light] .tickerflow{color:#474456}
+body[data-theme=light] .tickerflow a:hover,
+body[data-theme=light] .text-link:hover,
+body[data-theme=light] .more-link:hover,
+body[data-theme=light] .crumb a:hover,
+body[data-theme=light] .tab:hover,
+body[data-theme=light] .tab[aria-selected=true],
+body[data-theme=light] .standings-note a,
+body[data-theme=light] .article-sources a,
+body[data-theme=light] .bodycopy a,
+body[data-theme=light] .footer a:hover{color:var(--rxn-violet)}
+body[data-theme=light] .section-head,
+body[data-theme=light] .sectionhead,
+body[data-theme=light] .feed-item,
+body[data-theme=light] .tabs,
+body[data-theme=light] .article-meta-bar,
+body[data-theme=light] .article-header,
+body[data-theme=light] .article-body h2,
+body[data-theme=light] .widget-line,
+body[data-theme=light] .footbottom{border-color:var(--line)}
+body[data-theme=light] .pageintro-compact{background:#FFFFFF}
+body[data-theme=light] .pageintro-compact .crumb{color:var(--muted)}
+body[data-theme=light] .pageintro-compact .crumb a{color:var(--rxn-violet)}
+body[data-theme=light] .filterbar input,
+body[data-theme=light] .filterbar select,
+body[data-theme=light] .searchform input{
+ background:#FFFFFF;
+ color:var(--rxn-white);
+ border-color:#C9C5D6;
+ color-scheme:light;
+}
+body[data-theme=light] .filterbar input::placeholder,
+body[data-theme=light] .searchform input::placeholder{color:#777386}
+body[data-theme=light] .filter-button{color:var(--rxn-white)}
+body[data-theme=light] .pill.live,
+body[data-theme=light] .pill.light{background:var(--rxn-violet);color:#FFFFFF}
+body[data-theme=light] .standings th{background:var(--rxn-violet);color:#FFFFFF}
+body[data-theme=light] .standings td{background:#FFFFFF;color:var(--rxn-white);border-color:var(--line)}
+body[data-theme=light] .standings tr:nth-child(even) td{background:#F1F0F6}
+body[data-theme=light] .standings tbody tr:hover td{background:#EAE6FF}
+body[data-theme=light] .standings td:first-child{background:#EAE6FF;color:var(--rxn-violet-deep)}
+body[data-theme=light] .standings td:last-child{background:var(--rxn-violet);color:#FFFFFF}
+body[data-theme=light] .score-num .is-winner,
+body[data-theme=light] .score-num .is-draw{color:var(--rxn-white)}
+
+body[data-theme=light] .widget-dark{
+ background:var(--rxn-violet);
+ color:#FFFFFF;
+ border-color:var(--rxn-violet);
+}
+body[data-theme=light] .widget-dark p,
+body[data-theme=light] .widget-dark h2,
+body[data-theme=light] .widget-dark .kicker{color:#FFFFFF}
+body[data-theme=light] .widget-dark .btn{background:var(--rxn-violet-deep);color:#FFFFFF}
+body[data-theme=light] .comp-card:after{border-color:#E5E2EF}
+body[data-theme=light] .comp-card p{color:var(--muted)}
+body[data-theme=light] .match-toolbar{background:#FFFFFF;color:var(--rxn-white);border-color:var(--line);border-left-color:var(--rxn-violet)}
+body[data-theme=light] .article-body blockquote,
+body[data-theme=light] .article-sources,
+body[data-theme=light] .editorialnote{background:#F0EFF5;color:var(--rxn-white)}
+body[data-theme=light] .gallery-dialog,
+body[data-theme=light] .search-dialog{background:#FFFFFF;color:var(--rxn-white);border-color:var(--line)}
+body[data-theme=light] .reading-progress{background:#E7E5ED}
+body[data-theme=light] .mobile-dock{
+ background:rgba(255,255,255,.98);
+ border-top:1px solid var(--line);
+}
+body[data-theme=light] .mobile-dock a,
+body[data-theme=light] .mobile-dock button{color:#625E70}
+body[data-theme=light] .mobile-dock a:hover,
+body[data-theme=light] .mobile-dock button:hover,
+body[data-theme=light] .mobile-dock a[aria-current=page]{color:var(--rxn-violet)}
+body[data-theme=light] .nav ul{background:#FFFFFF;border-color:var(--line)}
+body[data-theme=light] .totop{background:#FFFFFF;color:var(--rxn-white);border-color:#C9C5D6}
+body[data-theme=light] .menu{background:#FFFFFF;color:var(--rxn-white)}
+body[data-theme=light] .hero-primary .save-button{border-color:#FFFFFF99;color:#FFFFFF}
+body[data-theme=light] :focus-visible{outline-color:var(--rxn-violet)}
 /* Navigation compacte avant tout chevauchement entre liens et préférences */
 @media(max-width:1150px){
  .nav ul{position:absolute;top:100%;left:0;right:0;z-index:5;display:none;flex-direction:column;align-items:stretch;max-height:calc(100vh - 110px);overflow:auto;padding:9px 16px 15px;background:#111;border-top:1px solid #3c3c3c}
