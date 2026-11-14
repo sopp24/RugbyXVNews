@@ -352,6 +352,13 @@ function updatePreferenceControls(){
   themeButton.setAttribute('aria-pressed',String(dark));
  }
 }
+function initThemeToggle(){
+ const themeButton=$('[data-theme-toggle]');
+ if(!themeButton)return;
+ themeButton.addEventListener('click',()=>{
+  applyTheme(document.body.dataset.theme==='dark'?'light':'dark');
+ });
+}
 function applyTheme(theme,persist=true){
  const safe=theme==='dark'?'dark':'light';
  document.body.dataset.theme=safe;
@@ -495,8 +502,6 @@ function initEvents(){
  document.addEventListener('click',e=>{
   const lang=e.target.closest('[data-lang-toggle]');
   if(lang){const next=currentLang==='fr'?'en':'fr';try{localStorage.setItem('rxn-lang',next)}catch(err){}location.reload();return}
-  const theme=e.target.closest('[data-theme-toggle]');
-  if(theme){applyTheme(document.body.dataset.theme==='dark'?'light':'dark');return}
   const save=e.target.closest('[data-save]');if(save){toggleSaved(save.dataset.save);return}
   if(e.target.closest('[data-share]')){sharePage();return}
   if(e.target.closest('[data-copy]')){copyPage();return}
@@ -571,6 +576,7 @@ async function boot(){
  let initialTheme='dark';
  try{const savedTheme=localStorage.getItem('rxn-theme');if(savedTheme==='light'||savedTheme==='dark')initialTheme=savedTheme}catch(e){}
  applyTheme(initialTheme,false);
+ initThemeToggle();
  await Promise.all([loadSportsData(),loadEditorialData(),loadLocaleData()]);
  render();
  initEvents();
