@@ -43,7 +43,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*awa
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v5/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v6/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/localStorage\.setItem\('rxn-lang'/,'Language preference persistence missing');
 assert.match(app,/localStorage\.setItem\('rxn-theme'/,'Theme preference persistence missing');
