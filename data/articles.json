@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "articles": [
+    {
+      "id": "top14-lecture-du-jeu",
+      "title": "Top 14 : les détails qui font basculer un grand match",
+      "category": "Top 14",
+      "country": "France",
+      "type": "Analyse",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "5 min",
+      "tone": "green",
+      "excerpt": "Conquête, discipline, occupation et gestion des temps faibles : une lecture des paramètres qui structurent une rencontre.",
+      "lead": "Un match ne se résume jamais à son score. La préparation, la qualité de la conquête et la capacité à faire les bons choix dans les moments décisifs racontent souvent une autre histoire.",
+      "sections": [
+        [
+          "Le rapport de force commence devant",
+          "La mêlée, la touche et les ballons portés donnent le tempo. Une équipe capable de sécuriser ses lancements peut installer son jeu et mettre son adversaire sous pression."
+        ],
+        [
+          "La discipline comme fil conducteur",
+          "Les pénalités concédées éloignent une équipe de son plan de jeu. La maîtrise des zones de collision et la qualité du replacement sont des indicateurs à observer tout au long de la rencontre."
+        ],
+        [
+          "Savoir jouer les bons temps",
+          "Un match se gagne aussi dans la gestion : accélérer après un ballon de récupération, conserver quand le contexte l’impose et occuper le terrain au bon moment."
+        ]
+      ],
+      "tags": [
+        "Top 14",
+        "Analyse",
+        "Tactique"
+      ],
+      "demo": true
+    },
+    {
+      "id": "pro-d2-identites-jeu",
+      "title": "Pro D2 : les identités de jeu qui font la différence",
+      "category": "Pro D2",
+      "country": "France",
+      "type": "Décryptage",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "4 min",
+      "tone": "blue",
+      "excerpt": "Un championnat exigeant où la régularité, la profondeur d’effectif et le caractère pèsent lourd.",
+      "lead": "La Pro D2 est un championnat de rythme et de densité. Pour s’y installer, les équipes doivent construire une identité lisible et tenir leur niveau semaine après semaine.",
+      "sections": [
+        [
+          "Trouver une identité",
+          "Chaque club cherche un équilibre entre conquête, vitesse et occupation. La cohérence entre le projet de jeu et les profils disponibles reste déterminante."
+        ],
+        [
+          "La profondeur de banc",
+          "La saison est longue et les séquences s’enchaînent. Les rotations doivent préserver l’intensité sans dénaturer les repères collectifs."
+        ]
+      ],
+      "tags": [
+        "Pro D2",
+        "Décryptage"
+      ],
+      "demo": true
+    },
+    {
+      "id": "nationale-projets-clubs",
+      "title": "Nationale : un championnat charnière pour les clubs ambitieux",
+      "category": "Nationale",
+      "country": "France",
+      "type": "Focus",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "4 min",
+      "tone": "red",
+      "excerpt": "Entre structuration, formation et ambition sportive, la division occupe une place singulière.",
+      "lead": "La Nationale constitue un espace de progression majeur pour les clubs qui souhaitent consolider leur projet et franchir un cap sportif.",
+      "sections": [
+        [
+          "Un cadre exigeant",
+          "Le niveau sportif demande des structures solides, une préparation adaptée et un suivi précis des joueurs."
+        ],
+        [
+          "Faire grandir le collectif",
+          "La continuité du groupe et la formation des jeunes peuvent devenir de véritables leviers de performance."
+        ]
+      ],
+      "tags": [
+        "Nationale",
+        "Clubs"
+      ],
+      "demo": true
+    },
+    {
+      "id": "international-styles-jeu",
+      "title": "Rugby international : quand les styles de jeu se rencontrent",
+      "category": "International",
+      "country": "International",
+      "type": "Analyse",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "6 min",
+      "tone": "ink",
+      "excerpt": "Cultures de jeu, intensité, adaptation tactique : les confrontations internationales sont un laboratoire passionnant.",
+      "lead": "Les rencontres internationales mettent en lumière des cultures de jeu différentes. Leur confrontation donne à voir la richesse tactique et humaine du rugby.",
+      "sections": [
+        [
+          "Des identités fortes",
+          "Chaque sélection s’appuie sur son histoire, ses formations et les profils de joueurs qui composent son effectif."
+        ],
+        [
+          "L’adaptation au contexte",
+          "Le niveau d’opposition impose de savoir ajuster son plan de jeu, sans perdre les principes collectifs qui font sa force."
+        ]
+      ],
+      "tags": [
+        "International",
+        "Sélections"
+      ],
+      "demo": true
+    },
+    {
+      "id": "transferts-construire-effectif",
+      "title": "Transferts : comment se construit un effectif sur une saison ?",
+      "category": "Actus & transferts",
+      "country": "Marché",
+      "type": "Dossier",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "5 min",
+      "tone": "gold",
+      "excerpt": "Recrutement, complémentarité des profils, formation : le marché ne se résume pas à une succession d’annonces.",
+      "lead": "Un recrutement réussi répond à un besoin précis. Il s’inscrit dans une stratégie sportive, dans un calendrier et dans un équilibre de vestiaire.",
+      "sections": [
+        [
+          "Identifier les besoins",
+          "Le staff évalue les postes, la disponibilité des joueurs et les profils susceptibles de compléter le groupe."
+        ],
+        [
+          "Penser complémentarité",
+          "La performance d’un effectif dépend de l’association des talents, de l’expérience et de la capacité à faire vivre un projet collectif."
+        ]
+      ],
+      "tags": [
+        "Transferts",
+        "Dossier"
+      ],
+      "demo": true
+    },
+    {
+      "id": "formation-parcours-joueurs",
+      "title": "Formation : les étapes qui construisent un joueur de rugby",
+      "category": "Actus & transferts",
+      "country": "Formation",
+      "type": "Grand format",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "7 min",
+      "tone": "blue",
+      "excerpt": "De l’école de rugby au haut niveau, le développement se construit dans la durée et au contact du collectif.",
+      "lead": "Le parcours d’un joueur repose sur une succession d’apprentissages, de rencontres et de choix. La progression ne suit pas toujours une trajectoire linéaire.",
+      "sections": [
+        [
+          "Apprendre les fondamentaux",
+          "La technique individuelle, la perception du jeu et le plaisir de pratiquer forment un socle essentiel."
+        ],
+        [
+          "Construire autour du collectif",
+          "L’accompagnement, le suivi physique et l’environnement humain comptent autant que les résultats immédiats."
+        ]
+      ],
+      "tags": [
+        "Formation",
+        "Joueurs"
+      ],
+      "demo": true
+    },
+    {
+      "id": "arbitrage-regles-comprendre",
+      "title": "Arbitrage : mieux comprendre les décisions au cœur du jeu",
+      "category": "International",
+      "country": "Règles",
+      "type": "Pédagogie",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "5 min",
+      "tone": "ink",
+      "excerpt": "Les lois du jeu, la communication et la cohérence arbitrale influencent la lecture d’une rencontre.",
+      "lead": "L’arbitrage fait partie intégrante du rugby. Comprendre les principes qui guident les décisions permet aussi de mieux lire les situations de jeu.",
+      "sections": [
+        [
+          "La sécurité comme priorité",
+          "Les décisions arbitrales visent notamment à protéger l’intégrité physique des joueurs et à préserver l’équité de la rencontre."
+        ],
+        [
+          "Une relation de jeu",
+          "La communication entre arbitres, capitaines et joueurs aide à rendre les décisions compréhensibles dans le rythme du match."
+        ]
+      ],
+      "tags": [
+        "Arbitrage",
+        "Règles"
+      ],
+      "demo": true
+    },
+    {
+      "id": "rugby-feminin-progression",
+      "title": "Rugby féminin : les leviers pour accompagner la progression",
+      "category": "International",
+      "country": "Rugby féminin",
+      "type": "Focus",
+      "author": "La rédaction",
+      "published": "Exemple éditorial",
+      "read": "6 min",
+      "tone": "red",
+      "excerpt": "Visibilité, formation, structuration et accès à la pratique : les enjeux d’un développement durable.",
+      "lead": "Le développement du rugby féminin s’appuie sur des parcours de pratique lisibles, des structures d’accueil et une exposition qui valorise les compétitions.",
+      "sections": [
+        [
+          "Rendre les parcours accessibles",
+          "Les clubs, les écoles et les structures fédérales jouent un rôle essentiel pour accompagner les pratiquantes à chaque étape."
+        ],
+        [
+          "Installer une visibilité durable",
+          "La couverture éditoriale, la valorisation des joueuses et la régularité des rendez-vous contribuent à élargir le public."
+        ]
+      ],
+      "tags": [
+        "Rugby féminin",
+        "Développement"
+      ],
+      "demo": true
+    }
+  ]
+}
