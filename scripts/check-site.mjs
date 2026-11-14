@@ -17,6 +17,7 @@ const locales=JSON.parse(fs.readFileSync(path.join(root,'data/locales.json'),'ut
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.webmanifest'),'utf8'));
 
 assert.match(html,/id="main"/,'Main landmark missing');
+assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[1],/data-nav="directory"|view=directory/i,'Clubs and players must not take space in the primary navigation');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
