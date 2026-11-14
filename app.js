@@ -409,7 +409,7 @@ function applySiteLanguage(){
    if(!node.nodeValue||!node.nodeValue.trim())continue;
    node.nodeValue=translateValue(node.nodeValue,map);
   }
-  $('input,button,a,[aria-label],[title],[alt]').forEach(el=>{
+  $$('input,button,a,[aria-label],[title],[alt]').forEach(el=>{
    ['placeholder','title','aria-label','aria-description','alt'].forEach(attr=>{
     if(el.hasAttribute(attr))el.setAttribute(attr,translateValue(el.getAttribute(attr),map));
    });
@@ -480,7 +480,7 @@ function render(){
  updateMeta();
  const active=view==='home'?'home':view==='live'||view==='match'?'live':view==='news'||view==='article'||view==='search'?'news':view==='competition'?compId:view==='directory'?'directory':view==='media'||view==='gallery'||view==='videos'||view==='podcasts'?'media':'';
  $$('[data-nav]').forEach(a=>{const key=a.dataset.nav;if(key===active||(active==='top14'&&key==='top14')||(active==='pro-d2'&&key==='prod2')||(active==='nationale'&&key==='nationale')||(active==='international'&&key==='international'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
- $('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===(view==='match'?'live':view)));
+ $$('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===(view==='match'?'live':view)));
  if(PREVIEW_MODE)$('#preview-notice').classList.remove('hidden');
  updateSavedCount();
  applySiteLanguage();
@@ -493,7 +493,7 @@ function notify(message){
 function toggleSaved(id){
  const saved=allSaved(),exists=saved.includes(id),next=exists?saved.filter(x=>x!==id):saved.concat(id);
  if(!storeSaved(next)){notify('Le navigateur ne permet pas de conserver les favoris.');return}
- $('[data-save]').filter(b=>b.dataset.save===id).forEach(b=>{b.setAttribute('aria-pressed',String(!exists));b.textContent=exists?'☆':'★'});
+ $$('[data-save]').filter(b=>b.dataset.save===id).forEach(b=>{b.setAttribute('aria-pressed',String(!exists));b.textContent=exists?'☆':'★'});
  updateSavedCount();notify(exists?'Article retiré des favoris.':'Article ajouté aux favoris.');
  if(view==='saved')renderSaved();
  applySiteLanguage();
