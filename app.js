@@ -2,13 +2,15 @@
 (() => {
 const PREVIEW_MODE = true; // Passer à false après remplacement et validation de tous les contenus de démonstration.
 const DATA_URL = './data/sports-data.json';
+const ARTICLES_URL = './data/articles.json';
+const GALLERY_URL = './data/gallery.json';
 const COMPETITIONS = [
  {id:'top14',name:'Top 14',short:'TOP 14',description:'L’élite du rugby français : clubs, actualités, analyses et suivi du championnat.'},
  {id:'pro-d2',name:'Pro D2',short:'PRO D2',description:'Le championnat de deuxième division, ses clubs et les enjeux de la saison.'},
  {id:'nationale',name:'Nationale',short:'NATIONALE',description:'Les clubs, les projets sportifs et les histoires du troisième échelon national.'},
  {id:'international',name:'International',short:'INTERNATIONAL',description:'Les sélections, les grandes compétitions et les cultures du rugby mondial.'}
 ];
-const ARTICLES = [
+let ARTICLES = [
  {id:'top14-lecture-du-jeu',title:'Top 14 : les détails qui font basculer un grand match',category:'Top 14',country:'France',type:'Analyse',author:'La rédaction',published:'Exemple éditorial',read:'5 min',tone:'green',excerpt:'Conquête, discipline, occupation et gestion des temps faibles : une lecture des paramètres qui structurent une rencontre.',lead:'Un match ne se résume jamais à son score. La préparation, la qualité de la conquête et la capacité à faire les bons choix dans les moments décisifs racontent souvent une autre histoire.',sections:[['Le rapport de force commence devant','La mêlée, la touche et les ballons portés donnent le tempo. Une équipe capable de sécuriser ses lancements peut installer son jeu et mettre son adversaire sous pression.'],['La discipline comme fil conducteur','Les pénalités concédées éloignent une équipe de son plan de jeu. La maîtrise des zones de collision et la qualité du replacement sont des indicateurs à observer tout au long de la rencontre.'],['Savoir jouer les bons temps','Un match se gagne aussi dans la gestion : accélérer après un ballon de récupération, conserver quand le contexte l’impose et occuper le terrain au bon moment.']],tags:['Top 14','Analyse','Tactique']},
  {id:'pro-d2-identites-jeu',title:'Pro D2 : les identités de jeu qui font la différence',category:'Pro D2',country:'France',type:'Décryptage',author:'La rédaction',published:'Exemple éditorial',read:'4 min',tone:'blue',excerpt:'Un championnat exigeant où la régularité, la profondeur d’effectif et le caractère pèsent lourd.',lead:'La Pro D2 est un championnat de rythme et de densité. Pour s’y installer, les équipes doivent construire une identité lisible et tenir leur niveau semaine après semaine.',sections:[['Trouver une identité','Chaque club cherche un équilibre entre conquête, vitesse et occupation. La cohérence entre le projet de jeu et les profils disponibles reste déterminante.'],['La profondeur de banc','La saison est longue et les séquences s’enchaînent. Les rotations doivent préserver l’intensité sans dénaturer les repères collectifs.']],tags:['Pro D2','Décryptage']},
  {id:'nationale-projets-clubs',title:'Nationale : un championnat charnière pour les clubs ambitieux',category:'Nationale',country:'France',type:'Focus',author:'La rédaction',published:'Exemple éditorial',read:'4 min',tone:'red',excerpt:'Entre structuration, formation et ambition sportive, la division occupe une place singulière.',lead:'La Nationale constitue un espace de progression majeur pour les clubs qui souhaitent consolider leur projet et franchir un cap sportif.',sections:[['Un cadre exigeant','Le niveau sportif demande des structures solides, une préparation adaptée et un suivi précis des joueurs.'],['Faire grandir le collectif','La continuité du groupe et la formation des jeunes peuvent devenir de véritables leviers de performance.']],tags:['Nationale','Clubs']},
@@ -18,7 +20,7 @@ const ARTICLES = [
  {id:'arbitrage-regles-comprendre',title:'Arbitrage : mieux comprendre les décisions au cœur du jeu',category:'International',country:'Règles',type:'Pédagogie',author:'La rédaction',published:'Exemple éditorial',read:'5 min',tone:'ink',excerpt:'Les lois du jeu, la communication et la cohérence arbitrale influencent la lecture d’une rencontre.',lead:'L’arbitrage fait partie intégrante du rugby. Comprendre les principes qui guident les décisions permet aussi de mieux lire les situations de jeu.',sections:[['La sécurité comme priorité','Les décisions arbitrales visent notamment à protéger l’intégrité physique des joueurs et à préserver l’équité de la rencontre.'],['Une relation de jeu','La communication entre arbitres, capitaines et joueurs aide à rendre les décisions compréhensibles dans le rythme du match.']],tags:['Arbitrage','Règles']},
  {id:'rugby-feminin-progression',title:'Rugby féminin : les leviers pour accompagner la progression',category:'International',country:'Rugby féminin',type:'Focus',author:'La rédaction',published:'Exemple éditorial',read:'6 min',tone:'red',excerpt:'Visibilité, formation, structuration et accès à la pratique : les enjeux d’un développement durable.',lead:'Le développement du rugby féminin s’appuie sur des parcours de pratique lisibles, des structures d’accueil et une exposition qui valorise les compétitions.',sections:[['Rendre les parcours accessibles','Les clubs, les écoles et les structures fédérales jouent un rôle essentiel pour accompagner les pratiquantes à chaque étape.'],['Installer une visibilité durable','La couverture éditoriale, la valorisation des joueuses et la régularité des rendez-vous contribuent à élargir le public.']],tags:['Rugby féminin','Développement']}
 ];
-const GALLERY = [
+let GALLERY = [
  {title:'Au cœur de la ligne d’avantage',kind:'Photo',tone:'green',caption:'Le combat collectif au plus près du jeu.'},
  {title:'La conquête aérienne',kind:'Photo',tone:'blue',caption:'La touche, un secteur clé de la stratégie.'},
  {title:'Un ballon à jouer',kind:'Vidéo',tone:'red',caption:'Séquence vidéo de démonstration.'},
@@ -221,6 +223,26 @@ async function loadSportsData(){
   if(data&&typeof data==='object')SPORTS={...SPORTS,...data};
  }catch(e){console.info('RugbyXVNews : fichier sports-data.json non chargé. Les modules de scores restent en attente de source.',e.message)}
 }
+
+async function loadEditorialData(){
+ try{
+  const [articleResponse,galleryResponse]=await Promise.all([
+   fetch(ARTICLES_URL,{cache:'no-store'}),
+   fetch(GALLERY_URL,{cache:'no-store'})
+  ]);
+  if(articleResponse.ok){
+   const data=await articleResponse.json();
+   if(data&&Array.isArray(data.articles)){
+    const valid=data.articles.filter(a=>a&&typeof a.id==='string'&&typeof a.title==='string'&&typeof a.category==='string'&&Array.isArray(a.sections));
+    if(valid.length||data.articles.length===0)ARTICLES=valid;
+   }
+  }
+  if(galleryResponse.ok){
+   const data=await galleryResponse.json();
+   if(data&&Array.isArray(data.items))GALLERY=data.items.filter(g=>g&&typeof g.title==='string'&&typeof g.kind==='string');
+  }
+ }catch(e){console.info('RugbyXVNews : contenu éditorial distant non chargé, utilisation des données de démonstration.',e.message)}
+}
 function updateMeta(){
  const description=view==='article'&&articleById(articleId)?articleById(articleId).excerpt:view==='competition'?compInfo(compId).description:view==='live'?'Scores, résultats, calendriers et classements des compétitions de rugby.':'RugbyXVNews : actualités, analyses et informations du rugby français et international.';
  const d=$('meta[name="description"]');if(d)d.content=description;
@@ -372,7 +394,7 @@ function registerServiceWorker(){
  }
 }
 async function boot(){
- await loadSportsData();
+ await Promise.all([loadSportsData(),loadEditorialData()]);
  render();
  initEvents();
  registerServiceWorker();
