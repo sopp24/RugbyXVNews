@@ -20,7 +20,7 @@ assert.match(html,/id="main"/,'Main landmark missing');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v11'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v12'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -52,7 +52,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v11/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v12/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/updateSavedCount\(\);\s*applySiteLanguage\(\);/,'Every route render must apply the selected language');
 assert.match(app,/if\(view==='saved'\)renderSaved\(\);\s*applySiteLanguage\(\);/,'Saved stories must retain the active language after an update');
@@ -98,6 +98,11 @@ assert.match(css,/\.news-card-body\{display:flex;flex:1;flex-direction:column/,'
 assert.match(css,/\.filterbar\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/,'Mobile-friendly filter layout missing');
 assert.match(css,/\.article-layout\{grid-template-columns:minmax\(0,1fr\) minmax\(245px,290px\)/,'Article reading layout must use consistent column proportions');
 assert.match(app,/data-reset-news-filters/,'News page must provide a reset filters action');
+assert.ok(app.includes('const image=safeHttpUrl(g.image)')&&app.includes('loading="lazy" width="900" height="1200"'),'Gallery thumbnails must display configured images with reserved dimensions');
+assert.ok(app.includes("g.credit?' · Crédit : '+esc(g.credit):''"),'Gallery cards must display configured media credits');
+assert.doesNotMatch(app,/role="tablist"|role="tab"|aria-selected=/,'Page-to-page navigation must use links and aria-current, not tab semantics');
+assert.match(css,/\.tab\[aria-current=page\]/,'Active page navigation tab style missing');
+assert.ok(locales.ui['Navigation des médias']&&locales.ui['Filtres du centre de match'],'Navigation landmark labels need English translations');
 assert.match(app,/applyNewsFilters\(\);\s*\}/,'Initial news result count must be computed');
 assert.match(app,/view==='news'\|\|view==='article'\|\|view==='search'/,'Article and search routes must retain active news navigation');
 assert.doesNotMatch(app,/style="margin-top:/,'Layout spacing should use named CSS classes instead of inline styles');
