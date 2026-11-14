@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sopp24.github.io/RugbyXVNews/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=live</loc><changefreq>hourly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=news</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=top14</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=pro-d2</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=nationale</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=international</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=live</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=news</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=top14</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=pro-d2</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=nationale</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=competition&amp;comp=international</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=top14-lecture-du-jeu</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=pro-d2-identites-jeu</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=nationale-projets-clubs</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=international-styles-jeu</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=transferts-construire-effectif</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=formation-parcours-joueurs</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=arbitrage-regles-comprendre</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sopp24.github.io/RugbyXVNews/?view=article&amp;id=rugby-feminin-progression</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>
