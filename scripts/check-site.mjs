@@ -17,11 +17,21 @@ const locales=JSON.parse(fs.readFileSync(path.join(root,'data/locales.json'),'ut
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.webmanifest'),'utf8'));
 
 assert.match(html,/id="main"/,'Main landmark missing');
+assert.match(html,/class="social"[^>]*aria-label="Réseaux et contact"/,'Footer must expose a labelled social links group');
+assert.match(html,/aria-label="Instagram"[^>]*<svg/,'Instagram footer link must use an inline SVG icon');
+assert.match(html,/aria-label="TikTok"[^>]*<svg/,'TikTok footer link must use an inline SVG icon');
+assert.match(html,/aria-label="LinkedIn — Rugby XV News"[^>]*<svg/,'LinkedIn footer link must use an inline SVG icon');
+assert.match(html,/aria-label="Spotify — Podcast RUGBYXVNEWS"[^>]*<svg/,'Spotify footer link must use an inline SVG icon');
+assert.match(html,/href="mailto:contact@rugbyxvnew\.com"[^>]*aria-label="Envoyer un e-mail à Rugby XV News"[^>]*><svg/,'Email footer link must use an inline SVG icon');
+assert.equal((html.match(/class="social-link /g)||[]).length,5,'Footer must contain exactly five social/contact icon links');
+assert.match(css,/\.social \.social-link\{[^}]*width:42px;height:42px/s,'Social icons need consistent touch targets');
+assert.match(css,/\.social \.social-link:focus-visible/,'Social icon links must have a visible keyboard focus');
+assert.ok(locales.ui['Réseaux & contact']&&locales.ui['Envoyer un e-mail à Rugby XV News'],'Footer social labels need English translations');
 assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[1],/data-nav="directory"|view=directory/i,'Clubs and players must not take space in the primary navigation');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v17'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v18'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -64,7 +74,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v17/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v18/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
