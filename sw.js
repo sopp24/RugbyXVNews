@@ -1,4 +1,4 @@
-const CACHE_NAME='rugbyxvnews-v12';
+const CACHE_NAME='rugbyxvnews-v13';
 const BASE=new URL('./',self.registration.scope);
 const CORE_FILES=['','index.html','style.css','app.js','manifest.webmanifest','icon.svg?v=3','offline.html','data/sports-data.json','data/articles.json','data/gallery.json','data/locales.json','assets/fonts/montserrat-latin-wght-normal.woff2','assets/fonts/montserrat-latin-wght-italic.woff2','assets/fonts/OFL.txt'];
 const CORE_URLS=CORE_FILES.map(p=>new URL(p,BASE).toString());
