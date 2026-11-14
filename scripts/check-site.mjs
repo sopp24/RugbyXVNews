@@ -59,8 +59,8 @@ assert.doesNotMatch(html,/fonts\.googleapis\.com|fonts\.gstatic\.com/,'Google Fo
 assert.match(html,/assets\/fonts\/montserrat-latin-wght-normal\.woff2/,'Normal font preload missing');
 assert.match(sw,/assets\/fonts\/montserrat-latin-wght-normal\.woff2/,'Offline normal font cache missing');
 assert.match(sw,/assets\/fonts\/montserrat-latin-wght-italic\.woff2/,'Offline italic font cache missing');
-assert.match(app,/function scoreMarkup/,'Winner/loser score component missing');
-assert.match(app,/function headline/,'Violet headline highlight helper missing');
+assert.match(app,/const scoreMarkup=/,'Winner/loser score component missing');
+assert.match(app,/const headline=/,'Violet headline highlight helper missing');
 assert.match(app,/hero-media/,'Full-bleed hero media component missing');
 assert.match(app,/let initialTheme='dark'/,'Dark-first boot default missing');
 assert.match(css,/aspect-ratio:4\/5/,'Portrait image ratio missing');
