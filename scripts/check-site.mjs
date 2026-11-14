@@ -20,7 +20,7 @@ assert.match(html,/id="main"/,'Main landmark missing');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v8'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v9'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -52,8 +52,12 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v8/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v9/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
+assert.match(app,/updateSavedCount\(\);\\s*applySiteLanguage\(\);/,'Every route render must apply the selected language');
+assert.match(app,/title=translateValue\(title,buildTranslationMap\(\)\)/,'Article headlines must be translated before markup splits them');
+assert.match(app,/el\\.textContent=currentLang==='en'\\?translateValue\(message,buildTranslationMap\(\)\):message/,'Transient notices must use the active language');
+assert.ok(locales.ui['La passion du jeu.']&&locales.ui["L'info, au cœur du terrain."],'Masthead strapline translations are required');
 assert.match(app,/localStorage\.setItem\('rxn-lang'/,'Language preference persistence missing');
 assert.match(app,/localStorage\.setItem\('rxn-theme'/,'Theme preference persistence missing');
 assert.match(app,/themeButton\.addEventListener\('click'/,'Theme control must have a direct click handler');
@@ -69,6 +73,9 @@ assert.ok(locales.articleTranslations&&Object.keys(locales.articleTranslations).
 assert.ok(locales.competitionTranslations&&Object.keys(locales.competitionTranslations).length===4,'English competition translations missing');
 assert.ok(sw.includes('data/locales.json'),'English locale should be cached');
 assert.match(css,/body\[data-theme=dark\]/,'Dark palette missing');
+assert.ok(css.includes('html[data-theme=light]')&&css.includes('--rxn-black:#F6F5FA'),'Light theme must define a complete light surface palette');
+assert.ok(css.includes('body[data-theme=light] .widget-dark{')&&css.includes('background:var(--rxn-violet)'),'Branded violet widgets must retain white-on-violet contrast in light mode');
+assert.ok(css.includes('body[data-theme=light] .mobile-dock{'),'Mobile navigation must invert with the light theme');
 assert.match(css,/--rxn-violet:\s*#5533EC/i,'Official brand violet token missing');
 assert.match(css,/--rxn-black:\s*#111111/i,'Official black token missing');
 assert.match(css,/--rxn-white:\s*#FFFFFF/i,'Official white token missing');
