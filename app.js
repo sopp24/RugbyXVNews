@@ -51,7 +51,7 @@ const pill=(text,kind='')=>'<span class="pill '+kind+'">'+esc(text)+'</span>';
 const sectionHead=(title,desc='',href='',label='Voir tout')=>'<div class="section-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+(href?'<a class="more-link" href="'+href+'">'+label+' ↗</a>':'')+'</div>';
 const crumb=(items)=>'<div class="crumb"><a href="?view=home">Accueil</a>'+items.map(x=>'<span> / </span>'+(x.href?'<a href="'+x.href+'">'+esc(x.label)+'</a>':esc(x.label))).join('')+'</div>';
 const emptyState=(title,desc,extra='')=>'<div class="empty-state"><strong>'+esc(title)+'</strong><p>'+esc(desc)+'</p>'+extra+'</div>';
-const visual=(tone='green',label='RugbyXVNews',cls='news-visual',src='',alt='')=>{const image=safeHttpUrl(src);return '<span class="'+cls+' '+esc(tone)+'" role="img" aria-label="'+esc(alt||label||'Illustration éditoriale de rugby')+'">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" decoding="async" width="1200" height="675">':'')+'<span class="visual-label">'+esc(label)+'</span></span>'};
+const visual=(tone='green',label='RugbyXVNews',cls='news-visual',src='',alt='')=>{const image=safeHttpUrl(src),priority=cls==='article-cover';return '<span class="'+cls+' '+esc(tone)+'" role="img" aria-label="'+esc(alt||label||'Illustration éditoriale de rugby')+'">'+(image?'<img src="'+esc(image)+'" alt="" loading="'+(priority?'eager':'lazy')+'" '+(priority?'fetchpriority="high"':'')+' decoding="async" width="1200" height="675">':'')+'<span class="visual-label">'+esc(label)+'</span></span>'};
 const articleTags=a=>'<div class="meta-row">'+pill(a.type,'gold')+pill(a.category,'')+'</div>';
 const saveButton=a=>'<button class="save-button" type="button" data-save="'+esc(a.id)+'" aria-label="Sauvegarder : '+esc(a.title)+'" aria-pressed="'+String(allSaved().includes(a.id))+'" title="Sauvegarder cet article">'+(allSaved().includes(a.id)?'★':'☆')+'</button>';
 function card(a){
@@ -254,7 +254,11 @@ function updateMeta(){
  const a=view==='article'?articleById(articleId):null;
  if(a&&!PREVIEW_MODE){
   const script=document.createElement('script');script.type='application/ld+json';script.id='article-schema';
-  script.textContent=JSON.stringify({'@context':'https://schema.org','@type':'NewsArticle','headline':a.title,'description':a.excerpt,'author':{'@type':'Organization','name':a.author},'publisher':{'@type':'Organization','name':'RugbyXVNews'}});
+  const articleSchema={'@context':'https://schema.org','@type':'NewsArticle','headline':a.title,'description':a.excerpt,'articleSection':a.category,'author':{'@type':'Organization','name':a.author},'publisher':{'@type':'Organization','name':'RugbyXVNews'},'mainEntityOfPage':location.href};
+  if(a.datePublished)articleSchema.datePublished=a.datePublished;
+  if(a.dateModified)articleSchema.dateModified=a.dateModified;
+  if(safeHttpUrl(a.image))articleSchema.image=safeHttpUrl(a.image);
+  script.textContent=JSON.stringify(articleSchema);
   document.head.appendChild(script);
  }
 }
@@ -377,9 +381,15 @@ function openGallery(index){
   dlg.innerHTML='<form method="dialog" class="dialog-close-row"><button class="icon-button" aria-label="Fermer">×</button></form><div class="gallery-dialog-visual"><strong></strong></div><p></p>';
   document.body.appendChild(dlg);
  }
- $('.gallery-dialog-visual',dlg).className='gallery-dialog-visual '+item.tone;
+ const frame=$('.gallery-dialog-visual',dlg);
+ frame.className='gallery-dialog-visual '+(item.tone||'green');
+ frame.querySelectorAll('img').forEach(img=>img.remove());
+ const image=safeHttpUrl(item.image);
+ if(image){
+  const img=document.createElement('img');img.src=image;img.alt='';img.width=1200;img.height=900;img.decoding='async';frame.prepend(img);
+ }
  $('.gallery-dialog-visual strong',dlg).textContent=item.title;
- $('p',dlg).textContent=item.caption+' — aperçu de démonstration';
+ $('p',dlg).textContent=item.caption+(item.credit?' · Crédit : '+item.credit:'');
  if(dlg.showModal)dlg.showModal();
 }
 async function refreshSportsData(button){
