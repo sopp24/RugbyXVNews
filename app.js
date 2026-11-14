@@ -90,7 +90,7 @@ function renderScoreCard(m){
  const live=matchIsLive(m),state=m.status==='live'?(live?'EN DIRECT':'DIRECT NON ACTUALISÉ'):m.status==='finished'?'TERMINÉ':m.status==='postponed'?'REPORTÉ':'À VENIR';
  const date=m.kickoff?formatDate(m.kickoff):'Horaire à confirmer';
  const score=m.homeScore!==null&&m.homeScore!==undefined&&m.awayScore!==null&&m.awayScore!==undefined&&Number.isFinite(Number(m.homeScore))&&Number.isFinite(Number(m.awayScore));
- return '<article class="score-card"><div class="score-card-head"><span>'+esc(m.competition||'Rugby')+'</span><span class="'+(live?'pill live':'')+'">'+state+'</span></div><div class="score-teams"><div class="score-team">'+esc(m.home||'Équipe à confirmer')+'</div><div class="score-num">'+(score?esc(m.homeScore)+' – '+esc(m.awayScore):'VS')+'</div><div class="score-team">'+esc(m.away||'Équipe à confirmer')+'</div></div><div class="score-status">'+esc(m.round||'')+' '+(m.round?'· ':'')+esc(date)+(m.venue?' · '+esc(m.venue):'')+(m.updatedAt||m.sourceUpdatedAt?' · '+esc(freshness(m.updatedAt||m.sourceUpdatedAt)):'')+'</div>'+((m.sourceName||m.sourceUrl)?'<div class="feed-meta">'+(m.sourceName?'<span>Source : '+esc(m.sourceName)+'</span>':'')+(safeHttpUrl(m.sourceUrl)?' <a class="text-link" href="'+esc(safeHttpUrl(m.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Vérifier ↗</a>':'')+'</div>':'')+'</article>';
+ return '<article class="score-card"><div class="score-card-head"><span>'+esc(m.competition||'Rugby')+'</span><span class="'+(live?'pill live':'')+'">'+state+'</span></div><div class="score-teams"><div class="score-team">'+esc(m.home||'Équipe à confirmer')+'</div><div class="score-num">'+(score?esc(m.homeScore)+' – '+esc(m.awayScore):'VS')+'</div><div class="score-team">'+esc(m.away||'Équipe à confirmer')+'</div></div><div class="score-status">'+esc(m.round||'')+' '+(m.round?'· ':'')+esc(date)+(m.venue?' · '+esc(m.venue):'')+(m.updatedAt||m.sourceUpdatedAt?' · '+esc(freshness(m.updatedAt||m.sourceUpdatedAt)):'')+'</div>'+((m.sourceName||m.sourceUrl)?'<div class="feed-meta">'+(m.sourceName?'<span>Source : '+esc(m.sourceName)+'</span>':'')+(safeHttpUrl(m.sourceUrl)?' <a class="text-link" href="'+esc(safeHttpUrl(m.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Vérifier ↗</a>':'')+'</div>':'')+(m.id?'<div class="score-detail-link"><a class="text-link" href="?view=match&id='+encodeURIComponent(m.id)+'&comp='+encodeURIComponent(m.competitionId||'')+'">Fiche du match ↗</a></div>':'')+'</article>';
 }
 function matchWidget(limit=2){
  const matches=currentMatches().filter(m=>matchIsLive(m)).concat(currentMatches().filter(m=>!matchIsLive(m)&&m.status==='finished')).slice(0,limit);
@@ -154,6 +154,26 @@ function renderLive(){
   contents=chosen.length?'<div class="score-grid">'+chosen.map(m=>renderScoreCard({...m,competition:m.competition,sourceUpdatedAt:m.updatedAt||m.sourceUpdatedAt})).join('')+'</div>':emptyState(currentTab==='live'?'Aucun direct disponible':currentTab==='finished'?'Aucun résultat publié':'Aucune rencontre programmée', 'Le centre de match est opérationnel côté interface. Il affichera les informations lorsque le fichier de données sera alimenté par une source vérifiée.');
  }
  main.innerHTML=pageIntro('Live & résultats','Le centre de match rassemble scores, calendriers, classements et informations des compétitions.')+'<section class="page-shell"><div class="wrap"><div class="match-toolbar"><div><span class="kicker">Centre de match</span><p class="data-freshness">'+(SPORTS.provider?'Source : '+esc(SPORTS.provider)+' · ':'')+esc(freshness(SPORTS.updatedAt))+'</p></div><button class="filter-button" type="button" data-refresh-data>↻ Actualiser</button></div>'+allTabs+contents+'<div class="section-head"><div><h2>Par compétition</h2><p>Accès aux calendriers et classements détaillés.</p></div></div>'+renderCompetitionCards()+'</div></section>';
+}
+
+function renderMatch(){
+ const matchId=params.get('id')||'';
+ const match=currentMatches().find(m=>String(m.id)===matchId);
+ if(!match){
+  document.title='Match indisponible — RugbyXVNews';
+  main.innerHTML=pageIntro('Centre du match','Les informations de cette rencontre ne sont pas encore disponibles.')+'<section class="page-shell"><div class="wrap">'+emptyState('Fiche de match indisponible','Les fiches détaillées seront ouvertes dès qu’une rencontre issue d’une source validée sera ajoutée.','<a class="btn dark" href="?view=live">Retour au centre de match ↗</a>')+'</div></section>';
+  return;
+ }
+ document.title=(match.home||'Match')+' – '+(match.away||'')+' — RugbyXVNews';
+ const info=match.competition||compInfo(match.competitionId).name;
+ const live=matchIsLive(match);
+ const stats=Array.isArray(match.stats)?match.stats:[];
+ const events=Array.isArray(match.events)?match.events:[];
+ const lineups=match.lineups||{};
+ const statBlock=stats.length?'<div class="table-wrap"><table class="standings"><thead><tr><th>Statistique</th><th>Recevant</th><th>Visiteur</th></tr></thead><tbody>'+stats.map(x=>'<tr><td>'+esc(x.label||'Statistique')+'</td><td>'+esc(x.home??'—')+'</td><td>'+esc(x.away??'—')+'</td></tr>').join('')+'</tbody></table></div>':emptyState('Statistiques à venir','Les statistiques détaillées apparaîtront si le fournisseur de données les propose.');
+ const eventBlock=events.length?'<ol class="match-events">'+events.map(x=>'<li><b>'+esc(x.minute||'')+'</b><span>'+esc(x.description||x.type||'Événement')+'</span></li>').join('')+'</ol>':emptyState('Fil du match non disponible','Le fil chronologique sera affiché lorsqu’un flux détaillé sera connecté.');
+ const lineupBlock=(Array.isArray(lineups.home)&&lineups.home.length)||(Array.isArray(lineups.away)&&lineups.away.length)?'<div class="lineup-grid"><section class="widget"><h2>'+esc(match.home)+'</h2><ol>'+((lineups.home||[]).map(x=>'<li>'+esc(x.number||'')+' '+esc(x.name||x)+'</li>').join(''))+'</ol></section><section class="widget"><h2>'+esc(match.away)+'</h2><ol>'+((lineups.away||[]).map(x=>'<li>'+esc(x.number||'')+' '+esc(x.name||x)+'</li>').join(''))+'</ol></section></div>':emptyState('Compositions non publiées','Les feuilles de match seront ajoutées après confirmation officielle des compositions.');
+ main.innerHTML=pageIntro('Fiche du match',info+' · '+(match.round||'Rencontre') )+'<section class="page-shell"><div class="wrap"><div class="match-feature"><div class="match-feature-head"><span class="kicker">'+esc(info)+'</span><span class="'+(live?'pill live':'pill light')+'">'+(live?'EN DIRECT':match.status==='finished'?'TERMINÉ':match.status==='postponed'?'REPORTÉ':'À VENIR')+'</span></div><div class="match-feature-teams"><div><small>Équipe recevante</small><strong>'+esc(match.home)+'</strong></div><div class="match-feature-score">'+(match.homeScore!==null&&match.homeScore!==undefined&&match.awayScore!==null&&match.awayScore!==undefined?esc(match.homeScore)+' – '+esc(match.awayScore):'VS')+'</div><div><small>Équipe visiteuse</small><strong>'+esc(match.away)+'</strong></div></div><p>'+esc(match.round||'')+' '+(match.round?'· ':'')+esc(match.kickoff?formatDate(match.kickoff):'Horaire à confirmer')+(match.venue?' · '+esc(match.venue):'')+'</p><p class="standings-note">'+esc(freshness(match.updatedAt||match.sourceUpdatedAt))+(match.sourceName?' · Source : '+esc(match.sourceName):'')+(safeHttpUrl(match.sourceUrl)?' · <a href="'+esc(safeHttpUrl(match.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Vérifier la source ↗</a>':'')+'</p></div><div class="match-tabs"><section>'+sectionHead('Statistiques','Données du match')+statBlock+'</section><section>'+sectionHead('Fil du match','Temps forts et événements')+eventBlock+'</section><section>'+sectionHead('Compositions','Feuilles de match')+lineupBlock+'</section></div><p style="margin-top:20px"><a class="text-link" href="'+compHref(match.competitionId||'top14')+'">Retour à la compétition ↗</a> · <a class="text-link" href="?view=live">Tous les résultats ↗</a></p></div></section>';
 }
 function renderNews(){
  document.title='Actualités & transferts — RugbyXVNews';
@@ -275,6 +295,7 @@ function render(){
   case 'home':renderHome();break;
   case 'competition':renderCompetition();break;
   case 'live':renderLive();break;
+  case 'match':renderMatch();break;
   case 'news':renderNews();break;
   case 'article':renderArticle();break;
   case 'directory':renderDirectory();break;
@@ -290,7 +311,7 @@ function render(){
   default:renderHome();
  }
  updateMeta();
- const active=view==='home'?'home':view==='live'?'live':view==='news'?'news':view==='competition'?compId:view==='directory'?'directory':view==='media'||view==='gallery'||view==='videos'||view==='podcasts'?'media':'';
+ const active=view==='home'?'home':view==='live'||view==='match'?'live':view==='news'?'news':view==='competition'?compId:view==='directory'?'directory':view==='media'||view==='gallery'||view==='videos'||view==='podcasts'?'media':'';
  $$('[data-nav]').forEach(a=>{const key=a.dataset.nav;if(key===active||(active==='top14'&&key==='top14')||(active==='pro-d2'&&key==='prod2')||(active==='nationale'&&key==='nationale')||(active==='international'&&key==='international'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
  $$('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===view));
  if(PREVIEW_MODE)$('#preview-notice').classList.remove('hidden');
