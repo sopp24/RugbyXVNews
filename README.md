@@ -10,11 +10,11 @@ Portail éditorial statique pour le rugby français et international. Le site es
 - Recherche d'articles et filtres par rubrique et format.
 - Annuaire de clubs et joueurs alimentable par données.
 - Galerie, vidéos et podcasts.
-- Mode sombre, navigation mobile, raccourci clavier de recherche, favoris locaux, PWA et page hors ligne.
+- Mode clair/sombre persistant, interface française/anglaise persistante, navigation mobile type application, raccourci clavier de recherche, favoris locaux, PWA et page hors ligne.
 - Mentions légales et confidentialité sous forme de modèles à compléter.
 
 ## Publier une nouvelle actualité
-Éditer le fichier **data/articles.json** et ajouter un objet dans le tableau articles. Champs principaux :
+Éditer le fichier **data/articles.json** et ajouter un objet dans le tableau articles. Ajouter les champs traduits dans **data/locales.json** sous articleTranslations pour que l'article soit aussi disponible en anglais. Champs principaux :
 - **id** : identifiant unique utilisé dans le lien de l'article.
 - **title**, **category**, **type**, **author**, **published**, **read**.
 - **excerpt** : chapô court ; **lead** : introduction.
@@ -64,3 +64,11 @@ Le workflow GitHub Actions **.github/workflows/site-check.yml** vérifie la synt
 - Connecter une source fiable pour les scores, calendriers et classements ou conserver les modules en attente.
 - Vérifier le domaine du sitemap, les métadonnées sociales et les pages Pages.
 - Faire une recette sur mobile iOS/Android, tablette, ordinateur, clavier et lecteur d'écran.
+
+
+## Langues et thèmes
+- Les préférences de langue et de thème sont conservées localement dans le navigateur (clés localStorage rxn-lang et rxn-theme).
+- La commande FR / EN se trouve dans la barre de navigation persistante et recharge la page dans la langue choisie.
+- Les traductions d'interface sont dans **data/locales.json** (objet ui). Les traductions des articles sont dans articleTranslations et celles de la galerie dans galleryTranslations.
+- Le mode clair utilise une palette ivoire/anthracite/or ; le mode sombre applique un thème sombre complet. Le bouton de thème reste dans la barre de navigation persistante.
+- Pour une nouvelle publication, renseigner ses champs anglais dans data/locales.json. Le moteur de traduction utilise les valeurs françaises comme clés de correspondance.
