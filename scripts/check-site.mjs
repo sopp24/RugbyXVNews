@@ -29,6 +29,9 @@ assert.match(app,/async function loadEditorialData/,'Editorial data loader missi
 assert.match(app,/function renderLive/,'Live centre missing');
 assert.match(app,/function renderCompetition/,'Competition pages missing');
 assert.match(app,/function renderArticle/,'Article page missing');
+assert.match(app,/function renderMatch/,'Match detail page missing');
+assert.match(app,/const clubs=q\?/,'Universal club search missing');
+assert.match(app,/const players=q\?/,'Universal player search missing');
 assert.match(sw,/endsWith\('\.json'\)/,'Sports JSON should use network-first caching');
 assert.ok(Array.isArray(sports.competitions),'Sports competitions must be an array');
 assert.ok(Array.isArray(articles.articles),'Articles must be an array');
