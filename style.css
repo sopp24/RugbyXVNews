@@ -1,3 +1,5 @@
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url("./assets/fonts/montserrat-latin-wght-normal.woff2") format("woff2");}
+@font-face{font-family:"Montserrat";font-style:italic;font-weight:100 900;font-display:swap;src:url("./assets/fonts/montserrat-latin-wght-italic.woff2") format("woff2");}
 /* Rugby XV News — charte officielle @rugby_xv_news */
 :root{
   color-scheme:dark;
@@ -263,7 +265,7 @@ p{margin-bottom:1em}
 .standings tbody tr:hover td{background:#30266b}
 .standings td:first-child{width:52px;background:#fff;color:var(--rxn-black);font-weight:900;text-align:center}
 .standings .club-name{font-weight:800;text-transform:uppercase}
-.standings td:last-child{font-weight:900}
+.standings td:last-child{background:var(--rxn-grey-bar);color:#fff;text-align:right;font-weight:900;padding-inline:14px}
 .standings-note{margin:10px 0 0}
 .standings-note a{color:var(--rxn-violet-light);text-decoration:underline;text-underline-offset:2px}
 .match-feature{padding:26px;background:var(--rxn-surface);border-top:4px solid var(--rxn-violet)}
@@ -297,7 +299,7 @@ p{margin-bottom:1em}
 .article-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .article-tools button{min-height:32px;padding:7px 9px;background:transparent;border:1px solid #555;color:#eee;font-size:9px;font-weight:800;text-transform:uppercase}
 .article-tools button:hover{background:var(--rxn-violet);border-color:var(--rxn-violet);color:#fff}
-.article-cover{position:relative;display:block;width:100%;aspect-ratio:16/9;margin:22px 0 7px;overflow:hidden;background:var(--rxn-violet)}
+.article-cover{position:relative;display:block;width:min(100%,720px);aspect-ratio:4/5;margin:22px 0 7px;overflow:hidden;background:var(--rxn-violet)}
 .article-cover:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-70%;height:100%;border:30px solid var(--rxn-black);border-radius:50%}
 .article-cover .visual-label{font-size:clamp(23px,4vw,42px)}
 .image-caption{margin:8px 0 22px;color:#999;text-align:right;font-size:10px}
