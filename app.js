@@ -576,7 +576,7 @@ function applyGalleryFilter(kind){
  $$('[data-gallery]').forEach(b=>b.classList.toggle('hidden',kind!=='all'&&b.dataset.kind!==kind));
 }
 function galleryNavigationIndices(){
- const visible=$('[data-gallery]').filter(button=>!button.classList.contains('hidden')).map(button=>Number(button.dataset.gallery)).filter(index=>Number.isInteger(index)&&GALLERY[index]);
+ const visible=$$('[data-gallery]').filter(button=>!button.classList.contains('hidden')).map(button=>Number(button.dataset.gallery)).filter(index=>Number.isInteger(index)&&GALLERY[index]);
  return visible.length?visible:GALLERY.map((item,index)=>index);
 }
 function openGallery(index){
