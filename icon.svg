@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="100" fill="#090909"/>
-<circle cx="256" cy="256" r="214" fill="none" stroke="#e4c33a" stroke-width="12"/>
-<path d="M256 76C155 145 130 230 154 318c18 64 62 103 102 137 40-34 84-73 102-137 24-88-1-173-102-242Z" fill="none" stroke="#fff" stroke-width="19" stroke-linejoin="round"/>
-<path d="M256 113v303M201 165l110 182M311 165 201 347" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
-<path d="M214 256h84" stroke="#e4c33a" stroke-width="17" stroke-linecap="round"/>
+<rect width="512" height="512" rx="78" fill="#f5f0e5"/>
+<path d="M0 0h126v512H0z" fill="#383735"/>
+<rect x="18" y="18" width="476" height="476" rx="68" fill="none" stroke="#c5a66a" stroke-width="5"/>
+<circle cx="315" cy="225" r="144" fill="#fffdf8" stroke="#ad8d56" stroke-width="7"/>
+<circle cx="315" cy="225" r="130" fill="none" stroke="#d9c39a" stroke-width="2"/>
+<path d="M315 106c-65 45-82 100-68 157 11 43 40 70 68 93 28-23 57-50 68-93 14-57-3-112-68-157Z" fill="none" stroke="#383735" stroke-width="11" stroke-linejoin="round"/>
+<path d="M315 132v204m-37-169 74 122m-74 0 74-122" stroke="#383735" stroke-width="7" stroke-linecap="round"/>
+<path d="M287 225h56" stroke="#c5a66a" stroke-width="11" stroke-linecap="round"/>
+<path d="M176 414h278" stroke="#c5a66a" stroke-width="4"/>
+<text x="315" y="448" text-anchor="middle" font-family="Georgia,serif" font-size="29" font-weight="bold" letter-spacing="2" fill="#383735">RUGBY XV NEWS</text>
 </svg>
