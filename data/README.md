@@ -9,11 +9,11 @@ Les fichiers sont servis en lecture seule depuis GitHub Pages. La rédaction les
 
 ## Format d'un article
 Champs requis : id, title, category, type, author, published, read, excerpt, lead et sections.
-Champs recommandés : tone, tags, image, imageAlt, imageCaption, datePublished, dateModified et demo.
+Champs recommandés : tone, tags, image, imageAlt, imageCaption, datePublished, dateModified et demo. Le traitement visuel suit la charte Rugby XV News : fond sombre, violet #5533EC, blanc, Montserrat, photos 4:5 et crédit systématique. La valeur tone sert à l'ambiance de secours, pas à modifier la palette de marque.
 La propriété sections contient un tableau de paires : titre de section puis paragraphe. Les identifiants doivent être uniques et stables. Les dates réelles doivent être au format ISO 8601 avec fuseau horaire.
 
 ## Format galerie
-Champs requis : title, kind (Photo ou Vidéo), caption. Champs recommandés : tone, image, credit et demo.
+Champs requis : title, kind (Photo ou Vidéo), caption. Champs recommandés : tone, image, credit et demo. Prévoir des vignettes portrait 3:4, des photos principales 4:5, un crédit et les droits de diffusion web. Les couleurs des maillots et les écussons restent intacts.
 Une URL d'image doit être HTTP(S) ou un chemin de fichier local au site. Les visuels doivent être libres de droits ou autorisés pour les usages prévus. Toujours renseigner un crédit lorsque requis.
 
 ## Format sportif
