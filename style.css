@@ -1093,3 +1093,14 @@ button,a{touch-action:manipulation}
  .mastactions{margin-left:0}
  .tagline{display:none}
 }
+
+
+/* Footer social links with inline brand SVGs */
+.social{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:15px}
+.social .social-link{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--ui-border);background:transparent;color:var(--ui-text);transition:background .18s ease,border-color .18s ease,color .18s ease}
+.social .social-link svg{display:block;width:21px;height:21px}
+.social .social-link:hover{background:var(--rxn-violet);border-color:var(--rxn-violet);color:#fff}
+.social .social-link:focus-visible{outline:3px solid var(--ui-focus);outline-offset:3px}
+.social-email-label{margin-top:10px!important}
+.social-email-label a{font-size:12px!important}
+@media(max-width:600px){.social .social-link{width:44px;height:44px}}
