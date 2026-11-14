@@ -56,3 +56,13 @@ Un match peut utiliser les statuts scheduled, upcoming, live, finished ou postpo
 ```
 
 Les données de personnes doivent rester limitées aux informations publiques et pertinentes pour le rugby. Ne pas ajouter de données personnelles sensibles, d'informations médicales ni de rumeurs non vérifiées.
+
+
+## Traductions françaises / anglaises
+Le fichier **locales.json** contient :
+- **ui** : dictionnaire des textes d'interface français vers anglais.
+- **competitionTranslations** : titres et descriptions de chaque compétition.
+- **articleTranslations** : traductions d'articles indexées par leur id stable ; renseigner au minimum title, excerpt, lead et sections. Traduire aussi category, type, author, published et tags lorsqu'ils diffèrent.
+- **galleryTranslations** : traductions des titres et légendes de galerie.
+
+Lorsqu'une nouvelle actualité est ajoutée dans articles.json, ajouter sa traduction dans locales.json sous le même id. Si une fiche de score, club, joueur, vidéo ou podcast comporte des champs anglais, utiliser des champs se terminant par **En** (ex. homeEn, awayEn, descriptionEn, nameEn) : le moteur les utilise comme traduction du champ français correspondant.
