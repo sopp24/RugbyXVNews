@@ -798,3 +798,11 @@ body[data-theme=dark] .nav-tools .theme-control{min-width:108px}
  .nav-tools .menu{display:grid;place-items:center;width:40px;height:40px;background:#272623;color:#f5f0e5;border:1px solid #c3a56e;border-radius:2px}
  body[data-theme=dark] .nav-tools .menu{background:#171614;color:#f0eadf;border-color:#8e7449}
 }
+
+body[data-theme=dark] .nav ul{background:#11100f}
+body[data-theme=dark] .nav li a{color:#f0eadf}
+body[data-theme=dark] .nav li a:hover,body[data-theme=dark] .nav li a[aria-current=page]{color:#e2c68f}
+@media(max-width:820px){
+ .nav-tools .menu{flex:0 0 40px}
+ .nav-tools .lang-control{flex:0 0 64px}
+}
