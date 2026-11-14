@@ -46,7 +46,7 @@ assert.match(app,/function renderCompetition/,'Competition pages missing');
 assert.match(app,/function renderArticle/,'Article page missing');
 assert.match(app,/function applyTheme/,'Theme handler missing');
 assert.match(app,/function initThemeToggle\(\)/,'Theme control must be initialized independently of asynchronous data loading');
-assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*await Promise\.all/,'Theme control must be wired before data loaders');
+assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*initNavigation\(\);\s*await Promise\.all/,'Theme control must be wired before data loaders');
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
