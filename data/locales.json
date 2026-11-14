@@ -376,7 +376,12 @@
     "Navigation des médias": "Media navigation",
     "Crédit :": "Credit:",
     "Fichier précédent": "Previous item",
-    "Fichier suivant": "Next item"
+    "Fichier suivant": "Next item",
+    "Titre, sujet ou mot-clé…": "Title, topic or keyword…",
+    "Commence à saisir pour trouver un article de démonstration.": "Start typing to find a demo article.",
+    "Aucun article de démonstration ne correspond à ta recherche.": "No demo articles match your search.",
+    "article(s) trouvé(s)": "article(s) found",
+    "Affiche les résultats complets avec Entrée.": "Press Enter to view all results."
   },
   "articleTranslations": {
     "top14-lecture-du-jeu": {
