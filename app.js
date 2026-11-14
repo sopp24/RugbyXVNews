@@ -35,7 +35,7 @@ let articleId=params.get('id')||'';
 let query=params.get('q')||'';
 const main=document.getElementById('main');
 const $=(s,root=document)=>root.querySelector(s);
-const safeHttpUrl=value=>{try{const u=new URL(String(value),location.origin);return (u.protocol==='https:'||u.protocol==='http:')?u.href:''}catch(e){return ''}};
+const safeHttpUrl=value=>{if(typeof value!=='string'||!value.trim())return '';try{const u=new URL(value.trim(),document.baseURI);return (u.protocol==='https:'||u.protocol==='http:')?u.href:''}catch(e){return ''}};
 const $$=(s,root=document)=>Array.from(root.querySelectorAll(s));
 const esc=value=>String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const compInfo=id=>COMPETITIONS.find(c=>c.id===id)||COMPETITIONS[0];
@@ -79,7 +79,7 @@ function freshness(value){
  return 'Mis à jour le '+formatDate(value,{dateStyle:'short'});
 }
 function currentMatches(){
- return SPORTS.competitions.flatMap(c=>(Array.isArray(c.matches)?c.matches:[]).map(m=>({...m,competition:c.name,competitionId:c.id,sourceUpdatedAt:m.updatedAt||c.updatedAt})));
+ return SPORTS.competitions.flatMap(c=>(Array.isArray(c.matches)?c.matches:[]).map(m=>({...m,competition:c.name,competitionId:c.id,sourceUpdatedAt:m.updatedAt||c.updatedAt||SPORTS.updatedAt,sourceName:m.sourceName||c.sourceName||SPORTS.provider,sourceUrl:m.sourceUrl||c.sourceUrl||SPORTS.sourceUrl})));
 }
 function matchIsLive(m){
  return m.status==='live'&&validUpdatedAt(m.updatedAt||m.sourceUpdatedAt)&&(Date.now()-Date.parse(m.updatedAt||m.sourceUpdatedAt)<=10*60*1000);
@@ -88,7 +88,7 @@ function renderScoreCard(m){
  const live=matchIsLive(m),state=m.status==='live'?(live?'EN DIRECT':'DIRECT NON ACTUALISÉ'):m.status==='finished'?'TERMINÉ':m.status==='postponed'?'REPORTÉ':'À VENIR';
  const date=m.kickoff?formatDate(m.kickoff):'Horaire à confirmer';
  const score=m.homeScore!==null&&m.homeScore!==undefined&&m.awayScore!==null&&m.awayScore!==undefined&&Number.isFinite(Number(m.homeScore))&&Number.isFinite(Number(m.awayScore));
- return '<article class="score-card"><div class="score-card-head"><span>'+esc(m.competition||'Rugby')+'</span><span class="'+(live?'pill live':'')+'">'+state+'</span></div><div class="score-teams"><div class="score-team">'+esc(m.home||'Équipe à confirmer')+'</div><div class="score-num">'+(score?esc(m.homeScore)+' – '+esc(m.awayScore):'VS')+'</div><div class="score-team">'+esc(m.away||'Équipe à confirmer')+'</div></div><div class="score-status">'+esc(m.round||'')+' '+(m.round?'· ':'')+esc(date)+(m.venue?' · '+esc(m.venue):'')+'</div>'+((m.sourceName||m.sourceUrl)?'<div class="feed-meta">'+(m.sourceName?'<span>Source : '+esc(m.sourceName)+'</span>':'')+(safeHttpUrl(m.sourceUrl)?' <a class="text-link" href="'+esc(safeHttpUrl(m.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Vérifier ↗</a>':'')+'</div>':'')+'</article>';
+ return '<article class="score-card"><div class="score-card-head"><span>'+esc(m.competition||'Rugby')+'</span><span class="'+(live?'pill live':'')+'">'+state+'</span></div><div class="score-teams"><div class="score-team">'+esc(m.home||'Équipe à confirmer')+'</div><div class="score-num">'+(score?esc(m.homeScore)+' – '+esc(m.awayScore):'VS')+'</div><div class="score-team">'+esc(m.away||'Équipe à confirmer')+'</div></div><div class="score-status">'+esc(m.round||'')+' '+(m.round?'· ':'')+esc(date)+(m.venue?' · '+esc(m.venue):'')+(m.updatedAt||m.sourceUpdatedAt?' · '+esc(freshness(m.updatedAt||m.sourceUpdatedAt)):'')+'</div>'+((m.sourceName||m.sourceUrl)?'<div class="feed-meta">'+(m.sourceName?'<span>Source : '+esc(m.sourceName)+'</span>':'')+(safeHttpUrl(m.sourceUrl)?' <a class="text-link" href="'+esc(safeHttpUrl(m.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Vérifier ↗</a>':'')+'</div>':'')+'</article>';
 }
 function matchWidget(limit=2){
  const matches=currentMatches().filter(m=>matchIsLive(m)).concat(currentMatches().filter(m=>!matchIsLive(m)&&m.status==='finished')).slice(0,limit);
@@ -101,14 +101,14 @@ function renderCompetitionCards(){
 function renderStandings(c){
  const rows=Array.isArray(c&&c.standings)?c.standings:[];
  if(!rows.length)return emptyState('Classement en attente','Le tableau sera publié dès que les données officielles de la compétition seront disponibles.');
- const allowed=['position','club','played','wins','draws','losses','points'];
+ 
  const body=rows.map((r,i)=>'<tr><td>'+esc(r.position||i+1)+'</td><td class="club-name">'+esc(r.club||r.name||'Club')+'</td><td>'+esc(r.played??'—')+'</td><td>'+esc(r.wins??'—')+'</td><td>'+esc(r.draws??'—')+'</td><td>'+esc(r.losses??'—')+'</td><td>'+esc(r.points??'—')+'</td></tr>').join('');
  return '<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Club</th><th>J</th><th>G</th><th>N</th><th>P</th><th>Pts</th></tr></thead><tbody>'+body+'</tbody></table></div><p class="standings-note">'+esc(freshness(c.updatedAt||SPORTS.updatedAt))+(safeHttpUrl(c.sourceUrl)?' · <a href="'+esc(safeHttpUrl(c.sourceUrl))+'" target="_blank" rel="noopener noreferrer">Source des données ↗</a>':'')+'</p>';
 }
 function renderFixtures(c){
  const matches=Array.isArray(c&&c.matches)?c.matches:[];
  if(!matches.length)return emptyState('Calendrier non connecté','Les journées et horaires seront ajoutés dès qu’un flux officiel ou une saisie éditoriale sera relié à la rubrique.');
- return '<div class="score-grid">'+matches.slice().sort((a,b)=>Date.parse(a.kickoff||0)-Date.parse(b.kickoff||0)).map(m=>renderScoreCard({...m,competition:c.name,sourceUpdatedAt:m.updatedAt||c.updatedAt})).join('')+'</div>';
+ return '<div class="score-grid">'+matches.slice().sort((a,b)=>Date.parse(a.kickoff||0)-Date.parse(b.kickoff||0)).map(m=>renderScoreCard({...m,competition:c.name,sourceUpdatedAt:m.updatedAt||c.updatedAt||SPORTS.updatedAt,sourceName:m.sourceName||c.sourceName||SPORTS.provider,sourceUrl:m.sourceUrl||c.sourceUrl||SPORTS.sourceUrl})).join('')+'</div>';
 }
 function renderHome(){
  document.title='RugbyXVNews — Le rugby, sans détour';
