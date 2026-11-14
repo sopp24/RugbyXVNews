@@ -229,10 +229,45 @@ function renderSaved(){
  const ids=allSaved(),items=ids.map(articleById).filter(Boolean);
  main.innerHTML=pageIntro('Mes favoris','Retrouve les articles que tu as enregistrés sur cet appareil.')+'<section class="page-shell"><div class="wrap">'+(items.length?'<div class="card-grid">'+items.map(card).join('')+'</div>':emptyState('Aucun article enregistré','Utilise l’étoile sur un article pour le retrouver ici.','<a class="btn dark" href="?view=news">Explorer les actualités ↗</a>'))+'<p class="standings-note">Tes favoris sont enregistrés localement dans ce navigateur. Ils ne sont pas synchronisés entre tes appareils.</p></div></section>';
 }
+function searchArticles(value){
+ const terms=escText(value).split(/\\s+/).filter(Boolean);
+ if(!terms.length)return [];
+ return ARTICLES.filter(article=>{
+  const translated=LOCALES.articleTranslations&&LOCALES.articleTranslations[article.id]||{};
+  const sections=(article.sections||[]).flat().join(' ');
+  const translatedSections=(translated.sections||[]).flat().join(' ');
+  const searchable=[
+   article.id,article.title,article.category,article.type,article.author,article.published,
+   article.excerpt,article.lead,sections,(article.tags||[]).join(' '),
+   translated.title,translated.category,translated.type,translated.author,translated.published,
+   translated.excerpt,translated.lead,translatedSections,(translated.tags||[]).join(' ')
+  ].join(' ');
+  const normalized=escText(searchable);
+  return terms.every(term=>normalized.includes(term));
+ });
+}
+function renderGlobalSearchSuggestions(){
+ const input=$('#global-search-input'),container=$('#global-search-suggestions');
+ if(!input||!container)return;
+ const value=input.value.trim();
+ if(!value){
+  container.innerHTML='<p class="search-suggestions-empty">Commence à saisir pour trouver un article de démonstration.</p>';
+  applySiteLanguage();
+  return;
+ }
+ const found=searchArticles(value);
+ if(!found.length){
+  container.innerHTML='<p class="search-suggestions-empty">Aucun article de démonstration ne correspond à ta recherche.</p>';
+  applySiteLanguage();
+  return;
+ }
+ container.innerHTML='<p class="search-suggestions-heading">'+found.length+' article(s) trouvé(s)</p><div class="search-suggestion-list">'+found.slice(0,6).map(article=>'<a class="search-suggestion" href="'+articleHref(article)+'"><span class="search-suggestion-category">'+esc(article.category)+' · '+esc(article.type)+'</span><strong>'+esc(article.title)+'</strong><span>'+esc(article.excerpt)+'</span></a>').join('')+'</div>'+(found.length>6?'<p class="search-suggestions-more">Affiche les résultats complets avec Entrée.</p>':'');
+ applySiteLanguage();
+}
 function renderSearch(){
  document.title='Recherche — RugbyXVNews';
  const q=query.trim(),needle=escText(q);
- const found=q?ARTICLES.filter(a=>escText([a.title,a.excerpt,a.category,a.type,a.author,(a.tags||[]).join(' ')].join(' ')).includes(needle)):[];
+ const found=q?searchArticles(q):[];
  const clubs=q?(SPORTS.clubs||[]).filter(x=>escText([x.name,x.competition,x.description].join(' ')).includes(needle)):[];
  const players=q?(SPORTS.players||[]).filter(x=>escText([x.name,x.position,x.club,x.description].join(' ')).includes(needle)):[];
  const comps=q?COMPETITIONS.filter(x=>escText([x.name,x.description].join(' ')).includes(needle)):[];
@@ -554,12 +589,13 @@ function initEvents(){
  const directoryFilter=$('#directory-filter');if(directoryFilter)directoryFilter.addEventListener('input',applyDirectoryFilter);
  const searchForm=$('#page-search');if(searchForm)searchForm.addEventListener('submit',e=>{e.preventDefault();const q=$('#page-search-input').value.trim();location.href='?view=search&q='+encodeURIComponent(q)});
  const globalSearch=$('#global-search');if(globalSearch)globalSearch.addEventListener('submit',e=>{e.preventDefault();const q=$('#global-search-input').value.trim();if(q)location.href='?view=search&q='+encodeURIComponent(q)});
+ const globalSearchInput=$('#global-search-input');if(globalSearchInput)globalSearchInput.addEventListener('input',renderGlobalSearchSuggestions);
  const dialog=$('#search-dialog');
- $$('[data-open-search]').forEach(b=>b.addEventListener('click',()=>{if(dialog&&typeof dialog.showModal==='function'){dialog.showModal();setTimeout(()=>$('#global-search-input').focus(),20)}else location.href='?view=search'}));
+ $$('[data-open-search]').forEach(b=>b.addEventListener('click',()=>{if(dialog&&typeof dialog.showModal==='function'){dialog.showModal();renderGlobalSearchSuggestions();setTimeout(()=>$('#global-search-input').focus(),20)}else location.href='?view=search'}));
  document.addEventListener('keydown',e=>{
   const galleryDialog=$('#gallery-dialog');
   if(galleryDialog&&galleryDialog.open&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();navigateGallery(e.key==='ArrowLeft'?-1:1);return}
-  if((e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();if(dialog&&dialog.showModal)dialog.showModal();setTimeout(()=>$('#global-search-input').focus(),20)}
+  if((e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();if(dialog&&dialog.showModal){dialog.showModal();renderGlobalSearchSuggestions()}setTimeout(()=>$('#global-search-input').focus(),20)}
   if(e.key==='Escape'&&dialog&&dialog.open)dialog.close()
  });
  const toTop=$('.totop');
