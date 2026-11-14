@@ -22,7 +22,7 @@ sports-data.json contient :
 - competitions : tableau d'objets avec id, name, season, updatedAt, sourceName, sourceUrl, matches et standings.
 - clubs, players, videos et podcasts : tableaux de fiches.
 
-Un match peut utiliser les statuts scheduled, upcoming, live, finished ou postponed. Pour un match live, fournir un updatedAt récent. Le front-end n'affiche plus « EN DIRECT » au-delà de dix minutes depuis la dernière mise à jour connue. Les scores doivent être des nombres ; null signifie qu'aucun score n'est publié.
+Un match peut utiliser les statuts scheduled, upcoming, live, finished ou postponed. Pour un match live, fournir un updatedAt récent. Le front-end n'affiche plus « EN DIRECT » au-delà de dix minutes depuis la dernière mise à jour connue. Les scores doivent être des nombres ; null signifie qu'aucun score n'est publié. Un match peut aussi contenir des tableaux facultatifs stats (label, home, away), events (minute, description) et lineups (home, away) pour alimenter la fiche détaillée.
 
 ## Exemple de match
 ```json
