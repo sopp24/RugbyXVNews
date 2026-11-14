@@ -21,7 +21,7 @@ assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v12'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v13'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -53,7 +53,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v12/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v13/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/updateSavedCount\(\);\s*applySiteLanguage\(\);/,'Every route render must apply the selected language');
 assert.match(app,/if\(view==='saved'\)renderSaved\(\);\s*applySiteLanguage\(\);/,'Saved stories must retain the active language after an update');
