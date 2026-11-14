@@ -1,4 +1,4 @@
-const CACHE_NAME='rugbyxvnews-v2';
+const CACHE_NAME='rugbyxvnews-v3';
 const BASE=new URL('./',self.registration.scope);
 const CORE_FILES=['','index.html','style.css','app.js','manifest.webmanifest','icon.svg','offline.html','data/sports-data.json','data/articles.json','data/gallery.json','data/locales.json'];
 const CORE_URLS=CORE_FILES.map(p=>new URL(p,BASE).toString());
@@ -11,7 +11,7 @@ self.addEventListener('activate',event=>{
 self.addEventListener('fetch',event=>{
  const request=event.request;
  if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
- if(new URL(request.url).pathname.endsWith('.json')) {
+ if(new URL(request.url).pathname.endsWith('.json')){
   event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
    if(response&&response.ok){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
    return response;
