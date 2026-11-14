@@ -4,6 +4,7 @@ const PREVIEW_MODE = true; // Passer à false après remplacement et validation 
 const DATA_URL = './data/sports-data.json';
 const ARTICLES_URL = './data/articles.json';
 const GALLERY_URL = './data/gallery.json';
+const LOCALES_URL = './data/locales.json';
 const COMPETITIONS = [
  {id:'top14',name:'Top 14',short:'TOP 14',description:'L’élite du rugby français : clubs, actualités, analyses et suivi du championnat.'},
  {id:'pro-d2',name:'Pro D2',short:'PRO D2',description:'Le championnat de deuxième division, ses clubs et les enjeux de la saison.'},
@@ -35,6 +36,9 @@ let compId=params.get('comp')||'top14';
 let tab=params.get('tab')||'actualites';
 let articleId=params.get('id')||'';
 let query=params.get('q')||'';
+let currentLang='fr';
+let LOCALES={ui:{},articleTranslations:{},galleryTranslations:{}};
+try{currentLang=localStorage.getItem('rxn-lang')==='en'?'en':'fr'}catch(e){}
 const main=document.getElementById('main');
 const $=(s,root=document)=>root.querySelector(s);
 const safeHttpUrl=value=>{if(typeof value!=='string'||!value.trim())return '';try{const u=new URL(value.trim(),document.baseURI);return (u.protocol==='https:'||u.protocol==='http:')?u.href:''}catch(e){return ''}};
@@ -69,7 +73,8 @@ function validUpdatedAt(value){
 function formatDate(value,options={dateStyle:'medium',timeStyle:'short'}){
  const d=new Date(value);
  if(!Number.isFinite(d.getTime()))return 'Date non renseignée';
- try{return new Intl.DateTimeFormat('fr-FR',options).format(d)}catch(e){return d.toLocaleDateString('fr-FR')}
+ const locale=currentLang==='en'?'en-GB':'fr-FR';
+ try{return new Intl.DateTimeFormat(locale,options).format(d)}catch(e){return d.toLocaleDateString(locale)}
 }
 function freshness(value){
  if(!validUpdatedAt(value))return 'Mise à jour non renseignée';
@@ -274,6 +279,114 @@ async function loadEditorialData(){
   }
  }catch(e){console.info('RugbyXVNews : contenu éditorial distant non chargé, utilisation des données de démonstration.',e.message)}
 }
+
+function buildTranslationMap(){
+ const map=new Map();
+ if(currentLang!=='en')return map;
+ const add=(from,to)=>{if(typeof from==='string'&&from&&typeof to==='string'&&to)map.set(from,to)};
+ Object.entries(LOCALES.ui||{}).forEach(([fr,en])=>add(fr,en));
+ ARTICLES.forEach(a=>{
+  const en=LOCALES.articleTranslations&&LOCALES.articleTranslations[a.id];
+  if(!en)return;
+  ['title','category','type','author','published','excerpt','lead'].forEach(k=>add(a[k],en[k]));
+  (a.sections||[]).forEach((section,i)=>{
+   const translated=(en.sections||[])[i]||[];
+   add(section[0],translated[0]);add(section[1],translated[1]);
+  });
+  (a.tags||[]).forEach((tag,i)=>add(tag,(en.tags||[])[i]));
+ });
+ GALLERY.forEach(g=>{
+  const en=LOCALES.galleryTranslations&&LOCALES.galleryTranslations[g.title];
+  if(en){add(g.title,en.title);add(g.caption,en.caption);add(g.kind,en.kind)}
+ });
+ function walkPairs(obj){
+  if(!obj||typeof obj!=='object')return;
+  if(Array.isArray(obj)){obj.forEach(walkPairs);return}
+  Object.keys(obj).forEach(key=>{
+   if(key.endsWith('En')&&typeof obj[key]==='string'){
+    const frKey=key.slice(0,-2);add(obj[frKey],obj[key]);
+   }
+   walkPairs(obj[key]);
+  });
+ }
+ walkPairs(SPORTS);
+ return map;
+}
+function translateValue(value,map){
+ if(typeof value!=='string'||!value)return value;
+ const leading=(value.match(/^\s*/)||[''])[0],trailing=(value.match(/\s*$/)||[''])[0];
+ const core=value.slice(leading.length,value.length-trailing.length);
+ if(map.has(core))return leading+map.get(core)+trailing;
+ let result=value;
+ const keys=Array.from(map.keys()).sort((a,b)=>b.length-a.length);
+ for(const key of keys){
+  if(key.length<3||!result.includes(key))continue;
+  result=result.split(key).join(map.get(key));
+ }
+ return result;
+}
+function updatePreferenceControls(){
+ const langButton=$('[data-lang-toggle]');
+ if(langButton){
+  const current=$('[data-lang-current]',langButton),next=$('[data-lang-next]',langButton);
+  if(current)current.textContent=currentLang.toUpperCase();
+  if(next)next.textContent=(currentLang==='fr'?'en':'fr').toUpperCase();
+  langButton.classList.toggle('is-en',currentLang==='en');
+  langButton.setAttribute('aria-label',currentLang==='fr'?'Switch language to English':'Passer en français');
+  langButton.setAttribute('aria-pressed',String(currentLang==='en'));
+ }
+ const themeButton=$('[data-theme-toggle]');
+ if(themeButton){
+  const dark=document.body.dataset.theme==='dark';
+  const glyph=$('[data-theme-icon]',themeButton),label=$('[data-theme-label]',themeButton);
+  if(glyph)glyph.textContent=dark?'☼':'☾';
+  if(label)label.textContent=currentLang==='en'?(dark?'Light mode':'Dark mode'):(dark?'Mode clair':'Mode sombre');
+  themeButton.setAttribute('aria-label',currentLang==='en'?(dark?'Switch to light mode':'Switch to dark mode'):(dark?'Activer le thème clair':'Activer le thème sombre'));
+  themeButton.setAttribute('aria-pressed',String(dark));
+ }
+}
+function applyTheme(theme,persist=true){
+ const safe=theme==='dark'?'dark':'light';
+ document.body.dataset.theme=safe;
+ const themeMeta=$('meta[name="theme-color"]');
+ if(themeMeta)themeMeta.content=safe==='dark'?'#171614':'#f3eee2';
+ const schemeMeta=$('meta[name="color-scheme"]');
+ if(schemeMeta)schemeMeta.content=safe;
+ if(persist){try{localStorage.setItem('rxn-theme',safe)}catch(e){}}
+ updatePreferenceControls();
+}
+function applySiteLanguage(){
+ const map=buildTranslationMap();
+ document.documentElement.lang=currentLang;
+ const localeMeta=$('meta[property="og:locale"]');
+ if(localeMeta)localeMeta.content=currentLang==='en'?'en_GB':'fr_FR';
+ if(currentLang==='en'){
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let node;
+  while((node=walker.nextNode())){
+   if(!node.nodeValue||!node.nodeValue.trim())continue;
+   node.nodeValue=translateValue(node.nodeValue,map);
+  }
+  $('input,button,a,[aria-label],[title]').forEach(el=>{
+   ['placeholder','title','aria-label'].forEach(attr=>{
+    if(el.hasAttribute(attr))el.setAttribute(attr,translateValue(el.getAttribute(attr),map));
+   });
+  });
+  document.title=translateValue(document.title,map);
+  const description=$('meta[name="description"]');if(description)description.content=translateValue(description.content,map);
+  const ogTitle=$('meta[property="og:title"]');if(ogTitle)ogTitle.content=translateValue(ogTitle.content,map);
+  const ogDescription=$('meta[property="og:description"]');if(ogDescription)ogDescription.content=translateValue(ogDescription.content,map);
+ }
+ updatePreferenceControls();
+}
+async function loadLocaleData(){
+ try{
+  const response=await fetch(LOCALES_URL,{cache:'no-store'});
+  if(!response.ok)throw new Error('Translations unavailable');
+  const data=await response.json();
+  if(data&&typeof data==='object')LOCALES=data;
+ }catch(e){console.info('RugbyXVNews: English locale file not loaded.',e.message)}
+}
 function updateMeta(){
  const currentArticle=view==='article'?articleById(articleId):null;
  const description=currentArticle?currentArticle.excerpt:view==='competition'?compInfo(compId).description:view==='live'?'Scores, résultats, calendriers et classements des compétitions de rugby.':'RugbyXVNews : actualités, analyses et informations du rugby français et international.';
@@ -373,6 +486,10 @@ function applyDirectoryFilter(){
 }
 function initEvents(){
  document.addEventListener('click',e=>{
+  const lang=e.target.closest('[data-lang-toggle]');
+  if(lang){const next=currentLang==='fr'?'en':'fr';try{localStorage.setItem('rxn-lang',next)}catch(err){}location.reload();return}
+  const theme=e.target.closest('[data-theme-toggle]');
+  if(theme){applyTheme(document.body.dataset.theme==='dark'?'light':'dark');return}
   const save=e.target.closest('[data-save]');if(save){toggleSaved(save.dataset.save);return}
   if(e.target.closest('[data-share]')){sharePage();return}
   if(e.target.closest('[data-copy]')){copyPage();return}
@@ -447,7 +564,10 @@ function registerServiceWorker(){
  }
 }
 async function boot(){
- await Promise.all([loadSportsData(),loadEditorialData()]);
+ let initialTheme='light';
+ try{initialTheme=localStorage.getItem('rxn-theme')==='dark'?'dark':'light'}catch(e){}
+ applyTheme(initialTheme,false);
+ await Promise.all([loadSportsData(),loadEditorialData(),loadLocaleData()]);
  render();
  initEvents();
  registerServiceWorker();
