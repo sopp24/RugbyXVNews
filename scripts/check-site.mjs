@@ -18,13 +18,20 @@ const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.webmanifest')
 
 assert.match(html,/id="main"/,'Main landmark missing');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
-assert.ok(html.includes('rel="icon" href="./icon.svg?v=2"'),'Versioned SVG favicon must be linked');
+assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=2'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v6'),'Service worker cache must be bumped after favicon updates');
+assert.ok(sw.includes('rugbyxvnews-v7'),'Service worker cache must be bumped after favicon updates');
 assert.ok(sw.includes('icon.svg?v=2'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
 assert.match(html,/data-theme-toggle/,'Theme switch missing');
+assert.ok(html.includes('<a class="nav-podcast-cta" data-nav="media" href="?view=podcasts">Podcasts</a>'),'Podcasts CTA must stay outside the collapsible navigation list');
+assert.ok(!html.includes('<li class="nav-podcast">'),'Podcasts CTA must not be hidden inside the collapsed menu');
+assert.match(app,/function initNavigation\(\)/,'Navigation must have a dedicated early initializer');
+assert.match(app,/initThemeToggle\(\);\s*initNavigation\(\);\s*await Promise\.all/,'Navigation and theme controls must work before asynchronous content loads');
+assert.match(css,/\.nav-podcast-cta\{[^}]*display:inline-flex/s,'Podcasts CTA must remain visible beside navigation tools');
+assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation tools must not shrink or disappear');
+assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/stroke="#FFFFFF"/,'Favicon monogram must use high-contrast brand white');
 assert.match(html,/name="viewport"/,'Viewport meta missing');
 assert.match(html,/style\.css/,'Stylesheet not linked');
 assert.match(html,/app\.js/,'Application script not linked');
