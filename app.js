@@ -313,7 +313,7 @@ function render(){
  updateMeta();
  const active=view==='home'?'home':view==='live'||view==='match'?'live':view==='news'?'news':view==='competition'?compId:view==='directory'?'directory':view==='media'||view==='gallery'||view==='videos'||view==='podcasts'?'media':'';
  $$('[data-nav]').forEach(a=>{const key=a.dataset.nav;if(key===active||(active==='top14'&&key==='top14')||(active==='pro-d2'&&key==='prod2')||(active==='nationale'&&key==='nationale')||(active==='international'&&key==='international'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
- $$('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===view));
+ $('[data-dock]').forEach(a=>a.toggleAttribute('aria-current',a.dataset.dock===(view==='match'?'live':view)));
  if(PREVIEW_MODE)$('#preview-notice').classList.remove('hidden');
  updateSavedCount();
 }
