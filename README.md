@@ -17,3 +17,6 @@ Navigation par rubriques, pages article, recherche, filtres de galerie, aperçu 
 
 ## Limites à connaître
 Cette version est un front-end statique : aucun CMS, compte rédacteur, stockage de contenu, live score, classement calculé, newsletter ou formulaire serveur n'est inclus. Pour l'exploitation quotidienne d'un média, prévoir un CMS/API éditoriale, une source de résultats autorisée, une gestion des droits médias et un service de formulaire.
+
+## Pages légales
+Les pages Mentions légales et Confidentialité sont des modèles avec champs à compléter. Ne les considère pas comme des documents juridiques finalisés : l'éditeur doit renseigner son identité, l'hébergement exact, les responsabilités et les traitements réellement activés avant l'ouverture au public.
