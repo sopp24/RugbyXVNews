@@ -18,10 +18,10 @@ const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.webmanifest')
 
 assert.match(html,/id="main"/,'Main landmark missing');
 assert.match(html,/class="social"[^>]*aria-label="Réseaux et contact"/,'Footer must expose a labelled social links group');
-assert.match(html,/aria-label="Instagram"[^>]*<svg/,'Instagram footer link must use an inline SVG icon');
-assert.match(html,/aria-label="TikTok"[^>]*<svg/,'TikTok footer link must use an inline SVG icon');
-assert.match(html,/aria-label="LinkedIn — Rugby XV News"[^>]*<svg/,'LinkedIn footer link must use an inline SVG icon');
-assert.match(html,/aria-label="Spotify — Podcast RUGBYXVNEWS"[^>]*<svg/,'Spotify footer link must use an inline SVG icon');
+assert.match(html,/aria-label="Instagram"[^>]*><svg/,'Instagram footer link must use an inline SVG icon');
+assert.match(html,/aria-label="TikTok"[^>]*><svg/,'TikTok footer link must use an inline SVG icon');
+assert.match(html,/aria-label="LinkedIn — Rugby XV News"[^>]*><svg/,'LinkedIn footer link must use an inline SVG icon');
+assert.match(html,/aria-label="Spotify — Podcast RUGBYXVNEWS"[^>]*><svg/,'Spotify footer link must use an inline SVG icon');
 assert.match(html,/href="mailto:contact@rugbyxvnew\.com"[^>]*aria-label="Envoyer un e-mail à Rugby XV News"[^>]*><svg/,'Email footer link must use an inline SVG icon');
 assert.equal((html.match(/class="social-link /g)||[]).length,5,'Footer must contain exactly five social/contact icon links');
 assert.match(css,/\.social \.social-link\{[^}]*width:42px;height:42px/s,'Social icons need consistent touch targets');
