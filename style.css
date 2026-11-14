@@ -328,3 +328,40 @@ body[data-theme=dark] .empty-state{background:#1b1b1b;border-color:#555}
  .article-body{max-width:none;color:black}
  a{text-decoration:none;color:black}
 }
+
+.news-visual.green,.gallery-image.green,.gallery-dialog-visual.green{background:linear-gradient(135deg,#203d31,#536c49 55%,#ad9547)}
+.news-visual.ink,.gallery-image.ink,.gallery-dialog-visual.ink{background:linear-gradient(135deg,#131b21,#263e35 55%,#64754f)}
+.news-visual.blue,.gallery-image.blue,.gallery-dialog-visual.blue{background:linear-gradient(135deg,#1b314b,#456b86 55%,#c0a34c)}
+.news-visual.red,.gallery-image.red,.gallery-dialog-visual.red{background:linear-gradient(135deg,#472b2b,#9b4c42 55%,#c9a34d)}
+.news-visual.gold,.gallery-image.gold,.gallery-dialog-visual.gold{background:linear-gradient(135deg,#4e4223,#a58b33 55%,#e6d9aa)}
+.crumb{font-size:10px;color:#777;margin-bottom:15px}
+.crumb span{color:var(--gold2);padding:0 7px}
+.competition-banner{background:#111;color:white;padding:22px;margin-bottom:18px}
+.competition-banner h2{font:900 clamp(38px,5vw,64px)/.9 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:8px 0}
+.competition-banner p{color:#ccc;font-size:11px;margin:0}
+.match-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.match-toolbar p{font-size:10px;color:var(--muted);margin:6px 0}
+.filter-button{border:1px solid var(--line);background:white;padding:10px 14px;min-height:42px;font-size:10px;font-weight:900;text-transform:uppercase}
+.filter-button:hover,.filter-button[aria-pressed=true]{background:var(--gold);border-color:var(--gold)}
+.newsletter-widget{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:30px 0}
+.newsletter-widget h2{font:800 31px/.95 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:7px 0}
+.newsletter-widget p{font-size:11px;color:var(--muted);max-width:630px;margin:0}
+.gallery-dialog{width:min(820px,calc(100% - 30px));border:0;background:#111;color:white;padding:15px;box-shadow:0 20px 70px #0008}
+.gallery-dialog::backdrop{background:#000b}
+.gallery-dialog-visual{aspect-ratio:16/9;display:flex;align-items:end;padding:22px;background:linear-gradient(135deg,#244b3d,#9b873e);position:relative;overflow:hidden}
+.gallery-dialog-visual:after{content:"";position:absolute;width:40%;height:22%;left:34%;top:38%;background:linear-gradient(135deg,#f0dda8,#9b7d28);border-radius:50%;transform:rotate(-23deg)}
+.gallery-dialog-visual strong{font:800 clamp(28px,5vw,55px)/.95 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;position:relative;z-index:1}
+.gallery-dialog p{font-size:11px;color:#ccc;margin:10px 0 0}
+.results-count{font-size:10px;color:#777;margin:5px 0 13px}
+.article-body .editorialnote{background:#fff8db;color:#5b4d1d;padding:14px 17px;font-size:11px;line-height:1.5;margin:22px 0}
+body[data-theme=dark] .filter-button{background:#202020;color:#eee;border-color:#444}
+body[data-theme=dark] .filter-button:hover{background:var(--gold);color:#111}
+body[data-theme=dark] .newsletter-widget p{color:#ccc}
+body[data-theme=dark] .searchform{border-color:#444}
+body[data-theme=dark] .searchform input{background:#202020;color:#eee}
+body[data-theme=dark] .score-card{color:#eee}
+body[data-theme=dark] .standings td{border-color:#333}
+body[data-theme=dark] .tabs{border-color:#444}
+.mobile-dock [aria-current=page]{color:var(--gold)}
+@media(max-width:820px){.newsletter-widget{align-items:flex-start;flex-direction:column}.match-toolbar{align-items:flex-start}}
+@media(max-width:480px){.match-toolbar{flex-direction:column}.filter-button{width:100%}.score-card{padding:12px}.score-card-head{font-size:8px}}
