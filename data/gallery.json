@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "title": "Au cœur de la ligne d’avantage",
+      "kind": "Photo",
+      "tone": "green",
+      "caption": "Le combat collectif au plus près du jeu.",
+      "demo": true
+    },
+    {
+      "title": "La conquête aérienne",
+      "kind": "Photo",
+      "tone": "blue",
+      "caption": "La touche, un secteur clé de la stratégie.",
+      "demo": true
+    },
+    {
+      "title": "Un ballon à jouer",
+      "kind": "Vidéo",
+      "tone": "red",
+      "caption": "Séquence vidéo de démonstration.",
+      "demo": true
+    },
+    {
+      "title": "Le regard du bord de terrain",
+      "kind": "Photo",
+      "tone": "gold",
+      "caption": "Les émotions vivent aussi en dehors du terrain.",
+      "demo": true
+    },
+    {
+      "title": "Le geste technique",
+      "kind": "Vidéo",
+      "tone": "ink",
+      "caption": "Un temps fort à revoir.",
+      "demo": true
+    },
+    {
+      "title": "La communion avec le public",
+      "kind": "Photo",
+      "tone": "green",
+      "caption": "Le rugby et ses supporters.",
+      "demo": true
+    }
+  ]
+}
