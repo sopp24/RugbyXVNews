@@ -72,3 +72,7 @@ Le workflow GitHub Actions **.github/workflows/site-check.yml** vérifie la synt
 - Les traductions d'interface sont dans **data/locales.json** (objet ui). Les traductions des articles sont dans articleTranslations et celles de la galerie dans galleryTranslations.
 - Le mode clair utilise une palette ivoire/anthracite/or ; le mode sombre applique un thème sombre complet. Le bouton de thème reste dans la barre de navigation persistante.
 - Pour une nouvelle publication, renseigner ses champs anglais dans data/locales.json. Le moteur de traduction utilise les valeurs françaises comme clés de correspondance.
+
+
+## Direction artistique
+L'interface web reprend une esthétique éditoriale inspirée des visuels publics RugbyXVNews : papier ivoire, aplats anthracite, filets et cadres dorés, emblème en médaillon et typographie à empattements pour les grands titres. Sur mobile, la navigation devient une expérience de type application avec barre persistante, menu accessible, PWA installable et page hors ligne.
