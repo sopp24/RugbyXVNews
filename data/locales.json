@@ -42,9 +42,9 @@
     "Classement en attente": "Standings coming soon",
     "Le tableau sera publié dès que les données officielles de la compétition seront disponibles.": "The table will appear once verified competition data is available.",
     "Calendrier non connecté": "Fixtures not connected",
-    "Les journées et horaires seront ajoutés dès qu’un flux officiel ou une saisie éditoriale sera relié à la rubrique.": "Rounds and kick-off times will appear once an official feed or editorial input is connected.",
+    "Les journées et horaires seront ajoutés dès qu’un flux officiel ou une saisie éditoriale sera relié à la rubrique.": "Rounds and kick-off times will be added once an official feed or editorial input is connected.",
     "Le direct arrive": "Live coverage is coming",
-    "Le centre de match est prêt. Les scores s’afficheront dès qu’une source sportive fiable et autorisée sera renseignée dans data/sports-data.json.": "The match centre is ready. Scores will appear once a trusted, authorised sports data source is connected.",
+    "Le centre de match est prêt. Les scores s’afficheront dès qu’une source sportive fiable et autorisée sera renseignée dans data/sports-data.json.": "The match centre is ready. Scores will appear once a trusted and authorised sports data source is added to data/sports-data.json.",
     "Ouvrir le centre de match": "Open match centre",
     "EN DIRECT": "LIVE",
     "DIRECT NON ACTUALISÉ": "LIVE — NOT UPDATED",
@@ -68,7 +68,7 @@
     "Aucune rencontre programmée": "No fixtures scheduled",
     "Aucun résultat": "No results",
     "Le centre de match est opérationnel côté interface. Il affichera les informations lorsque le fichier de données sera alimenté par une source vérifiée.": "The match centre interface is ready. Information will appear when the data file is populated from a verified source.",
-    "Les scores seront affichés dès que la source sera connectée.": "Scores will appear once the data source is connected.",
+    "Les scores seront affichés dès que la source sera connectée.": "Scores will appear once a data source is connected.",
     "Rechercher": "Search",
     "Que recherchez-vous ?": "What are you looking for?",
     "Mots-clés": "Keywords",
@@ -193,7 +193,7 @@
     "Retrouve les dernières publications et les formats de la rédaction. La newsletter sera activée lors du branchement d’un service d’inscription.": "Keep up with the latest stories and newsroom formats. The newsletter will be activated once a subscription service is connected.",
     "Contacter la rédaction": "Contact the newsroom",
     "Une info, une idée, un regard rugby ?": "A tip, an idea, a rugby perspective?",
-    "La rédaction est à l'écoute des passionnés, des clubs et de celles et ceux qui font vivre le rugby.": "The newsroom is open to fans, clubs and everyone who makes rugby happen.",
+    "La rédaction est à l'écoute des passionnés, des clubs et de celles et ceux qui font vivre le rugby.": "The newsroom is here for fans, clubs and everyone who makes rugby happen.",
     "Écrire à la rédaction": "Write to the newsroom",
     "Explore": "Explore",
     "Explorer": "Explore",
@@ -232,7 +232,25 @@
     "Passer en anglais": "Switch to English",
     "Passer en français": "Switch to French",
     "Retour à l’accueil": "Back to home",
-    "RugbyXVNews. Tous droits réservés.": "RugbyXVNews. All rights reserved."
+    "RugbyXVNews. Tous droits réservés.": "RugbyXVNews. All rights reserved.",
+    "Aller au contenu": "Skip to content",
+    "Le centre de match rassemble scores, calendriers, classements et informations des compétitions.": "The match centre brings together scores, fixtures, standings and competition information.",
+    "Résultat(s) dans le média.": "result(s) across the site.",
+    "Aucun résultat ne correspond à votre recherche.": "No results match your search.",
+    "Les compositions seront ajoutées après confirmation officielle.": "Line-ups will be added once officially confirmed.",
+    "Fiche de match": "Match details",
+    "Article": "Story",
+    "Les favoris sont enregistrés localement dans ce navigateur.": "Saved stories are stored locally in this browser.",
+    "Toute l’actualité": "All news",
+    "Plus d’articles": "More stories",
+    "Plus de contenus": "More content",
+    "Plus de podcasts": "More podcasts",
+    "Date non renseignée": "Date not provided",
+    "h": "h",
+    "min": "min",
+    "L’article": "The story",
+    "Les autres rubriques": "Other sections",
+    "Dans le média": "On RugbyXVNews"
   },
   "articleTranslations": {
     "top14-lecture-du-jeu": {
@@ -455,6 +473,24 @@
       "title": "Together with the crowd",
       "kind": "Photo",
       "caption": "Rugby and its supporters."
+    }
+  },
+  "competitionTranslations": {
+    "top14": {
+      "name": "Top 14",
+      "description": "France’s top-tier club competition: clubs, news, analysis and coverage of the league."
+    },
+    "pro-d2": {
+      "name": "Pro D2",
+      "description": "The second division: its clubs, stories and the challenges of the season."
+    },
+    "nationale": {
+      "name": "Nationale",
+      "description": "Clubs, sporting projects and stories from the third tier of French rugby."
+    },
+    "international": {
+      "name": "International",
+      "description": "National teams, major competitions and rugby cultures from around the world."
     }
   }
 }
