@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /*?view=saved
+Disallow: /data/
