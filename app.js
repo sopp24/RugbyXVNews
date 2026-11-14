@@ -193,7 +193,7 @@ function renderDirectory(){
  const kind=params.get('kind')||'clubs',isClubs=kind==='clubs',items=isClubs?SPORTS.clubs:SPORTS.players;
  const title=isClubs?'Clubs':'Joueurs';
  document.title=title+' — RugbyXVNews';
- main.innerHTML=pageIntro('Clubs & joueurs','Repères, fiches, effectifs, parcours et informations pour retrouver les acteurs du rugby.')+'<section class="page-shell"><div class="wrap"><div class="tabs"><a class="tab" aria-selected="'+String(isClubs)+'" href="?view=directory&kind=clubs">Clubs</a><a class="tab" aria-selected="'+String(!isClubs)+'" href="?view=directory&kind=players">Joueurs</a></div><div class="filterbar"><label class="sr-only" for="directory-filter">Rechercher</label><input id="directory-filter" type="search" placeholder="'+(isClubs?'Rechercher un club…':'Rechercher un joueur…')+'"></div><div id="directory-results" class="directory-grid">'+(Array.isArray(items)&&items.length?items.map(x=>'<article class="directory-card"><span class="kicker">'+esc(isClubs?x.competition||'Club':x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'Fiche à compléter avec des informations vérifiées.')+'</p>'+(safeHttpUrl(x.url)?'<a class="text-link" href="'+esc(safeHttpUrl(x.url))+'" target="_blank" rel="noopener noreferrer">Consulter ↗</a>':'')+'</article>').join(''):emptyState(isClubs?'Annuaire des clubs à connecter':'Fiches joueurs à connecter','Ajoute les fiches validées dans data/sports-data.json. Aucun effectif ou profil fictif n’est affiché.'))+'</div></div></section>';
+ main.innerHTML=pageIntro('Clubs & joueurs','Repères, fiches, effectifs, parcours et informations pour retrouver les acteurs du rugby.')+'<section class="page-shell"><div class="wrap"><div class="tabs"><a class="tab" aria-selected="'+String(isClubs)+'" href="?view=directory&kind=clubs">Clubs</a><a class="tab" aria-selected="'+String(!isClubs)+'" href="?view=directory&kind=players">Joueurs</a></div><div class="filterbar"><label class="sr-only" for="directory-filter">Rechercher</label><input id="directory-filter" type="search" value="'+esc(params.get('q')||'')+'" placeholder="'+(isClubs?'Rechercher un club…':'Rechercher un joueur…')+'"></div><div id="directory-results" class="directory-grid">'+(Array.isArray(items)&&items.length?items.map(x=>'<article class="directory-card"><span class="kicker">'+esc(isClubs?x.competition||'Club':x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'Fiche à compléter avec des informations vérifiées.')+'</p>'+(safeHttpUrl(x.url)?'<a class="text-link" href="'+esc(safeHttpUrl(x.url))+'" target="_blank" rel="noopener noreferrer">Consulter ↗</a>':'')+'</article>').join(''):emptyState(isClubs?'Annuaire des clubs à connecter':'Fiches joueurs à connecter','Ajoute les fiches validées dans data/sports-data.json. Aucun effectif ou profil fictif n’est affiché.'))+'</div></div></section>';
 }
 function renderGallery(){
  document.title='Galerie — RugbyXVNews';
@@ -220,8 +220,19 @@ function renderSaved(){
 }
 function renderSearch(){
  document.title='Recherche — RugbyXVNews';
- const q=query.trim(),needle=escText(q),found=ARTICLES.filter(a=>escText([a.title,a.excerpt,a.category,a.type,a.author,a.tags.join(' ')].join(' ')).includes(needle));
- main.innerHTML=pageIntro('Recherche',q?'Résultats pour « '+q+' »':'Recherche dans les articles et rubriques.')+'<section class="page-shell"><div class="wrap"><form class="searchform search-page-form" id="page-search"><label class="sr-only" for="page-search-input">Mots-clés</label><input type="search" id="page-search-input" name="q" value="'+esc(q)+'" placeholder="Club, joueur, compétition, sujet…"><button type="submit">Rechercher ↗</button></form><p class="results-count">'+found.length+' résultat(s) dans les articles éditoriaux de démonstration.</p>'+(found.length?'<div class="card-grid">'+found.map(card).join('')+'</div>':emptyState('Aucun résultat','Essaie avec un autre mot-clé ou explore les rubriques.'))+'</div></section>';
+ const q=query.trim(),needle=escText(q);
+ const found=q?ARTICLES.filter(a=>escText([a.title,a.excerpt,a.category,a.type,a.author,(a.tags||[]).join(' ')].join(' ')).includes(needle)):[];
+ const clubs=q?(SPORTS.clubs||[]).filter(x=>escText([x.name,x.competition,x.description].join(' ')).includes(needle)):[];
+ const players=q?(SPORTS.players||[]).filter(x=>escText([x.name,x.position,x.club,x.description].join(' ')).includes(needle)):[];
+ const comps=q?COMPETITIONS.filter(x=>escText([x.name,x.description].join(' ')).includes(needle)):[];
+ const matches=q?currentMatches().filter(x=>escText([x.home,x.away,x.competition,x.round].join(' ')).includes(needle)):[];
+ const total=found.length+clubs.length+players.length+comps.length+matches.length;
+ const results=(found.length?sectionHead('Articles','Publications et analyses')+'<div class="card-grid">'+found.map(card).join('')+'</div>':'')+
+ (comps.length?sectionHead('Compétitions','Rubriques disponibles')+'<div class="comp-strip">'+comps.map(c=>'<article class="comp-card"><span class="comp-name">'+esc(c.name)+'</span><p>'+esc(c.description)+'</p><a href="'+compHref(c.id)+'">Voir la rubrique ↗</a></article>').join('')+'</div>':'')+
+ (clubs.length?sectionHead('Clubs','Fiches disponibles')+'<div class="directory-grid">'+clubs.map(x=>'<article class="directory-card"><span class="kicker">'+esc(x.competition||'Club')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p><a class="text-link" href="?view=directory&kind=clubs&q='+encodeURIComponent(x.name)+'">Voir la fiche ↗</a></article>').join('')+'</div>':'')+
+ (players.length?sectionHead('Joueurs','Fiches disponibles')+'<div class="directory-grid">'+players.map(x=>'<article class="directory-card"><span class="kicker">'+esc(x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p><a class="text-link" href="?view=directory&kind=players&q='+encodeURIComponent(x.name)+'">Voir la fiche ↗</a></article>').join('')+'</div>':'')+
+ (matches.length?sectionHead('Rencontres','Calendriers et résultats')+'<div class="score-grid">'+matches.map(renderScoreCard).join('')+'</div>':'');
+ main.innerHTML=pageIntro('Recherche',q?'Résultats pour « '+q+' »':'Recherche dans les articles, les compétitions, les clubs, les joueurs et les rencontres.')+'<section class="page-shell"><div class="wrap"><form class="searchform search-page-form" id="page-search"><label class="sr-only" for="page-search-input">Mots-clés</label><input type="search" id="page-search-input" name="q" value="'+esc(q)+'" placeholder="Club, joueur, compétition, sujet…"><button type="submit">Rechercher ↗</button></form><p class="results-count">'+(q?total+' résultat(s) dans le média.':'Saisis un terme pour lancer une recherche.')+'</p>'+(q?(total?results:emptyState('Aucun résultat','Essaie avec un autre mot-clé ou explore les rubriques.')):renderCompetitionCards())+'</div></section>';
 }
 function renderContact(){
  document.title='Contact — RugbyXVNews';
@@ -310,6 +321,7 @@ function render(){
   case 'privacy':renderPrivacy();break;
   default:renderHome();
  }
+ if(view==='directory'&&params.get('q'))applyDirectoryFilter();
  updateMeta();
  const active=view==='home'?'home':view==='live'||view==='match'?'live':view==='news'?'news':view==='competition'?compId:view==='directory'?'directory':view==='media'||view==='gallery'||view==='videos'||view==='podcasts'?'media':'';
  $$('[data-nav]').forEach(a=>{const key=a.dataset.nav;if(key===active||(active==='top14'&&key==='top14')||(active==='pro-d2'&&key==='prod2')||(active==='nationale'&&key==='nationale')||(active==='international'&&key==='international'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
