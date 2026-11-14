@@ -370,7 +370,11 @@
     "Voir les actualités": "View news",
     "Ouvrir le menu": "Open menu",
     "Fermer le menu": "Close menu",
-    "Réinitialiser": "Reset filters"
+    "Réinitialiser": "Reset filters",
+    "Filtres du centre de match": "Match centre filters",
+    "Type de fiche": "Profile type",
+    "Navigation des médias": "Media navigation",
+    "Crédit :": "Credit:"
   },
   "articleTranslations": {
     "top14-lecture-du-jeu": {
