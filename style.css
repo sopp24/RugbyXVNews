@@ -372,3 +372,12 @@ body[data-theme=dark] .tabs{border-color:#444}
 .article-cover .visual-label{position:absolute;left:14px;bottom:12px;color:#fff;font:800 16px/1 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;text-shadow:0 2px 5px #000;z-index:2}
 .gallery-image strong{z-index:2}
 .mobile-dock a,.mobile-dock button{position:relative}
+
+.news-visual.has-image:after,.article-cover.has-image:after,.gallery-image.has-image:after,.gallery-dialog-visual.has-image:after{display:none}
+.pageintro-compact{padding:14px 0 0;background:transparent;border:0}
+.article-sources{margin:32px 0;padding:16px 18px;background:var(--surface);border-left:3px solid var(--gold);font-size:11px}
+.article-sources h2{font-size:25px;margin:0 0 8px}
+.article-sources ul{margin:0;padding-left:18px}
+.article-sources li{margin:5px 0}
+.article-sources a,.article-meta-bar a{border-bottom:1px solid var(--gold);font-weight:700}
+body[data-theme=dark] .article-sources{background:#1d1d1d;color:#ddd}
