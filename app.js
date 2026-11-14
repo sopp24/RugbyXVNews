@@ -71,6 +71,12 @@ if(SHOW_PREVIEW_NOTICE)document.getElementById('notice').classList.remove('hidde
 if(view==='category')category();else if(view==='article')articlePage();else if(view==='gallery')galleryPage();else if(view==='contact')contactPage();else if(view==='legal')legalPage();else if(view==='privacy')privacyPage();else if(view==='search')searchPage();else home();
 const active=view==='gallery'?'gallery':view==='category'?({'Top 14':'top14','Pro D2':'pro-d2','Nationale':'nationale','International':'international','Actus & transferts':'actus'}[cat]||'top14'):'';
 document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===active)a.setAttribute('aria-current','page')});
+const metaDesc=document.querySelector('meta[name="description"]'),ogTitle=document.querySelector('meta[property="og:title"]'),ogDesc=document.querySelector('meta[property="og:description"]');
+const currentArticle=articles.find(x=>x.id===id);
+const pageDescription=view==='article'&&currentArticle?currentArticle.excerpt:view==='category'?'Actualités, analyses et décryptages de la rubrique '+cat+' sur RugbyXVNews.':view==='gallery'?'Les photos, vidéos et temps forts de RugbyXVNews.':view==='contact'?'Contacter la rédaction de RugbyXVNews.':'Toute l’actualité du rugby français et international.';
+if(metaDesc)metaDesc.setAttribute('content',pageDescription);
+if(ogTitle)ogTitle.setAttribute('content',document.title);
+if(ogDesc)ogDesc.setAttribute('content',pageDescription);
 document.getElementById('year').textContent=new Date().getFullYear();
 const nav=document.getElementById('navlinks'),menu=document.querySelector('.menu'),closeMenu=()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');document.body.classList.remove('menuopen')};
 menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);document.body.classList.toggle('menuopen',open)});
