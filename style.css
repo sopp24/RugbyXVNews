@@ -482,8 +482,8 @@ body[data-theme=light] .topline{color:#fff}
  .brand-monogram{min-width:28px;height:29px;font-size:17px}
  .mastin{min-height:67px}
  .nav-control{min-height:36px;padding-inline:7px;font-size:8px}
- .nav-control.theme-control{width:37px;padding:0}
- .theme-control [data-theme-label]{display:none}
+ .nav-control.theme-control{width:auto;min-width:78px;padding-inline:7px}
+ .theme-control [data-theme-label]{display:inline;font-size:8px}
  .hero-primary{min-height:365px}
  .hero-primary .hero-copy{padding:22px 18px}
  .hero-primary .hero-copy h1{font-size:clamp(39px,10vw,57px)}
@@ -551,7 +551,7 @@ body[data-theme=light] .topline{color:#fff}
  .topline .wrap>span{max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .nav-tools{gap:3px}
  .lang-control{min-width:58px}
- .theme-control{min-width:36px}
+ .theme-control{min-width:78px}
  .brand-rugby,.brand-news{font-size:18px}
  .brand-monogram{min-width:25px;height:26px;font-size:15px}
  .hero-primary .hero-copy{padding:19px 15px}
