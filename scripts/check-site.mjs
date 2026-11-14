@@ -21,10 +21,20 @@ assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v16'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v17'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
+assert.match(html,/class="mastactions">[\s\S]*?data-open-search[\s\S]*?<\/div>\s*<div class="tagline">/,'Search icon must be placed before the left-aligned masthead tagline');
+assert.match(css,/\.tagline\{[^}]*text-align:left/s,'Masthead tagline must be left-aligned');
+assert.match(html,/id="global-search-suggestions"[^>]*aria-live="polite"/,'Global search must expose live suggestions accessibly');
+assert.match(app,/function searchArticles\(value\)/,'A shared article-search function must power suggestions and results');
+assert.match(app,/translated\.title[\s\S]*translatedSections/,'Article search must include English and full article content');
+assert.match(app,/globalSearchInput\.addEventListener\('input',renderGlobalSearchSuggestions\)/,'Global search must update results while typing');
+assert.match(app,/globalSearch\.addEventListener\('submit'/,'Global search must support form submission');
+assert.match(app,/const found=q\?searchArticles\(q\):\[\]/,'Search results page must query the actual article dataset');
+assert.match(app,/function renderGlobalSearchSuggestions\(\)/,'Global search suggestions renderer missing');
+assert.match(css,/\.search-suggestion-list\{[^}]*overflow:auto/s,'Live search results must remain scrollable');
 assert.match(html,/data-theme-toggle/,'Theme switch missing');
 assert.ok(html.includes('<a class="mast-podcast-cta" data-nav="media" href="?view=podcasts">Podcasts</a>'),'Podcasts CTA must sit in the masthead beside the strapline');
 assert.ok(!html.includes('class="nav-podcast-cta"'),'Podcasts CTA must not remain in navigation tools');
@@ -53,7 +63,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v16/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v17/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
