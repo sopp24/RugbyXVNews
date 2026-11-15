@@ -61,7 +61,7 @@ assert.match(css,/\.mast-podcast-cta\{[^}]*display:inline-flex/s,'Podcasts CTA m
 assert.match(html,/class="mast-podcast-cta"[^>]*href="\?view=podcasts"/,'Header Podcasts CTA must point to the podcast page');
 assert.match(css,/\.theme-control \[data-theme-label\]\{display:inline/,'Theme action label must remain visible on mobile');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation tools must not shrink or disappear');
-assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/stroke="#FFFFFF"/,'Favicon monogram must use high-contrast brand white');
+assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/fill="#5533EC"/,'Favicon must use the Instagram-inspired brand violet monogram');
 assert.match(html,/name="viewport"/,'Viewport meta missing');
 assert.match(html,/style\.css/,'Stylesheet not linked');
 assert.match(html,/app\.js/,'Application script not linked');
