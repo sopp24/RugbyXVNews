@@ -29,16 +29,14 @@ assert.match(css,/\.social \.social-link:focus-visible/,'Social icon links must 
 assert.ok(locales.ui['Réseaux & contact']&&locales.ui['Envoyer un e-mail à Rugby XV News'],'Footer social labels need English translations');
 assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[1],/data-nav="directory"|view=directory/i,'Clubs and players must not take space in the primary navigation');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
-assert.ok(html.includes('rel="icon" href="./icon.svg?v=4"'),'Versioned SVG favicon must be linked');
-assert.ok(manifest.icons.some(icon=>icon.src.includes('icon.svg?v=4')),'PWA manifest must include the branded SVG favicon');
+assert.ok(html.includes('rel="icon" href="./icon.svg?v=5"'),'Versioned SVG favicon must be linked');
+assert.ok(manifest.icons.some(icon=>icon.src.includes('icon.svg?v=5')),'PWA manifest must include the branded SVG favicon');
 assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=4"'),'iPhone home-screen icon must be explicitly linked');
-assert.ok(html.includes('favicon-32.png?v=4'),'PNG favicon fallback must be linked for browser compatibility');
-assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-192.png?v=4')&&icon.sizes==='192x192'),'PWA manifest must include a 192px PNG icon');
-assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-512.png?v=4')&&icon.sizes==='512x512'),'PWA manifest must include a 512px PNG icon');
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
-assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('fill="#5533EC"'),'Instagram-inspired violet monogram SVG must be used');
-assert.ok(sw.includes('rugbyxvnews-v19'),'Service worker cache must be bumped after header layout updates');
-assert.ok(sw.includes('icon.svg?v=4'),'Versioned favicon must be included in the offline cache');
+assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
+assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
+assert.ok(sw.includes('rugbyxvnews-v20'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('icon.svg?v=5'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
 assert.match(html,/class="mastactions">[\s\S]*?data-open-search[\s\S]*?<\/div>\s*<div class="tagline">/,'Search icon must be placed before the left-aligned masthead tagline');
@@ -80,7 +78,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v19/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v20/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
