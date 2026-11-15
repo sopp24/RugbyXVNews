@@ -35,7 +35,8 @@ assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=4
 assert.ok(html.includes('favicon-32.png?v=4'),'PNG favicon fallback must be linked for browser compatibility');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-192.png?v=4')&&icon.sizes==='192x192'),'PWA manifest must include a 192px PNG icon');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-512.png?v=4')&&icon.sizes==='512x512'),'PWA manifest must include a 512px PNG icon');
-assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/viewBox="0 0 874 874"[\\s\\S]*fill="#5533EC"/,'Instagram-inspired violet monogram SVG must be used');
+const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
+assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('fill="#5533EC"'),'Instagram-inspired violet monogram SVG must be used');
 assert.ok(sw.includes('rugbyxvnews-v19'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=4'),'Versioned favicon must be included in the offline cache');
 
