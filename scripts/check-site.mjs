@@ -80,7 +80,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v18/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v19/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
