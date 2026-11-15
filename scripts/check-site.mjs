@@ -29,9 +29,9 @@ assert.match(css,/\.social \.social-link:focus-visible/,'Social icon links must 
 assert.ok(locales.ui['Réseaux & contact']&&locales.ui['Envoyer un e-mail à Rugby XV News'],'Footer social labels need English translations');
 assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[1],/data-nav="directory"|view=directory/i,'Clubs and players must not take space in the primary navigation');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
-assert.ok(html.includes('rel="icon" href="./icon.svg?v=3"'),'Versioned SVG favicon must be linked');
+assert.ok(html.includes('rel="icon" href="./icon.svg?v=4"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
-assert.ok(sw.includes('rugbyxvnews-v18'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v19'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
