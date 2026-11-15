@@ -30,9 +30,14 @@ assert.ok(locales.ui['Réseaux & contact']&&locales.ui['Envoyer un e-mail à Rug
 assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[1],/data-nav="directory"|view=directory/i,'Clubs and players must not take space in the primary navigation');
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=4"'),'Versioned SVG favicon must be linked');
-assert.ok(manifest.icons[0].src.includes('icon.svg?v=3'),'PWA manifest must use the branded favicon');
+assert.ok(manifest.icons.some(icon=>icon.src.includes('icon.svg?v=4')),'PWA manifest must include the branded SVG favicon');
+assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=4"'),'iPhone home-screen icon must be explicitly linked');
+assert.ok(html.includes('favicon-32.png?v=4'),'PNG favicon fallback must be linked for browser compatibility');
+assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-192.png?v=4')&&icon.sizes==='192x192'),'PWA manifest must include a 192px PNG icon');
+assert.ok(manifest.icons.some(icon=>icon.src.includes('icon-512.png?v=4')&&icon.sizes==='512x512'),'PWA manifest must include a 512px PNG icon');
+assert.match(fs.readFileSync(path.join(root,'icon.svg'),'utf8'),/viewBox="0 0 874 874"[\\s\\S]*fill="#5533EC"/,'Instagram-inspired violet monogram SVG must be used');
 assert.ok(sw.includes('rugbyxvnews-v19'),'Service worker cache must be bumped after header layout updates');
-assert.ok(sw.includes('icon.svg?v=3'),'Versioned favicon must be included in the offline cache');
+assert.ok(sw.includes('icon.svg?v=4'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
 assert.match(html,/class="mastactions">[\s\S]*?data-open-search[\s\S]*?<\/div>\s*<div class="tagline">/,'Search icon must be placed before the left-aligned masthead tagline');
