@@ -31,7 +31,7 @@ assert.doesNotMatch((html.match(/<ul id="navlinks">([\s\S]*?)<\/ul>/)||['',''])[
 assert.match(html,/rel="manifest"/,'PWA manifest not linked');
 assert.ok(html.includes('rel="icon" href="./icon.svg?v=5"'),'Versioned SVG favicon must be linked');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('icon.svg?v=5')),'PWA manifest must include the branded SVG favicon');
-assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=4"'),'iPhone home-screen icon must be explicitly linked');
+assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=5"'),'iPhone home-screen icon must be explicitly linked');
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
 assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
