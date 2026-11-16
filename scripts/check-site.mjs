@@ -35,7 +35,7 @@ assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=5
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
 assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
-assert.ok(sw.includes('rugbyxvnews-v23'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v24'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=5'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -78,7 +78,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v23/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v24/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
@@ -190,5 +190,12 @@ assert.match(css,/body\[data-theme=light\]\{[\s\S]*?--rxn-white:#5533EC;[\s\S]*?
 assert.match(css,/body\[data-theme=light\] \.nav li a,[\s\S]*?\.mobile-dock button\{[\s\S]*?color:var\(--rxn-violet\)/,'Navigation text on light surfaces must use brand violet');
 assert.match(css,/body\[data-theme=light\] \.section-head h2,[\s\S]*?\.footer h3\{[\s\S]*?background-image:linear-gradient\(90deg,#5533EC 0 52%,#2D1A96 52% 100%\)/,'Light-theme headings must use the split-violet title treatment');
 assert.match(css,/body\[data-theme=light\] \.widget-dark p,[\s\S]*?color:#FFFFFF/,'White text must remain white on branded violet blocks');
+
+
+assert.match(css,/body\[data-theme=light\] \.pageintro h1\{[\s\S]*?linear-gradient\(90deg,#FFFFFF 0 40%,#5533EC 40% 100%\)/,'Page intro titles must switch from white to brand violet over the pale disc');
+assert.match(css,/body\[data-theme=light\] \.pageintro p\{[\s\S]*?linear-gradient\(90deg,#F0EDFF 0 58%,#5533EC 58% 100%\)/,'Page intro descriptions must remain legible over the pale disc');
+assert.match(css,/body\[data-theme=light\] \.cta h2\{[\s\S]*?linear-gradient\(90deg,#FFFFFF 0 66%,#5533EC 66% 100%\)/,'CTA headings must switch to brand violet over the pale decorative shape');
+assert.match(css,/body\[data-theme=light\] \.mobile-dock\{[\s\S]*?background:#FFFFFF;[\s\S]*?backdrop-filter:none/s,'Light mobile dock must be opaque so content does not bleed through');
+assert.match(css,/@media\(max-width:820px\)\{[\s\S]*?body\[data-theme=light\] \.pageintro h1\{[\s\S]*?46%[\s\S]*?body\[data-theme=light\] \.pageintro p\{[\s\S]*?38%/,'Mobile page intro split points must follow the decorative disc');
 
 console.log('RugbyXVNews quality checks passed.');
