@@ -1347,3 +1347,62 @@ body[data-theme=light] .social .social-link{
 body[data-theme=light] .social .social-link:hover{
  color:#FFFFFF;
 }
+
+
+/* Light-theme contrast on the violet editorial bands.
+   The decorative pale disc stays in place; typography changes color as it crosses it. */
+body[data-theme=light] .pageintro h1{
+ background-image:linear-gradient(90deg,#FFFFFF 0 40%,#5533EC 40% 100%);
+ background-repeat:no-repeat;
+ background-size:100% 100%;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+body[data-theme=light] .pageintro p{
+ background-image:linear-gradient(90deg,#F0EDFF 0 58%,#5533EC 58% 100%);
+ background-repeat:no-repeat;
+ background-size:100% 100%;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+body[data-theme=light] .cta h2{
+ background-image:linear-gradient(90deg,#FFFFFF 0 66%,#5533EC 66% 100%);
+ background-repeat:no-repeat;
+ background-size:100% 100%;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+body[data-theme=light] .cta p{
+ background-image:linear-gradient(90deg,#F0EDFF 0 66%,#5533EC 66% 100%);
+ background-repeat:no-repeat;
+ background-size:100% 100%;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+@media(max-width:820px){
+ body[data-theme=light] .pageintro h1{
+  background-image:linear-gradient(90deg,#FFFFFF 0 46%,#5533EC 46% 100%);
+ }
+ body[data-theme=light] .pageintro p{
+  background-image:linear-gradient(90deg,#F0EDFF 0 38%,#5533EC 38% 100%);
+ }
+ body[data-theme=light] .cta h2,
+ body[data-theme=light] .cta p{
+  background-image:linear-gradient(90deg,#FFFFFF 0 64%,#5533EC 64% 100%);
+ }
+ body[data-theme=light] .mobile-dock{
+  background:#FFFFFF;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-top-color:var(--line);
+  box-shadow:0 -6px 22px rgba(35,24,92,.08);
+ }
+}
