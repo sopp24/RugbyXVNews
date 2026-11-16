@@ -1271,3 +1271,79 @@ body[data-theme=light] .score-num .is-draw{color:var(--ui-text)}
  html{scroll-padding-bottom:calc(70px + env(safe-area-inset-bottom))}
  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
 }
+
+
+/* Light theme identity: purple typography on every white/light surface. */
+body[data-theme=light]{
+ --rxn-white:#5533EC;
+ --muted:#5533EC;
+ --ui-text:#5533EC;
+ --ui-muted:#5533EC;
+}
+body[data-theme=light] .nav li a,
+body[data-theme=light] .tickerflow,
+body[data-theme=light] .lang-next,
+body[data-theme=light] .lang-divider,
+body[data-theme=light] .filterbar input::placeholder,
+body[data-theme=light] .searchform input::placeholder,
+body[data-theme=light] .mobile-dock a,
+body[data-theme=light] .mobile-dock button{
+ color:var(--rxn-violet);
+}
+body[data-theme=light] .nav li a:hover,
+body[data-theme=light] .nav li a[aria-current=page],
+body[data-theme=light] .footer a:hover,
+body[data-theme=light] .mobile-dock a:hover,
+body[data-theme=light] .mobile-dock button:hover,
+body[data-theme=light] .mobile-dock a[aria-current=page]{
+ color:var(--rxn-violet-deep);
+}
+body[data-theme=light] .tickerflow a{color:inherit}
+body[data-theme=light] .tab,
+body[data-theme=light] .crumb,
+body[data-theme=light] .score-status,
+body[data-theme=light] .feed-meta,
+body[data-theme=light] .byline,
+body[data-theme=light] .results-count,
+body[data-theme=light] .data-freshness,
+body[data-theme=light] .search-hint,
+body[data-theme=light] .reading-size-hint,
+body[data-theme=light] .image-caption,
+body[data-theme=light] .gallery-item small,
+body[data-theme=light] .gallery-dialog-position,
+body[data-theme=light] .footdesc,
+body[data-theme=light] .footer p{
+ color:var(--rxn-violet);
+}
+
+/* Split-tone headline treatment on white panels: a crisp mid-word cut. */
+body[data-theme=light] .section-head h2,
+body[data-theme=light] .sectionhead h2,
+body[data-theme=light] .news-card-body h3 a,
+body[data-theme=light] .directory-card h3,
+body[data-theme=light] .comp-card .comp-name,
+body[data-theme=light] .article-body h2,
+body[data-theme=light] .article-body h3,
+body[data-theme=light] .bodycopy h2,
+body[data-theme=light] .bodycopy h3,
+body[data-theme=light] .widget:not(.widget-dark) h2,
+body[data-theme=light] .search-dialog-inner h2,
+body[data-theme=light] .footer h3{
+ background-image:linear-gradient(90deg,#5533EC 0 52%,#2D1A96 52% 100%);
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+body[data-theme=light] .news-card-body h3 a:hover{
+ background-image:linear-gradient(90deg,#2D1A96 0 52%,#5533EC 52% 100%);
+}
+body[data-theme=light] .footer .brand-caption{
+ color:var(--rxn-violet);
+}
+body[data-theme=light] .social .social-link{
+ color:var(--rxn-violet);
+}
+body[data-theme=light] .social .social-link:hover{
+ color:#FFFFFF;
+}
