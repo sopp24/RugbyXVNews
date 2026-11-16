@@ -35,7 +35,7 @@ assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=5
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
 assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
-assert.ok(sw.includes('rugbyxvnews-v20'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v21'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=5'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -78,7 +78,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v20/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v21/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
@@ -164,4 +164,16 @@ for(const competition of sports.competitions||[]){
 assert.equal(manifest.background_color,'#111111','PWA background must use official black');
 assert.equal(manifest.theme_color,'#5533EC','PWA theme must use official violet');
 assert.ok(manifest.start_url&&manifest.scope,'PWA start_url and scope required');
+
+assert.match(css,/\.table-wrap\{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden/,'Tables must remain horizontally scrollable on narrow screens');
+assert.match(css,/\.standings th:nth-child\(n\),\.standings td:nth-child\(n\)\{display:table-cell!important\}/,'Mobile standings must retain every data column');
+assert.match(css,/body\{padding-bottom:calc\(70px \+ env\(safe-area-inset-bottom\)\)\}/,'Mobile content must clear the fixed dock and iPhone safe area');
+assert.match(css,/\.mobile-dock a,\.mobile-dock button\{min-height:48px;font-size:10px/,'Mobile dock actions must remain readable and comfortably tappable');
+assert.match(css,/\.menu\{width:44px;height:44px;min-width:44px\}/,'Mobile menu button must have a 44px touch target');
+assert.match(css,/\.nav-control\{min-height:44px\}/,'Navigation preference controls must have a 44px minimum touch target');
+assert.match(css,/max-height:calc\(100dvh - 24px\)/,'Dialogs must fit the dynamic mobile viewport');
+assert.match(css,/\.article-body iframe\{display:block;width:100%;aspect-ratio:16\/9;height:auto/,'Embedded media must resize fluidly in article content');
+assert.match(css,/@media\(max-height:520px\) and \(max-width:820px\)/,'Short landscape mobile screens need a dedicated layout');
+assert.match(css,/\.theme-control \[data-theme-label\]\{display:none\}/,'Small phones must use a compact theme control without losing its accessible label');
+
 console.log('RugbyXVNews quality checks passed.');
