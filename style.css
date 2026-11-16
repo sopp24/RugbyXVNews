@@ -1104,3 +1104,110 @@ button,a{touch-action:manipulation}
 .social-email-label{margin-top:10px!important}
 .social-email-label a{font-size:12px!important}
 @media(max-width:600px){.social .social-link{width:44px;height:44px}}
+
+
+/* Responsive hardening — mobile, tablet, small laptops and iOS safe areas */
+html{ -webkit-text-size-adjust:100%; }
+body{max-width:100%;overflow-x:clip}
+.wrap,.mastin,.navin,.page-shell,.pageintro,.article-layout,.hero-grid,.feed-layout,.footgrid{min-width:0}
+.card-grid,.directory-grid,.media-grid,.gallery-grid,.score-grid,.lineup-grid,.comp-strip,.sidebar-stack{min-width:0}
+.card-grid>*,.directory-grid>*,.media-grid>*,.gallery-grid>*,.score-grid>*,.lineup-grid>*,.sidebar-stack>*{min-width:0}
+.pageintro h1,.article-header h1,.hero-copy h1,.news-card-body h3,.hero-secondary h2,.section-head h2,.sectionhead h2,.score-team,.match-feature-teams strong,.club-name{min-width:0;overflow-wrap:anywhere}
+.filterbar>*{min-width:0;max-width:100%}
+.filterbar input,.filterbar select,.search-page-form input,.searchform input{max-width:100%}
+.search-dialog,.gallery-dialog{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+.search-dialog-inner{min-width:0}
+.searchform button{min-height:44px;white-space:nowrap}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}
+.article-body img,.article-body video,.article-body iframe,.article-body table,.article-body pre{max-width:100%}
+.article-body img,.article-body video{height:auto}
+.article-body iframe{display:block;width:100%;aspect-ratio:16/9;height:auto;border:0}
+.article-body pre{overflow-x:auto;white-space:pre}
+.nav{z-index:90}
+.nav ul{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.menu{width:44px;height:44px;min-width:44px}
+.nav-control{min-height:44px}
+.totop{bottom:calc(22px + env(safe-area-inset-bottom))}
+.toast{bottom:calc(24px + env(safe-area-inset-bottom))}
+.gallery-dialog{width:min(900px,calc(100% - 24px))}
+.gallery-dialog-visual{max-height:60vh;max-height:60dvh}
+@media(max-width:820px){
+ .nav ul{max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px)}
+ .nav li a{min-height:48px;padding-inline:14px}
+ .mobile-dock{min-height:62px;padding:7px 6px calc(7px + env(safe-area-inset-bottom))}
+ .mobile-dock a,.mobile-dock button{min-height:48px;font-size:10px;line-height:1.2}
+ body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+ .totop{bottom:calc(78px + env(safe-area-inset-bottom))}
+ .toast{bottom:calc(78px + env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
+ .table-wrap{margin-inline:0}
+ .standings{min-width:600px;table-layout:auto}
+ .standings th,.standings td{padding:10px 10px;font-size:11px}
+ .standings th{font-size:10px}
+ .standings td.club-name{min-width:170px;white-space:normal;overflow-wrap:anywhere}
+ .article-body blockquote{margin-inline:0;padding:16px;font-size:clamp(17px,3vw,20px)}
+ .article-body h2{font-size:clamp(22px,4vw,30px);line-height:1.08;overflow-wrap:anywhere}
+ .search-dialog-inner{padding:clamp(12px,3vw,22px)}
+}
+@media(max-width:600px){
+ .topline .wrap>span{font-size:10px}
+ .mast-podcast-cta{min-height:40px;padding-inline:10px;font-size:10px;letter-spacing:.04em}
+ .mastactions .icon-button{width:44px;height:44px;min-width:44px}
+ .nav-tools{gap:6px}
+ .nav-control{min-height:44px;padding-inline:9px;font-size:10px;letter-spacing:.04em}
+ .nav-control.theme-control{min-width:86px}
+ .theme-control [data-theme-label]{font-size:10px}
+ .menu{width:44px;height:44px}
+ .pageintro h1{font-size:clamp(34px,9.5vw,52px);line-height:1;overflow-wrap:anywhere}
+ .section-head h2,.sectionhead h2{font-size:clamp(23px,6vw,29px)}
+ .filterbar input,.filterbar select{width:100%;min-width:0;min-height:44px;font-size:12px}
+ .filter-button,.article-tools button{min-height:44px;font-size:10px}
+ .searchform{display:grid;grid-template-columns:minmax(0,1fr) auto}
+ .searchform input{min-width:0;font-size:12px;padding-inline:11px}
+ .searchform button{padding-inline:12px;font-size:10px}
+ .news-card-body h3{font-size:clamp(16px,4.2vw,19px);overflow-wrap:anywhere}
+ .news-card-body .byline{font-size:10px;line-height:1.4}
+ .feed-item h3{font-size:clamp(16px,4.5vw,19px);overflow-wrap:anywhere}
+ .feed-item p{font-size:12px}
+ .score-team{font-size:11px;overflow-wrap:anywhere}
+ .match-feature-teams strong{font-size:clamp(15px,4vw,20px);overflow-wrap:anywhere}
+ .article-tools button{min-width:44px;padding-inline:8px}
+ .article-body{font-size:16px;line-height:1.75}
+ .article-body p,.article-body li{overflow-wrap:anywhere}
+ .gallery-dialog{padding:12px}
+ .gallery-dialog-visual{min-height:38vh;min-height:38dvh;max-height:54vh;max-height:54dvh;padding:14px}
+ .footlinks a,.footer a:not(.brand){font-size:11px}
+ .social .social-link{width:44px;height:44px}
+}
+@media(max-width:390px){
+ .wrap{width:calc(100% - 24px)}
+ .mastin{gap:6px}
+ .brand-signature{gap:4px}
+ .brand-rugby,.brand-news{font-size:15px}
+ .brand-monogram{min-width:22px;height:24px;font-size:14px}
+ .mast-podcast-cta{min-height:40px;padding-inline:7px;font-size:9px;letter-spacing:.02em}
+ .mastactions .icon-button{width:42px;height:42px;min-width:42px}
+ .nav-tools{gap:5px}
+ .lang-control{min-width:58px;padding-inline:6px;font-size:10px}
+ .theme-control{width:44px;min-width:44px;padding:0}
+ .theme-control [data-theme-label]{display:none}
+ .theme-glyph{font-size:18px}
+ .mobile-dock a,.mobile-dock button{font-size:9px}
+ .mobile-dock span{font-size:18px}
+ .score-card{padding:12px}
+ .score-teams{gap:5px}
+ .score-num{font-size:clamp(24px,8vw,30px)}
+ .match-feature{padding:14px}
+ .match-feature-teams{gap:5px}
+ .article-tools{gap:5px}
+ .article-tools button{font-size:9px;padding-inline:6px}
+}
+@media(max-height:520px) and (max-width:820px){
+ .mobile-dock{min-height:54px;padding-top:4px;padding-bottom:calc(4px + env(safe-area-inset-bottom))}
+ .mobile-dock a,.mobile-dock button{min-height:44px}
+ body{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
+ .nav ul{max-height:calc(100vh - 100px);max-height:calc(100dvh - 100px)}
+ .gallery-dialog-visual{min-height:32vh;min-height:32dvh;max-height:48vh;max-height:48dvh}
+}
+@media(max-width:600px){
+ .standings th:nth-child(n),.standings td:nth-child(n){display:table-cell!important}
+}
