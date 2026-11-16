@@ -1211,3 +1211,63 @@ body{max-width:100%;overflow-x:clip}
 @media(max-width:600px){
  .standings th:nth-child(n),.standings td:nth-child(n){display:table-cell!important}
 }
+
+
+/* UX safeguards: footer reachability and explicit light-theme contrast. */
+.footer{
+ position:relative;
+ display:block;
+ min-height:0;
+ height:auto;
+ max-height:none;
+ overflow:visible;
+ clear:both;
+}
+.footer>.wrap,
+.footgrid,
+.footgrid>div,
+.footbottom,
+.footbottom>div{
+ min-width:0;
+ max-width:100%;
+ overflow:visible;
+}
+.footgrid{align-items:start}
+.footdesc,
+.footer p,
+.footlinks a,
+.footbottom a,
+.footbottom span{overflow-wrap:anywhere}
+body[data-theme=light] .footer,
+body[data-theme=light] .footer a,
+body[data-theme=light] .footer h3,
+body[data-theme=light] .footbottom{color:var(--ui-text)}
+body[data-theme=light] .footer p,
+body[data-theme=light] .footer .brand-caption{color:var(--ui-muted)}
+body[data-theme=light] .footer .social-link{
+ background:transparent;
+ color:var(--ui-text);
+ border-color:var(--ui-border);
+}
+body[data-theme=light] .footer .social-link:hover{
+ background:var(--rxn-violet);
+ color:#FFFFFF;
+ border-color:var(--rxn-violet);
+}
+body[data-theme=light] .pageintro-compact{color:var(--ui-text)}
+body[data-theme=light] .search-page-form input,
+body[data-theme=light] .search-dialog input,
+body[data-theme=light] .search-dialog select,
+body[data-theme=light] .search-dialog textarea{color:var(--ui-text)}
+body[data-theme=light] .score-num .is-winner,
+body[data-theme=light] .score-num .is-draw{color:var(--ui-text)}
+
+/* Keep focused footer links and the final copyright row above the fixed mobile dock. */
+@media(max-width:820px){
+ html{scroll-padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+}
+@media(max-height:520px) and (max-width:820px){
+ html{scroll-padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+ body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+}
