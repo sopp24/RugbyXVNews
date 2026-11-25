@@ -35,7 +35,7 @@ assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=5
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
 assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
-assert.ok(sw.includes('rugbyxvnews-v24'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v25'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=5'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -78,7 +78,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v24/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v25/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
@@ -197,5 +197,33 @@ assert.match(css,/body\[data-theme=light\] \.pageintro p\{[\s\S]*?linear-gradien
 assert.match(css,/body\[data-theme=light\] \.cta h2\{[\s\S]*?linear-gradient\(90deg,#FFFFFF 0 66%,#5533EC 66% 100%\)/,'CTA headings must switch to brand violet over the pale decorative shape');
 assert.match(css,/body\[data-theme=light\] \.mobile-dock\{[\s\S]*?background:#FFFFFF;[\s\S]*?backdrop-filter:none/s,'Light mobile dock must be opaque so content does not bleed through');
 assert.match(css,/@media\(max-width:820px\)\{[\s\S]*?body\[data-theme=light\] \.pageintro h1\{[\s\S]*?46%[\s\S]*?body\[data-theme=light\] \.pageintro p\{[\s\S]*?38%/,'Mobile page intro split points must follow the decorative disc');
+
+
+// Intégrité du précache, du sitemap, des traductions et du verrou d'accès
+const precache=(sw.match(/const CORE_FILES=\[([^\]]*)\]/)||['',''])[1].split(',').map(x=>x.trim().replace(/^'|'$/g,'').split('?')[0]).filter(x=>x!=='');
+for(const file of precache)assert.ok(fs.existsSync(path.join(root,file)),'Service worker precache entry missing on disk: '+file);
+assert.ok(precache.includes('sopp-gate.js'),'Access gate must be precached');
+for(const page of ['index.html','offline.html']){
+ const source=fs.readFileSync(path.join(root,page),'utf8');
+ const head=source.slice(0,source.indexOf('</head>'));
+ assert.ok(/<script src="sopp-gate\.js"><\/script>/.test(head),'Access gate script missing in '+page);
+ assert.equal(head.indexOf('<script'),head.indexOf('<script src="sopp-gate.js">'),'Access gate must be the first script in '+page);
+ assert.match(source,/<meta name="robots" content="noindex, ?nofollow">/,'Gated page must be noindex: '+page);
+}
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
+for(const m of sitemap.matchAll(/[?&]id=([a-z0-9-]+)/g))assert.ok(articles.articles.some(a=>a.id===m[1]),'Sitemap references an unknown article: '+m[1]);
+assert.match(fs.readFileSync(path.join(root,'robots.txt'),'utf8'),/^Disallow: \/$/m,'robots.txt must block crawling while the access gate is active');
+for(const article of articles.articles){
+ const en=locales.articleTranslations[article.id];
+ assert.equal((en.sections||[]).length,article.sections.length,'English sections count differs for '+article.id);
+ assert.equal((en.tags||[]).length,(article.tags||[]).length,'English tags count differs for '+article.id);
+ for(const section of article.sections)assert.ok(Array.isArray(section)&&section.length===2&&section.every(x=>typeof x==='string'&&x),'Invalid section in '+article.id);
+ for(const key of ['excerpt','lead','author','published','read','type'])assert.ok(article[key],'Missing '+key+' in '+article.id);
+ if(article.image&&!/^https?:/.test(article.image))assert.ok(fs.existsSync(path.join(root,article.image)),'Missing image file for '+article.id);
+}
+for(const item of gallery.items){
+ assert.ok(locales.galleryTranslations[item.title],'English gallery translation missing for '+item.title);
+ if(item.image&&!/^https?:/.test(item.image))assert.ok(fs.existsSync(path.join(root,item.image)),'Missing gallery image: '+item.image);
+}
 
 console.log('RugbyXVNews quality checks passed.');

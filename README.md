@@ -38,13 +38,15 @@ Les liens d'articles sont construits à partir de id. Garder un identifiant uniq
 ## Configuration de prévisualisation et référencement
 Dans **app.js**, passer **PREVIEW_MODE** à false uniquement lorsque les exemples ont été remplacés et les données contrôlées. Ce mode retire l'avertissement de démonstration, autorise l'indexation et active le balisage NewsArticle des pages article. Tant que le mode est actif, la page utilise noindex,nofollow pour éviter d'indexer le contenu fictif. Avant l'ouverture publique, modifier aussi la balise robots statique de index.html de noindex,nofollow vers index,follow.
 
+**Conséquence SEO du verrouillage d'accès :** tant que le verrou SOPP Agents est actif, robots.txt contient `Disallow: /`, la ligne `Sitemap:` y est commentée et sitemap.xml est conservé mais inactif, et toutes les pages restent en noindex. Le site n'est donc pas référencé par les moteurs de recherche. Pour l'ouvrir au public : retirer sopp-gate.js des pages (et du précache de sw.js), passer PREVIEW_MODE à false, restaurer `Allow: /` et la ligne `Sitemap:` dans robots.txt, puis passer la balise robots de index.html et offline.html à index,follow.
+
 Le sitemap utilise actuellement l'URL GitHub Pages par défaut **https://sopp24.github.io/RugbyXVNews/**. Si un domaine personnalisé est ajouté, mettre à jour les URLs dans **sitemap.xml**, **robots.txt** et le schéma site-schema de **index.html**.
 
 ## Déployer sur GitHub Pages
 1. Ouvrir le dépôt, puis **Settings → Pages**.
 2. Sélectionner **Deploy from a branch**, la branche **main**, puis **/(root)**.
 3. Enregistrer. L'adresse publique apparaît sur la page Pages lorsque le déploiement est terminé.
-4. À chaque mise à jour du site, le service worker est actualisé à sa version courante. Incrémenter CACHE_NAME dans **sw.js** si des modifications de stratégie de cache sont nécessaires.
+4. À chaque mise à jour du site, le service worker est actualisé à sa version courante. Les pages HTML et les fichiers JSON sont servis réseau d'abord ; les autres ressources (app.js, style.css…) sont servies depuis le cache puis rafraîchies en arrière-plan. Incrémenter CACHE_NAME dans **sw.js** (et la vérification de scripts/check-site.mjs) à chaque évolution de la liste de précache ou de la stratégie de cache.
 
 ## Contrôles qualité
 Le workflow GitHub Actions **.github/workflows/site-check.yml** vérifie la syntaxe JavaScript, les fichiers requis, le JSON et quelques invariants de données à chaque push et pull request.
@@ -100,3 +102,11 @@ La charte officielle du compte @rugby_xv_news est la référence visuelle du sit
 - La navigation reste noire avec un soulignement violet de 3 px pour la rubrique active et un accès Podcasts violet.
 
 La navigation mobile, la recherche, le mode de lecture clair optionnel, la langue FR/EN, les favoris et la PWA restent fonctionnels. Avant publication, confirmer le logo original et les licences de diffusion web des photographies, écussons et logos tiers.
+
+
+## Verrouillage d'accès
+- L'application est conçue pour être ouverte depuis **SOPP Agents** (https://sopp24.github.io/SOPP-agents/), qui se déverrouille par Face ID / Touch ID puis ouvre l'app avec un jeton dans le fragment d'URL.
+- Un accès direct à l'adresse du site affiche un écran de verrouillage (script **sopp-gate.js**, chargé en premier dans index.html et offline.html).
+- En développement, localhost / 127.0.0.1 contournent le verrou ; ajouter `?soppgate=force` à l'URL pour le forcer.
+- Un dépôt statique public ne peut pas réellement cacher son code : une vraie protection nécessite un dépôt privé derrière le Worker authentifié (voir SOPP-agents/cloudflare-auth).
+- Voir aussi la section « Configuration de prévisualisation et référencement » pour l'effet sur robots.txt et le sitemap.

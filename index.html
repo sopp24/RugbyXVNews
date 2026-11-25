@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="sopp-gate.js"></script>
 <meta name="theme-color" content="#111111">
 <meta name="color-scheme" content="dark">
 <meta property="og:locale" content="fr_FR">
@@ -50,7 +51,7 @@
 <div class="wrap navin">
 <ul id="navlinks">
 <li><a data-nav="home" href="?view=home">Accueil</a></li>
-<li><a data-nav="live" href="?view=live"><span class="live-dot"></span> Live & résultats</a></li>
+<li><a data-nav="live" href="?view=live"><span class="live-dot" aria-hidden="true"></span> Live & résultats</a></li>
 <li><a data-nav="top14" href="?view=competition&comp=top14">Top 14</a></li>
 <li><a data-nav="prod2" href="?view=competition&comp=pro-d2">Pro D2</a></li>
 <li><a data-nav="nationale" href="?view=competition&comp=nationale">Nationale</a></li>
@@ -59,7 +60,7 @@
 <li class="navmore"><a data-nav="media" href="?view=media">Vidéos & galerie</a></li>
 
 </ul>
-<div class="nav-tools" aria-label="Préférences et accès rapides">
+<div class="nav-tools" role="group" aria-label="Préférences et accès rapides">
 <button type="button" class="nav-control lang-control" data-lang-toggle aria-label="Switch language to English" title="Français / English"><span class="lang-current" data-lang-current>FR</span><span class="lang-divider">/</span><span class="lang-next" data-lang-next>EN</span></button>
 <button type="button" class="nav-control theme-control" data-theme-toggle aria-label="Activer le thème sombre" aria-pressed="false" title="Changer de thème"><span class="theme-glyph" data-theme-icon aria-hidden="true">☾</span><span data-theme-label>Mode sombre</span></button>
 <button class="menu" type="button" aria-expanded="false" aria-controls="navlinks" aria-label="Ouvrir le menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
@@ -67,7 +68,7 @@
 </div>
 </nav>
 
-<div class="ticker" aria-label="À la une"><div class="wrap">
+<div class="ticker" role="group" aria-label="À la une"><div class="wrap">
 <b>À LA UNE</b><div class="tickerflow" id="tickerflow"><a href="?view=news">Les dernières infos RugbyXVNews</a><a href="?view=live">Suivre les résultats</a><a href="?view=directory">Clubs & joueurs</a></div>
 </div></div>
 <div class="notice hidden" id="preview-notice"><div class="wrap">ⓘ Version de prévisualisation : les articles et illustrations sont des exemples. Les résultats et classements seront affichés après connexion d’une source fiable.</div></div>
@@ -91,7 +92,7 @@
 <div><h3>Explorer</h3><div class="footlinks">
 <a href="?view=competition&comp=top14">Top 14</a><a href="?view=competition&comp=pro-d2">Pro D2</a><a href="?view=competition&comp=nationale">Nationale</a><a href="?view=competition&comp=international">International</a><a href="?view=news">Actus & transferts</a><a href="?view=live">Résultats & classements</a><a href="?view=directory">Clubs & joueurs</a><a href="?view=media">Médiathèque</a>
 </div></div>
-<div><h3>Réseaux & contact</h3><p>Retrouve Rugby XV News sur ses réseaux et plateformes d’écoute, ou écris à la rédaction.</p><div class="social" aria-label="Réseaux et contact">
+<div><h3>Réseaux & contact</h3><p>Retrouve Rugby XV News sur ses réseaux et plateformes d’écoute, ou écris à la rédaction.</p><div class="social" role="group" aria-label="Réseaux et contact">
 <a class="social-link social-instagram" href="https://www.instagram.com/rugby_xv_news/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
 <a class="social-link social-tiktok" href="https://www.tiktok.com/@rugby_xv_news" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3v11.2a4.3 4.3 0 1 1-3.8-4.27v3.1a1.3 1.3 0 1 0 .8 1.2V3h3c.2 2.1 1.4 3.7 3.8 4.2v3.1A8 8 0 0 1 15 8.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 <a class="social-link social-linkedin" href="https://fr.linkedin.com/posts/rugby-xv-news_pierre-courtaud-lentretien-cette-fin-activity-7414412370166448128-ef-X" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Rugby XV News" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5V19M5 5.2v.1M10 19v-6.1c0-2 1.1-3.2 3-3.2s3 1.2 3 3.2V19M10 10v9M3 8.5h4V19H3zM8 10h4v1.4c.7-1 1.8-1.7 3.4-1.7 3 0 4.6 1.9 4.6 5.2V19h-4v-4.5c0-1.4-.6-2.2-1.8-2.2S12 13.1 12 14.5V19H8z" fill="currentColor" transform="translate(1 0) scale(.92 1)"/></svg></a>
@@ -103,14 +104,14 @@
 </div></footer>
 
 <nav class="mobile-dock" aria-label="Navigation mobile">
-<a href="?view=home" data-dock="home"><span>⌂</span>Accueil</a>
-<a href="?view=live" data-dock="live"><span>◉</span>Live</a>
-<button type="button" data-open-search><span>⌕</span>Recherche</button>
-<a href="?view=saved" data-dock="saved"><span>☆</span>Favoris <i data-saved-count>0</i></a>
+<a href="?view=home" data-dock="home"><span aria-hidden="true">⌂</span>Accueil</a>
+<a href="?view=live" data-dock="live"><span aria-hidden="true">◉</span>Live</a>
+<button type="button" data-open-search><span aria-hidden="true">⌕</span>Recherche</button>
+<a href="?view=saved" data-dock="saved"><span aria-hidden="true">☆</span>Favoris <i data-saved-count>0</i></a>
 </nav>
 
 <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-heading">
-<form method="dialog" class="dialog-close-row"><button class="icon-button" aria-label="Fermer la recherche">×</button></form>
+<form method="dialog" class="dialog-close-row"><button class="icon-button" type="submit" aria-label="Fermer la recherche">×</button></form>
 <div class="search-dialog-inner"><span class="eyebrow">Dans le média</span><h2 id="search-heading">Que recherchez-vous ?</h2>
 <form id="global-search" class="searchform" role="search"><label class="sr-only" for="global-search-input">Mots-clés</label><input id="global-search-input" type="search" name="q" placeholder="Titre, sujet ou mot-clé…" autocomplete="off" required><button type="submit">Rechercher ↗</button></form>
 <div id="global-search-suggestions" class="search-suggestions" aria-live="polite" aria-relevant="additions text"><p class="search-suggestions-empty">Commence à saisir pour trouver un article de démonstration.</p></div>

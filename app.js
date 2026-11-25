@@ -83,9 +83,9 @@ function freshness(value){
  if(!validUpdatedAt(value))return 'Mise à jour non renseignée';
  const minutes=Math.floor((Date.now()-Date.parse(value))/60000);
  if(minutes<2)return 'Mis à jour à l’instant';
- if(minutes<60)return 'Mis à jour il y a '+minutes+' min';
+ if(minutes<60)return currentLang==='en'?'Updated '+minutes+' min ago':'Mis à jour il y a '+minutes+' min';
  const hours=Math.floor(minutes/60);
- if(hours<24)return 'Mis à jour il y a '+hours+' h';
+ if(hours<24)return currentLang==='en'?'Updated '+hours+' h ago':'Mis à jour il y a '+hours+' h';
  return 'Mis à jour le '+formatDate(value,{dateStyle:'short'});
 }
 function currentMatches(){
@@ -187,7 +187,7 @@ function renderMatch(){
 }
 function renderNews(){
  document.title='Actualités & transferts — RugbyXVNews';
- main.innerHTML=pageIntro('Actualités & transferts','Le fil complet de la rédaction : informations, analyses, dossiers, coulisses et mouvements du rugby.')+'<section class="page-shell"><div class="wrap"><div class="filterbar"><label class="sr-only" for="news-filter">Rechercher dans les actualités</label><input type="search" id="news-filter" placeholder="Rechercher un sujet, une équipe, un joueur…"><label class="sr-only" for="news-category">Filtrer par rubrique</label><select id="news-category"><option value="">Toutes les rubriques</option>'+['Top 14','Pro D2','Nationale','International','Actus & transferts'].map(c=>'<option>'+esc(c)+'</option>').join('')+'</select><label class="sr-only" for="news-type">Filtrer par format</label><select id="news-type"><option value="">Tous les formats</option>'+Array.from(new Set(ARTICLES.map(a=>a.type))).map(c=>'<option>'+esc(c)+'</option>').join('')+'</select><button class="filter-button filter-reset" type="button" data-reset-news-filters>Réinitialiser</button></div><p class="results-count" id="news-count" aria-live="polite"></p><div class="card-grid" id="news-results">'+ARTICLES.map(card).join('')+'</div></div></section>';
+ main.innerHTML=pageIntro('Actualités & transferts','Le fil complet de la rédaction : informations, analyses, dossiers, coulisses et mouvements du rugby.')+'<section class="page-shell"><div class="wrap"><div class="filterbar"><label class="sr-only" for="news-filter">Rechercher dans les actualités</label><input type="search" id="news-filter" placeholder="Rechercher un sujet, une équipe, un joueur…"><label class="sr-only" for="news-category">Filtrer par rubrique</label><select id="news-category"><option value="">Toutes les rubriques</option>'+['Top 14','Pro D2','Nationale','International','Actus & transferts'].map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join('')+'</select><label class="sr-only" for="news-type">Filtrer par format</label><select id="news-type"><option value="">Tous les formats</option>'+Array.from(new Set(ARTICLES.map(a=>a.type))).map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join('')+'</select><button class="filter-button filter-reset" type="button" data-reset-news-filters>Réinitialiser</button></div><p class="results-count" id="news-count" aria-live="polite"></p><div class="card-grid" id="news-results">'+ARTICLES.map(card).join('')+'</div></div></section>';
  applyNewsFilters();
 }
 function renderArticle(){
@@ -208,7 +208,7 @@ function renderDirectory(){
 }
 function renderGallery(){
  document.title='Galerie — RugbyXVNews';
- main.innerHTML=pageIntro('Galerie','Les images, les gestes et les émotions qui racontent le rugby.')+'<section class="page-shell"><div class="wrap"><nav class="tabs" aria-label="Navigation des médias"><a class="tab" aria-current="page" href="?view=gallery">Galerie</a><a class="tab" href="?view=videos">Vidéos</a><a class="tab" href="?view=podcasts">Podcasts</a></nav><div class="filterbar"><button class="filter-button" data-gallery-filter="all" aria-pressed="true">Tout voir</button><button class="filter-button" data-gallery-filter="Photo" aria-pressed="false">Photos</button><button class="filter-button" data-gallery-filter="Vidéo" aria-pressed="false">Vidéos</button></div><div class="gallery-grid">'+GALLERY.map((g,i)=>{const image=safeHttpUrl(g.image);return '<button class="gallery-item" type="button" data-gallery="'+i+'" data-kind="'+g.kind+'"><span class="gallery-image '+esc(g.tone||'ink')+(image?' has-image':'')+'">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" width="900" height="1200" decoding="async">':'')+'<strong>'+esc(g.title)+'</strong></span><small>'+esc(g.kind)+' · '+esc(g.caption)+(g.credit?' · Crédit : '+esc(g.credit):'')+'</small></button>'}).join('')+'</div>'+(PREVIEW_MODE?'<p class="byline">Vignettes de démonstration. À remplacer par des médias originaux ou dûment licenciés, avec crédits et légendes.</p>':'')+'</div></section>';
+ main.innerHTML=pageIntro('Galerie','Les images, les gestes et les émotions qui racontent le rugby.')+'<section class="page-shell"><div class="wrap"><nav class="tabs" aria-label="Navigation des médias"><a class="tab" aria-current="page" href="?view=gallery">Galerie</a><a class="tab" href="?view=videos">Vidéos</a><a class="tab" href="?view=podcasts">Podcasts</a></nav><div class="filterbar"><button class="filter-button" data-gallery-filter="all" aria-pressed="true">Tout voir</button><button class="filter-button" data-gallery-filter="Photo" aria-pressed="false">Photos</button><button class="filter-button" data-gallery-filter="Vidéo" aria-pressed="false">Vidéos</button></div><div class="gallery-grid">'+GALLERY.map((g,i)=>{const image=safeHttpUrl(g.image);return '<button class="gallery-item" type="button" data-gallery="'+i+'" data-kind="'+esc(g.kind)+'"><span class="gallery-image '+esc(g.tone||'ink')+(image?' has-image':'')+'">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" width="900" height="1200" decoding="async">':'')+'<strong>'+esc(g.title)+'</strong></span><small>'+esc(g.kind)+' · '+esc(g.caption)+(g.credit?' · Crédit : '+esc(g.credit):'')+'</small></button>'}).join('')+'</div>'+(PREVIEW_MODE?'<p class="byline">Vignettes de démonstration. À remplacer par des médias originaux ou dûment licenciés, avec crédits et légendes.</p>':'')+'</div></section>';
 }
 function renderVideos(){
  document.title='Vidéos — RugbyXVNews';
@@ -278,7 +278,7 @@ function renderSearch(){
  (clubs.length?sectionHead('Clubs','Fiches disponibles')+'<div class="directory-grid">'+clubs.map(x=>'<article class="directory-card"><span class="kicker">'+esc(x.competition||'Club')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p><a class="text-link" href="?view=directory&kind=clubs&q='+encodeURIComponent(x.name)+'">Voir la fiche ↗</a></article>').join('')+'</div>':'')+
  (players.length?sectionHead('Joueurs','Fiches disponibles')+'<div class="directory-grid">'+players.map(x=>'<article class="directory-card"><span class="kicker">'+esc(x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p><a class="text-link" href="?view=directory&kind=players&q='+encodeURIComponent(x.name)+'">Voir la fiche ↗</a></article>').join('')+'</div>':'')+
  (matches.length?sectionHead('Rencontres','Calendriers et résultats')+'<div class="score-grid">'+matches.map(renderScoreCard).join('')+'</div>':'');
- main.innerHTML=pageIntro('Recherche',q?'Résultats pour « '+q+' »':'Recherche dans les articles, les compétitions, les clubs, les joueurs et les rencontres.')+'<section class="page-shell"><div class="wrap"><form class="searchform search-page-form" id="page-search"><label class="sr-only" for="page-search-input">Mots-clés</label><input type="search" id="page-search-input" name="q" value="'+esc(q)+'" placeholder="Club, joueur, compétition, sujet…"><button type="submit">Rechercher ↗</button></form><p class="results-count">'+(q?total+' résultat(s) dans le média.':'Saisis un terme pour lancer une recherche.')+'</p>'+(q?(total?results:emptyState('Aucun résultat','Essaie avec un autre mot-clé ou explore les rubriques.')):renderCompetitionCards())+'</div></section>';
+ main.innerHTML=pageIntro('Recherche',q?(currentLang==='en'?'Results for “'+q+'”':'Résultats pour « '+q+' »'):'Recherche dans les articles, les compétitions, les clubs, les joueurs et les rencontres.')+'<section class="page-shell"><div class="wrap"><form class="searchform search-page-form" id="page-search"><label class="sr-only" for="page-search-input">Mots-clés</label><input type="search" id="page-search-input" name="q" value="'+esc(q)+'" placeholder="Club, joueur, compétition, sujet…"><button type="submit">Rechercher ↗</button></form><p class="results-count">'+(q?total+' résultat(s) dans le média.':'Saisis un terme pour lancer une recherche.')+'</p>'+(q?(total?results:emptyState('Aucun résultat','Essaie avec un autre mot-clé ou explore les rubriques.')):renderCompetitionCards())+'</div></section>';
 }
 function renderContact(){
  document.title='Contact — RugbyXVNews';
@@ -455,6 +455,17 @@ function applySiteLanguage(){
   const ogTitle=$('meta[property="og:title"]');if(ogTitle)ogTitle.content=translateValue(ogTitle.content,map);
   const ogDescription=$('meta[property="og:description"]');if(ogDescription)ogDescription.content=translateValue(ogDescription.content,map);
  }
+ else{
+  // Typographie française : espace insécable avant « : ; ? ! » et après « « ».
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let node;
+  while((node=walker.nextNode())){
+   const value=node.nodeValue;
+   if(!value||(value.indexOf(' ')<0))continue;
+   const fixed=value.replace(/ ([:;?!»])/g,'\u00a0$1').replace(/« /g,'«\u00a0');
+   if(fixed!==value)node.nodeValue=fixed;
+  }
+ }
  updatePreferenceControls();
 }
 async function loadLocaleData(){
@@ -554,7 +565,7 @@ function applyNewsFilters(){
  if(!results)return;
  const q=escText(input?input.value:'');
  const c=category?category.value:'',t=type?type.value:'';
- const filtered=ARTICLES.filter(a=>(!q||escText([a.title,a.excerpt,a.category,a.type,a.tags.join(' ')].join(' ')).includes(q))&&(!c||a.category===c)&&(!t||a.type===t));
+ const filtered=ARTICLES.filter(a=>(!q||escText([a.title,a.excerpt,a.category,a.type,(a.tags||[]).join(' ')].join(' ')).includes(q))&&(!c||a.category===c)&&(!t||a.type===t));
  results.innerHTML=filtered.length?filtered.map(card).join(''):emptyState('Aucun article','Modifie les filtres ou essaie une autre recherche.');
  const count=$('#news-count');if(count)count.textContent=filtered.length+' article(s) affiché(s).';
  applySiteLanguage();
@@ -563,7 +574,7 @@ function applyDirectoryFilter(){
  const input=$('#directory-filter'),results=$('#directory-results');if(!input||!results)return;
  const isClubs=(params.get('kind')||'clubs')==='clubs',items=isClubs?SPORTS.clubs:SPORTS.players,q=escText(input.value);
  const filtered=(items||[]).filter(x=>escText([x.name,x.competition,x.position,x.description].join(' ')).includes(q));
- results.innerHTML=filtered.length?filtered.map(x=>'<article class="directory-card"><span class="kicker">'+esc(isClubs?x.competition||'Club':x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p>'+(x.url?'<a class="text-link" href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">Consulter ↗</a>':'')+'</article>').join(''):emptyState('Aucun résultat','Aucune fiche ne correspond à ta recherche.');
+ results.innerHTML=filtered.length?filtered.map(x=>'<article class="directory-card"><span class="kicker">'+esc(isClubs?x.competition||'Club':x.position||'Joueur')+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||'')+'</p>'+(safeHttpUrl(x.url)?'<a class="text-link" href="'+esc(safeHttpUrl(x.url))+'" target="_blank" rel="noopener noreferrer">Consulter ↗</a>':'')+'</article>').join(''):emptyState('Aucun résultat','Aucune fiche ne correspond à ta recherche.');
  applySiteLanguage();
 }
 function initEvents(){
@@ -595,7 +606,7 @@ function initEvents(){
  document.addEventListener('keydown',e=>{
   const galleryDialog=$('#gallery-dialog');
   if(galleryDialog&&galleryDialog.open&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();navigateGallery(e.key==='ArrowLeft'?-1:1);return}
-  if((e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();if(dialog&&dialog.showModal){dialog.showModal();renderGlobalSearchSuggestions()}setTimeout(()=>$('#global-search-input').focus(),20)}
+  if((e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)&&!document.activeElement.isContentEditable&&!(dialog&&dialog.open)){e.preventDefault();if(dialog&&dialog.showModal){dialog.showModal();renderGlobalSearchSuggestions()}setTimeout(()=>$('#global-search-input').focus(),20)}
   if(e.key==='Escape'&&dialog&&dialog.open)dialog.close()
  });
  const toTop=$('.totop');

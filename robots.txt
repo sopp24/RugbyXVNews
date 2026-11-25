@@ -1,5 +1,6 @@
+# Site verrouillé : il s'ouvre uniquement depuis SOPP Agents (voir sopp-gate.js) et ses pages sont en noindex.
+# Aucune indexation n'est donc souhaitée pour le moment.
 User-agent: *
-Allow: /
-Disallow: /*?view=saved
-Disallow: /data/
-Sitemap: https://sopp24.github.io/RugbyXVNews/sitemap.xml
+Disallow: /
+# Sitemap désactivé tant que le verrou est actif (le fichier sitemap.xml est conservé) :
+# Sitemap: https://sopp24.github.io/RugbyXVNews/sitemap.xml

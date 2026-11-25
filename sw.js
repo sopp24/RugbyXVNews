@@ -1,6 +1,6 @@
-const CACHE_NAME='rugbyxvnews-v24';
+const CACHE_NAME='rugbyxvnews-v25';
 const BASE=new URL('./',self.registration.scope);
-const CORE_FILES=['','index.html','style.css','app.js','manifest.webmanifest','icon.svg?v=5','apple-touch-icon.png?v=5','offline.html','data/sports-data.json','data/articles.json','data/gallery.json','data/locales.json','assets/fonts/montserrat-latin-wght-normal.woff2','assets/fonts/montserrat-latin-wght-italic.woff2','assets/fonts/OFL.txt'];
+const CORE_FILES=['','index.html','style.css','app.js','sopp-gate.js','manifest.webmanifest','icon.svg?v=5','apple-touch-icon.png?v=5','offline.html','data/sports-data.json','data/articles.json','data/gallery.json','data/locales.json','assets/fonts/montserrat-latin-wght-normal.woff2','assets/fonts/montserrat-latin-wght-italic.woff2','assets/fonts/OFL.txt'];
 const CORE_URLS=CORE_FILES.map(p=>new URL(p,BASE).toString());
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE_URLS)).then(()=>self.skipWaiting()));
@@ -25,11 +25,14 @@ self.addEventListener('fetch',event=>{
   }).catch(()=>caches.match(request,{ignoreSearch:true}).then(cached=>cached||caches.match(new URL('offline.html',BASE).toString()))));
   return;
  }
+ // Ressources statiques : réponse immédiate depuis le cache, rafraîchie en arrière-plan
+ // (évite de servir indéfiniment un ancien app.js / style.css avec une page HTML plus récente).
  event.respondWith(caches.match(request).then(cached=>{
-  if(cached)return cached;
-  return fetch(request).then(response=>{
+  const network=fetch(request).then(response=>{
    if(response&&response.ok){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
    return response;
   });
+  if(cached){event.waitUntil(network.catch(()=>{}));return cached;}
+  return network;
  }));
 });
