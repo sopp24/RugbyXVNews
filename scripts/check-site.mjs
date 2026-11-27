@@ -35,7 +35,7 @@ assert.ok(html.includes('rel="apple-touch-icon" href="./apple-touch-icon.png?v=5
 const brandIcon=fs.readFileSync(path.join(root,'icon.svg'),'utf8');
 assert.ok(brandIcon.includes('viewBox="0 0 874 874"')&&brandIcon.includes('translate(-185.5 16)')&&brandIcon.includes('fill="#5533EC"'),'Favicon must use the traced Instagram monogram silhouette');
 assert.ok(manifest.icons.some(icon=>icon.src.includes('apple-touch-icon.png?v=5')&&icon.sizes==='180x180'),'PWA manifest must include the exact iPhone PNG icon');
-assert.ok(sw.includes('rugbyxvnews-v24'),'Service worker cache must be bumped after header layout updates');
+assert.ok(sw.includes('rugbyxvnews-v25'),'Service worker cache must be bumped after header layout updates');
 assert.ok(sw.includes('icon.svg?v=5'),'Versioned favicon must be included in the offline cache');
 
 assert.match(html,/data-lang-toggle/,'Language switch missing');
@@ -78,7 +78,7 @@ assert.match(app,/applyTheme\(initialTheme,false\);\s*initThemeToggle\(\);\s*ini
 assert.doesNotMatch(app,/const theme=e\.target\.closest\('\[data-theme-toggle\]'\)/,'Theme control must not be double-bound through delegated clicks');
 assert.match(css,/@media\(max-width:1150px\)/,'Compact navigation breakpoint missing');
 assert.match(css,/\.nav-tools\{[^}]*flex:0 0 auto/s,'Navigation preferences must not shrink into adjacent links');
-assert.match(sw,/rugbyxvnews-v24/,'Service worker cache must be bumped after core UI fixes');
+assert.match(sw,/rugbyxvnews-v25/,'Service worker cache must be bumped after core UI fixes');
 assert.match(app,/function applySiteLanguage/,'Language handler missing');
 assert.match(app,/const \$=\(s,root=document\)=>root\.querySelector\(s\)/,'Single-element selector helper contract missing');
 assert.match(app,/const \$\$=\(s,root=document\)=>Array\.from\(root\.querySelectorAll\(s\)\)/,'Multi-element selector helper contract missing');
